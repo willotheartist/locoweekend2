@@ -32,6 +32,21 @@ export const articleIndex: Article[] = [
     featured: false,
   },
   {
+  slug: "the-hotel-lobby-as-coworking-space",
+  title: "The Hotel Lobby as Co-Working Space",
+  subtitle:
+    "Ace, Hoxton and CitizenM figured it out first. Now every hotel is redesigning its ground floor for people who never check in.",
+  excerpt:
+    "Once a transitional space, the hotel lobby has become the most valuable square footage in the building. As remote work reshapes cities, brands are monetising presence — not just overnight stays.",
+  city: "London",
+  category: "Culture",
+  author: "Wills Duroy",
+  date: "2026-02-19",
+  readTime: "25 min",
+  image: "/images/global/hotel-lobby.jpg",
+  featured: false,
+},
+  {
   slug: "the-greenland-question",
   title: "The Greenland Question Nobody’s Asking the Greenlanders",
   subtitle:
@@ -62,20 +77,7 @@ export const articleIndex: Article[] = [
     image: "/images/global/mediterranean-marina.jpg",
     featured: false,
   },
-  {
-    slug: "welcome-to-the-beige-empire",
-    title: "Welcome to the Beige Empire",
-    subtitle: "How London's café culture became a copy-paste nightmare",
-    excerpt:
-      "Every new opening looks the same: fluted panels, terrazzo, oat milk on tap. We walked twelve cafés in Zone 2 and couldn't tell them apart. Here's what happened to personality.",
-    city: "London",
-    category: "Culture",
-    author: "Wills Duroy",
-    date: "2026-02-14",
-    readTime: "6 min",
-    image: "/images/london/beige-empire.jpg",
-    featured: false,
-  },
+
   {
   slug: "the-gorpcore-plateau",
   title: "The Gorpcore Plateau",
@@ -89,6 +91,21 @@ export const articleIndex: Article[] = [
   date: "2026-02-19",
   readTime: "21 min",
   image: "/images/global/gorpcore.jpg",
+  featured: false,
+},
+{
+  slug: "why-menswear-is-suddenly-interesting-again",
+  title: "Why Menswear Is Suddenly Interesting Again",
+  subtitle:
+    "Phoebe Philo's return, Loewe's rise, quiet tailoring, anti-streetwear — men's fashion is having its most creative moment in a decade",
+  excerpt:
+    "After the streetwear decade, menswear is shifting from logos to language: cut, fabrication, restraint, and ideas. The money is moving too — and the creative director chairs suggest this isn’t a trend but a structural reset.",
+  city: "Global",
+  category: "Culture",
+  author: "Wills Mayani",
+  date: "2026-02-19",
+  readTime: "20 min",
+  image: "/images/global/menswear-interesting.jpg",
   featured: false,
 },
 
@@ -165,85 +182,6 @@ export const articleIndex: Article[] = [
     featured: true,
   },
   {
-    slug: "the-bar-you-only-find-twice",
-    title: "The Bar You Only Find Twice",
-    subtitle: "A Soho legend that doesn't want to be found",
-    excerpt:
-      "No sign, no Google listing, no influencer has ever posted it. The bartender knows your name by your second visit — if you can find it again.",
-    city: "London",
-    category: "Drinks",
-    author: "Wills Duroy",
-    date: "2026-02-12",
-    readTime: "4 min",
-    image: "/images/london/bar-twice.jpg",
-  },
-
-  {
-    slug: "what-beirut-eats-now",
-    title: "What Beirut Eats Now",
-    subtitle: "A city rebuilding itself one kitchen at a time",
-    excerpt:
-      "After everything, the restaurants came back first. Not the fancy ones — the neighbourhood spots. The ones where the cook is also the owner, the waiter, and the accountant.",
-    city: "Beirut",
-    category: "Grub",
-    author: "Wills Mayani",
-    date: "2026-02-04",
-    readTime: "9 min",
-    image: "/images/beirut/eats-now.jpg",
-  },
-  {
-    slug: "nigos-next-move",
-    title: "Nigo's Next Move",
-    subtitle: "Inside Kenzo's quiet revolution",
-    excerpt:
-      "While everyone was watching the big houses implode, Nigo was doing something nobody expected: making clothes people actually want to wear.",
-    city: "Paris",
-    category: "Threads",
-    author: "Wills Mayani",
-    date: "2026-02-02",
-    readTime: "5 min",
-    image: "/images/paris/nigo.jpg",
-  },
-  {
-    slug: "the-last-record-shop-in-madrid",
-    title: "The Last Record Shop in Madrid",
-    subtitle: "Vinyl, dust, and a man who won't give up",
-    excerpt:
-      "Antonio has been selling records from the same shop since 1983. The rent has tripled, the customers have halved, and he's never been happier.",
-    city: "Madrid",
-    category: "Sound",
-    author: "Wills Mayani",
-    date: "2026-01-30",
-    readTime: "6 min",
-    image: "/images/madrid/record-shop.jpg",
-  },
-  {
-    slug: "why-every-politician-eats-the-same-lunch",
-    title: "Why Every Politician Eats the Same Lunch",
-    subtitle: "Power, sandwiches, and the performance of normality",
-    excerpt:
-      "From Westminster to the Élysée, there's a reason every leader is photographed eating something beige and inoffensive. We investigated.",
-    city: "London",
-    category: "Politics",
-    author: "Wills Mayani",
-    date: "2026-01-28",
-    readTime: "4 min",
-    image: "/images/london/politician-lunch.jpg",
-  },
-  {
-    slug: "film-picks-feb-26",
-    title: "Film Picks: February 2026",
-    subtitle: "What to watch this month",
-    excerpt:
-      "A Romanian horror film shot on a phone, a Senegalese coming-of-age epic, and the best British comedy in years. Our editors pick the month's essential viewing.",
-    city: "London",
-    category: "Flicks",
-    author: "Wills Mayani",
-    date: "2026-02-01",
-    readTime: "3 min",
-    image: "/images/london/film-picks.jpg",
-  },
-  {
     slug: "is-shoreditch-still-cool",
     title: "Is Shoreditch Still Cool?",
     subtitle: "How a neighbourhood becomes a business model",
@@ -254,7 +192,7 @@ export const articleIndex: Article[] = [
     author: "Wills Mayani",
     date: "2026-02-17",
     readTime: "8 min",
-    image: "/images/london/shoreditch-cool.jpg",
+    image: "/images/london/shoreditch.jpg",
   },
 ];
 
