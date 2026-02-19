@@ -30,7 +30,6 @@ function extractMeta(source: string): Record<string, unknown> | null {
   if (!match) return null;
 
   try {
-    // eslint-disable-next-line no-new-func
     return new Function(`return ${match[1]}`)() as Record<string, unknown>;
   } catch {
     return null;
