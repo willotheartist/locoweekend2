@@ -1,0 +1,65 @@
+/* src/app/globals.css */
+@import "tailwindcss";
+
+@theme {
+  --color-ink: #0a0a0a;
+  --color-paper: #fafaf7;
+  --color-concrete: #c4c4c4;
+  --color-yellow: #fff100;
+  --color-grey-line: #d4d4d0;
+  --color-grey-text: #888888;
+  --color-grey-dark: #444444;
+
+  /* ✅ Tailwind font utilities map to these vars */
+  --font-sans: system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-serif: var(--font-eb-garamond);
+  --font-mono: var(--font-anon-pro);
+  --font-crimson: var(--font-crimson-pro);
+}
+
+body {
+  @apply bg-paper text-ink antialiased;
+  font-family: var(--font-sans);
+}
+
+a {
+  @apply underline-offset-4;
+}
+
+/* Noise background overlay */
+.lw-noise-bg {
+  background-image: radial-gradient(circle at 0 0, rgba(0, 0, 0, 0.04), transparent),
+    radial-gradient(circle at 100% 0, rgba(0, 0, 0, 0.02), transparent),
+    radial-gradient(circle at 0 100%, rgba(0, 0, 0, 0.02), transparent),
+    radial-gradient(circle at 100% 100%, rgba(0, 0, 0, 0.03), transparent);
+  mix-blend-mode: multiply;
+}
+
+/* ───────────────────────────────────────────
+   EDITORIAL TYPOGRAPHY REFINEMENTS
+   ─────────────────────────────────────────── */
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Clamp utility for excerpt text */
+.line-clamp-3 {
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.line-clamp-4 {
+  display: -webkit-box;
+  -webkit-line-clamp: 4;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
