@@ -6,7 +6,7 @@ import { Footer } from "@/components/site/Footer";
 import { EB_Garamond, Anonymous_Pro, Crimson_Pro } from "next/font/google";
 
 export const metadata: Metadata = {
-  title: "LOCO WEEKEND",
+  title: "LocoWeekend · Culture, Affairs, & anything interesting",
   description:
     "LocoWeekend — anti tourist-trap street magazine. London & Madrid. No PR. No influencers.",
 };
