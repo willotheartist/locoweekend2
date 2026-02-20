@@ -170,24 +170,138 @@ function CompactStory({ article }: { article: Article }) {
   );
 }
 
-function HeadlineRow({ article }: { article: Article }) {
+/* ───────────────────────────────────────────
+   WEEKEND BRIEFING (Monocle-ish 4-card gateway)
+   ─────────────────────────────────────────── */
+
+function BriefingCard({
+  kicker,
+  article,
+}: {
+  kicker: string;
+  article: Article;
+}) {
   return (
-    <div className="group">
-      <div className="flex items-start gap-3">
-        <div className="mt-[6px] w-1.5 h-1.5 rounded-full bg-grey-line" />
-        <div className="min-w-0">
-          <CategoryLabel category={article.category} />
-          <Link href={`/articles/${article.slug}`} className="no-underline block mt-1">
-            <h4 className="font-serif text-[1.05rem] leading-[1.25] text-ink group-hover:underline decoration-1 underline-offset-4">
-              {article.title}
-            </h4>
-          </Link>
-          <div className="mt-2">
-            <Meta time={article.readTime} />
+    <Link
+      href={`/articles/${article.slug}`}
+      className="block no-underline group h-full"
+    >
+      <div className="h-full p-5">
+        <div className="font-mono text-[10px] font-bold tracking-[0.18em] uppercase text-grey-text">
+          {kicker}
+        </div>
+
+        <div className="mt-3">
+          <ImageBox
+            city={article.city}
+            src={article.image}
+            alt={article.title}
+            aspect="4/3"
+            className="transition-transform duration-300 group-hover:scale-[1.01]"
+          />
+        </div>
+
+        <div className="mt-4 font-serif text-[1.15rem] leading-[1.18] font-semibold text-ink group-hover:underline decoration-1 underline-offset-4 line-clamp-2">
+          {article.title}
+        </div>
+
+        {article.subtitle ? (
+          <div className="mt-2 font-serif text-[0.92rem] italic text-grey-dark leading-snug line-clamp-2">
+            {article.subtitle}
           </div>
+        ) : null}
+
+        <div className="mt-3 flex items-center justify-between gap-3">
+          <Meta time={article.readTime} />
+          <span className="font-mono text-[10px] tracking-[0.14em] uppercase text-grey-text">
+            → Open
+          </span>
         </div>
       </div>
-    </div>
+    </Link>
+  );
+}
+
+function WeekendBriefingGateway({ items }: { items: { kicker: string; article: Article }[] }) {
+  return (
+    <section className="border border-grey-line">
+      <div className="flex items-center justify-between px-5 py-4 border-b border-grey-line">
+        <div className="flex items-center gap-3">
+          <div className="w-9 h-0.5 bg-yellow" />
+          <div className="font-mono text-[11px] font-bold tracking-[0.14em] uppercase text-ink">
+            Weekend Briefing
+          </div>
+        </div>
+        <div className="font-mono text-[10px] tracking-[0.14em] uppercase text-grey-text">
+          Four doors
+        </div>
+      </div>
+
+      {/* Grid */}
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 divide-y sm:divide-y-0 sm:divide-x divide-grey-line">
+        {items.map((it, idx) => (
+          <div
+            key={`${it.kicker}-${it.article.slug}-${idx}`}
+            className="h-full"
+          >
+            <BriefingCard kicker={it.kicker} article={it.article} />
+          </div>
+        ))}
+      </div>
+    </section>
+  );
+}
+
+/* ───────────────────────────────────────────
+   CITY FOCUS GATEWAY (Monocle-ish)
+   ─────────────────────────────────────────── */
+
+function CityGatewayCard({
+  city,
+  href,
+  blurb,
+  image,
+}: {
+  city: string;
+  href: string;
+  blurb: string;
+  image?: string;
+}) {
+  return (
+    <Link href={href} className="block no-underline group">
+      <div className="border-t border-grey-line pt-5">
+        <div className="relative">
+          <ImageBox
+            city={city}
+            src={image}
+            alt={city}
+            aspect="4/5"
+            className="transition-transform duration-300 group-hover:scale-[1.01]"
+          />
+          <div className="pointer-events-none absolute inset-0 bg-linear-to-t from-black/10 via-black/0 to-black/0" />
+        </div>
+
+        <div className="mt-4 flex items-baseline justify-between gap-4">
+          <h3 className="font-serif text-[1.6rem] leading-[1.05] font-semibold text-ink">
+            {city}
+          </h3>
+          <span className="font-mono text-[10px] tracking-[0.14em] uppercase text-grey-text">
+            Explore
+          </span>
+        </div>
+
+        <p className="font-serif text-[0.98rem] leading-[1.65] text-grey-dark mt-2 max-w-[44ch]">
+          {blurb}
+        </p>
+
+        <div className="mt-4 inline-flex items-center gap-2 font-mono text-[11px] font-bold tracking-[0.14em] uppercase text-ink">
+          <span className="group-hover:underline decoration-1 underline-offset-4">
+            Enter the city
+          </span>
+          <span aria-hidden="true">→</span>
+        </div>
+      </div>
+    </Link>
   );
 }
 
@@ -199,6 +313,14 @@ function pickByCategory(all: Article[], category: string, count: number) {
   return all.filter((a) => a.category === category).slice(0, count);
 }
 
+function pickFirstImageForCity(all: Article[], city: string) {
+  return all.find((a) => a.city === city && a.image)?.image;
+}
+
+function pickFirstByCategory(all: Article[], category: string) {
+  return all.find((a) => a.category === category);
+}
+
 /* ───────────────────────────────────────────
    HOMEPAGE
    ─────────────────────────────────────────── */
@@ -207,13 +329,11 @@ export default function HomePage() {
   const featured = articleIndex.find((a) => a.featured) ?? articleIndex[0];
   const rest = articleIndex.filter((a) => a.slug !== featured.slug);
 
-  // SECTION A — make the page feel “edited”, not empty:
-  // - Lead on left
-  // - Two stacked columns with 3 items each
+  // SECTION A
   const middleCol = rest.slice(0, 3);
   const rightCol = rest.slice(3, 6);
 
-  // SECTION B — more density: 6 “latest” in a proper grid
+  // SECTION B
   const latestGrid = rest.slice(6, 12);
 
   // ROWS
@@ -222,80 +342,70 @@ export default function HomePage() {
   const drinks = pickByCategory(rest, "Drinks", 3);
   const politics = pickByCategory(rest, "Politics", 3);
 
-  // Archive
-  const usedSlugs = new Set([
-    featured.slug,
-    ...middleCol.map((a) => a.slug),
-    ...rightCol.map((a) => a.slug),
-    ...latestGrid.map((a) => a.slug),
-    ...flicks.map((a) => a.slug),
-    ...grub.map((a) => a.slug),
-    ...drinks.map((a) => a.slug),
-    ...politics.map((a) => a.slug),
-  ]);
+  // City images
+  const londonImg = pickFirstImageForCity(articleIndex, "London");
+  const beirutImg = pickFirstImageForCity(articleIndex, "Beirut");
+  const madridImg = pickFirstImageForCity(articleIndex, "Madrid");
+  const globalImg = pickFirstImageForCity(articleIndex, "Global");
 
-  const archive = rest.filter((a) => !usedSlugs.has(a.slug));
+  // Briefing picks (never breaks)
+  const bRead = pickFirstByCategory(rest, "Politics") ?? latestGrid[0] ?? rest[0];
+  const bWatch = pickFirstByCategory(rest, "Flicks") ?? latestGrid[1] ?? rest[1] ?? rest[0];
+  const bEat = pickFirstByCategory(rest, "Grub") ?? latestGrid[2] ?? rest[2] ?? rest[0];
+  const bUnderstand = latestGrid[3] ?? rest[3] ?? rest[0];
+
+  const briefingItems = [
+    { kicker: "Read", article: bRead },
+    { kicker: "Watch", article: bWatch },
+    { kicker: "Eat", article: bEat },
+    { kicker: "Understand", article: bUnderstand },
+  ];
 
   return (
     <div className="w-full bg-paper">
       <div className="max-w-[1320px] mx-auto px-5 sm:px-8 lg:px-10">
-        {/* TOP RULE */}
-        <div className="border-t border-ink mt-2" />
-
         {/* SECTION A */}
         <div className="grid grid-cols-1 lg:grid-cols-12">
-          {/* Lead */}
+          {/* Lead (sticky on lg+) */}
           <div className="lg:col-span-6 py-6 lg:py-7 lg:pr-10 lg:border-r border-grey-line">
-            <CategoryLabel category={featured.category} />
+            <div className="lg:sticky lg:top-24">
+              <CategoryLabel category={featured.category} />
 
-            <Link
-              href={`/articles/${featured.slug}`}
-              className="no-underline block mt-3 group"
-            >
-              <h1 className="font-serif text-[2.25rem] sm:text-[2.85rem] lg:text-[3.15rem] font-semibold leading-[1.03] text-ink group-hover:underline decoration-[1.5px] underline-offset-[6px]">
-                {featured.title}
-              </h1>
-            </Link>
+              <Link
+                href={`/articles/${featured.slug}`}
+                className="no-underline block mt-3 group"
+              >
+                <h1 className="font-serif text-[2.25rem] sm:text-[2.85rem] lg:text-[3.15rem] font-semibold leading-[1.03] text-ink group-hover:underline decoration-[1.5px] underline-offset-[6px]">
+                  {featured.title}
+                </h1>
+              </Link>
 
-            {featured.subtitle && (
-              <p className="font-serif text-[1.08rem] italic text-grey-dark mt-3 leading-snug max-w-[62ch]">
-                {featured.subtitle}
+              {featured.subtitle && (
+                <p className="font-serif text-[1.08rem] italic text-grey-dark mt-3 leading-snug max-w-[62ch]">
+                  {featured.subtitle}
+                </p>
+              )}
+
+              <p className="font-serif text-[1.05rem] leading-[1.75] text-grey-dark mt-4 max-w-[64ch]">
+                {featured.excerpt}
               </p>
-            )}
 
-            <p className="font-serif text-[1.05rem] leading-[1.75] text-grey-dark mt-4 max-w-[64ch]">
-              {featured.excerpt}
-            </p>
-
-            <div className="mt-4 flex items-center justify-between gap-4">
-              <Meta time={featured.readTime} />
-              <Byline author={featured.author} />
-            </div>
-
-            {/* Lead image: reduce empty feeling by tightening margin + using a slightly squatter ratio */}
-            <Link href={`/articles/${featured.slug}`} className="block mt-5 no-underline">
-              <ImageBox
-                city={featured.city}
-                src={featured.image}
-                alt={featured.title}
-                aspect="16/9"
-              />
-            </Link>
-
-            {/* Under-lead headlines (Monocle-style density) */}
-            <div className="mt-6 pt-6 border-t border-grey-line">
-              <div className="flex items-center justify-between gap-6">
-                <span className="font-mono text-[11px] font-bold tracking-[0.14em] uppercase text-ink">
-                  Also on the front page
-                </span>
-                <div className="flex-1 h-px bg-grey-line" />
+              <div className="mt-4 flex items-center justify-between gap-4">
+                <Meta time={featured.readTime} />
+                <Byline author={featured.author} />
               </div>
 
-              <div className="mt-5 grid grid-cols-1 sm:grid-cols-2 gap-x-10 gap-y-6">
-                {latestGrid.slice(0, 4).map((a) => (
-                  <HeadlineRow key={a.slug} article={a} />
-                ))}
-              </div>
+              <Link
+                href={`/articles/${featured.slug}`}
+                className="block mt-5 no-underline"
+              >
+                <ImageBox
+                  city={featured.city}
+                  src={featured.image}
+                  alt={featured.title}
+                  aspect="16/9"
+                />
+              </Link>
             </div>
           </div>
 
@@ -306,7 +416,10 @@ export default function HomePage() {
                 key={article.slug}
                 className={i > 0 ? "mt-6 pt-6 border-t border-grey-line" : ""}
               >
-                <Link href={`/articles/${article.slug}`} className="block no-underline mb-3">
+                <Link
+                  href={`/articles/${article.slug}`}
+                  className="block no-underline mb-3"
+                >
                   <ImageBox
                     city={article.city}
                     src={article.image}
@@ -326,7 +439,10 @@ export default function HomePage() {
                 key={article.slug}
                 className={i > 0 ? "mt-6 pt-6 border-t border-grey-line" : ""}
               >
-                <Link href={`/articles/${article.slug}`} className="block no-underline mb-3">
+                <Link
+                  href={`/articles/${article.slug}`}
+                  className="block no-underline mb-3"
+                >
                   <ImageBox
                     city={article.city}
                     src={article.image}
@@ -340,7 +456,7 @@ export default function HomePage() {
           </div>
         </div>
 
-        {/* SECTION B — LATEST GRID (denser, Monocle-ish) */}
+        {/* SECTION B — LATEST GRID */}
         <div className="mt-1 border-t border-ink" />
         <div className="mt-0">
           <div className="relative">
@@ -354,9 +470,15 @@ export default function HomePage() {
             <div className="md:col-span-4 lg:col-span-3 py-6 md:pr-8 md:border-r border-grey-line">
               <div className="space-y-6">
                 {latestGrid.slice(0, 3).map((a) => (
-                  <div key={a.slug} className="pb-6 border-b border-grey-line last:border-b-0 last:pb-0">
+                  <div
+                    key={a.slug}
+                    className="pb-6 border-b border-grey-line last:border-b-0 last:pb-0"
+                  >
                     <CategoryLabel category={a.category} />
-                    <Link href={`/articles/${a.slug}`} className="no-underline block mt-2 group">
+                    <Link
+                      href={`/articles/${a.slug}`}
+                      className="no-underline block mt-2 group"
+                    >
                       <h3 className="font-serif text-[1.28rem] font-semibold leading-[1.15] text-ink group-hover:underline decoration-1 underline-offset-4">
                         {a.title}
                       </h3>
@@ -373,9 +495,13 @@ export default function HomePage() {
               </div>
             </div>
 
-            {/* Right: 3-up cards with tighter padding + more copy */}
+            {/* Right: Briefing gateway + cards */}
             <div className="md:col-span-8 lg:col-span-9 py-6 md:pl-8">
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-9 gap-y-8">
+              {/* NEW: Weekend Briefing gateway (fixes the “worse” look) */}
+              <WeekendBriefingGateway items={briefingItems} />
+
+              {/* Cards */}
+              <div className="mt-8 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-9 gap-y-8">
                 {latestGrid.slice(3, 9).map((article) => (
                   <RowCard key={article.slug} article={article} />
                 ))}
@@ -429,68 +555,37 @@ export default function HomePage() {
           </>
         )}
 
-        {/* SECTION C */}
+        {/* SECTION C — CITY FOCUS GATEWAY */}
         <div className="border-t border-ink mt-10" />
 
-        <div className="grid grid-cols-1 lg:grid-cols-12">
-          {/* Sidebar */}
-          <div className="lg:col-span-4 xl:col-span-3 py-8 lg:pr-10 lg:border-r border-grey-line">
-            <div className="flex items-center gap-3 mb-5">
-              <div className="w-8 h-0.5 bg-yellow" />
-              <span className="font-mono text-[11px] font-bold tracking-[0.14em] uppercase text-ink">
-                Editor&apos;s Note
-              </span>
-            </div>
+        <div className="mt-8">
+          <RuleLabel label="City Focus" />
 
-            <div className="bg-ink text-paper p-7">
-              <p className="font-serif text-[0.98rem] leading-[1.75] italic">
-                &ldquo;We started this thing because every city guide felt like it was
-                written by someone who&apos;d been there for a weekend. We live here.
-                We eat here. We get ripped off here.&rdquo;
-              </p>
-              <p className="font-mono text-[10px] tracking-[0.14em] uppercase text-paper/45 mt-5">
-                — Wills Mayani, Editor
-              </p>
-            </div>
-
-            <Link
-              href="/subscribe"
-              className="block bg-yellow text-ink font-mono text-[11px] font-bold tracking-[0.14em] uppercase text-center py-3.5 px-5 mt-8 no-underline hover:brightness-95 transition-all"
-            >
-              Subscribe to the Weekend
-            </Link>
-          </div>
-
-          {/* Archive */}
-          <div className="lg:col-span-8 xl:col-span-9 py-8 lg:pl-10">
-            <RuleLabel label="From the Archive" />
-
-            {archive.length > 0 && (
-              <div className="mt-6 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-9 gap-y-8">
-                {archive.map((article) => (
-                  <article key={article.slug} className="group">
-                    <CategoryLabel category={article.category} />
-                    <Link href={`/articles/${article.slug}`} className="no-underline block mt-2">
-                      <h3 className="font-serif text-[1.22rem] font-semibold leading-[1.18] text-ink group-hover:underline decoration-1 underline-offset-4">
-                        {article.title}
-                      </h3>
-                    </Link>
-                    {article.subtitle && (
-                      <p className="font-serif text-[0.95rem] italic text-grey-dark mt-2 leading-snug line-clamp-2">
-                        {article.subtitle}
-                      </p>
-                    )}
-                    <p className="font-serif text-[0.98rem] leading-[1.65] text-grey-dark mt-2 line-clamp-3">
-                      {article.excerpt}
-                    </p>
-                    <div className="mt-3 flex items-center justify-between gap-4">
-                      <Meta time={article.readTime} />
-                      <Byline author={article.author} />
-                    </div>
-                  </article>
-                ))}
-              </div>
-            )}
+          <div className="mt-6 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-x-8 gap-y-10">
+            <CityGatewayCard
+              city="London"
+              href="/city/london"
+              blurb="Zone 2 culture, over-designed cafés, real opinions."
+              image={londonImg}
+            />
+            <CityGatewayCard
+              city="Beirut"
+              href="/city/beirut"
+              blurb="Currency collapse, dark humour, daily life continuing anyway."
+              image={beirutImg}
+            />
+            <CityGatewayCard
+              city="Madrid"
+              href="/city/madrid"
+              blurb="Late nights, sharper politics, a city that never explains itself."
+              image={madridImg}
+            />
+            <CityGatewayCard
+              city="Global"
+              href="/city/global"
+              blurb="Systems, money, media, power, mood — the connective tissue."
+              image={globalImg}
+            />
           </div>
         </div>
 
