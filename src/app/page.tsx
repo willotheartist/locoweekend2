@@ -1,12 +1,18 @@
 // src/app/page.tsx
+import type { Metadata } from "next";
 import Link from "next/link";
 import Image from "next/image";
 import { articleIndex } from "@/content/articles";
 import type { Article } from "@/content/articles";
 
-/* ───────────────────────────────────────────
-   ATOMS
-   ─────────────────────────────────────────── */
+export const metadata: Metadata = {
+  title: "LocoWeekend · Culture, Affairs, & anything interesting",
+  description:
+    "Independent street magazine covering culture, affairs, film, food, cities, and anything interesting.",
+  alternates: {
+    canonical: "/",
+  },
+};
 
 function CategoryLabel({ category }: { category: string }) {
   return (
@@ -106,7 +112,11 @@ function SectionHeader({ label }: { label: string }) {
 function RowCard({ article }: { article: Article }) {
   return (
     <article className="group">
-      <Link href={`/articles/${article.slug}`} className="block no-underline mb-3">
+      <Link
+        href={`/articles/${article.slug}`}
+        aria-label={`Read article: ${article.title}`}
+        className="block no-underline mb-3"
+      >
         <ImageBox
           city={article.city}
           src={article.image}
@@ -117,10 +127,14 @@ function RowCard({ article }: { article: Article }) {
 
       <CategoryLabel category={article.category} />
 
-      <Link href={`/articles/${article.slug}`} className="no-underline block mt-2">
-        <h3 className="font-serif text-[1.28rem] font-semibold leading-[1.14] text-ink group-hover:underline decoration-1 underline-offset-4">
+      <Link
+        href={`/articles/${article.slug}`}
+        aria-label={`Read article: ${article.title}`}
+        className="no-underline block mt-2"
+      >
+        <h2 className="font-serif text-[1.28rem] font-semibold leading-[1.14] text-ink group-hover:underline decoration-1 underline-offset-4">
           {article.title}
-        </h3>
+        </h2>
       </Link>
 
       {article.subtitle ? (
@@ -146,10 +160,14 @@ function CompactStory({ article }: { article: Article }) {
     <article className="group">
       <CategoryLabel category={article.category} />
 
-      <Link href={`/articles/${article.slug}`} className="no-underline block mt-2">
-        <h3 className="font-serif text-[1.32rem] font-semibold leading-[1.12] text-ink group-hover:underline decoration-1 underline-offset-4">
+      <Link
+        href={`/articles/${article.slug}`}
+        aria-label={`Read article: ${article.title}`}
+        className="no-underline block mt-2"
+      >
+        <h2 className="font-serif text-[1.32rem] font-semibold leading-[1.12] text-ink group-hover:underline decoration-1 underline-offset-4">
           {article.title}
-        </h3>
+        </h2>
       </Link>
 
       {article.subtitle ? (
@@ -170,10 +188,6 @@ function CompactStory({ article }: { article: Article }) {
   );
 }
 
-/* ───────────────────────────────────────────
-   WEEKEND BRIEFING (Monocle-ish 4-card gateway)
-   ─────────────────────────────────────────── */
-
 function BriefingCard({
   kicker,
   article,
@@ -184,6 +198,7 @@ function BriefingCard({
   return (
     <Link
       href={`/articles/${article.slug}`}
+      aria-label={`${kicker}: ${article.title}`}
       className="block no-underline group h-full"
     >
       <div className="h-full p-5">
@@ -201,7 +216,7 @@ function BriefingCard({
           />
         </div>
 
-        <div className="mt-4 font-serif text-[1.15rem] leading-[1.18] font-semibold text-ink group-hover:underline decoration-1 underline-offset-4 line-clamp-2">
+        <div className="mt-4 font-serif text-[1.15rem] leading-[1.18] font-semibold text-ink group-hover:underline decoration-1 underline-offset-4">
           {article.title}
         </div>
 
@@ -224,26 +239,25 @@ function BriefingCard({
 
 function WeekendBriefingGateway({ items }: { items: { kicker: string; article: Article }[] }) {
   return (
-    <section className="border border-grey-line">
+    <section className="border border-grey-line" aria-labelledby="weekend-briefing-heading">
       <div className="flex items-center justify-between px-5 py-4 border-b border-grey-line">
         <div className="flex items-center gap-3">
           <div className="w-9 h-0.5 bg-yellow" />
-          <div className="font-mono text-[11px] font-bold tracking-[0.14em] uppercase text-ink">
+          <h2
+            id="weekend-briefing-heading"
+            className="font-mono text-[11px] font-bold tracking-[0.14em] uppercase text-ink"
+          >
             Weekend Briefing
-          </div>
+          </h2>
         </div>
         <div className="font-mono text-[10px] tracking-[0.14em] uppercase text-grey-text">
           Four doors
         </div>
       </div>
 
-      {/* Grid */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 divide-y sm:divide-y-0 sm:divide-x divide-grey-line">
         {items.map((it, idx) => (
-          <div
-            key={`${it.kicker}-${it.article.slug}-${idx}`}
-            className="h-full"
-          >
+          <div key={`${it.kicker}-${it.article.slug}-${idx}`} className="h-full">
             <BriefingCard kicker={it.kicker} article={it.article} />
           </div>
         ))}
@@ -251,10 +265,6 @@ function WeekendBriefingGateway({ items }: { items: { kicker: string; article: A
     </section>
   );
 }
-
-/* ───────────────────────────────────────────
-   CITY FOCUS GATEWAY (Monocle-ish)
-   ─────────────────────────────────────────── */
 
 function CityGatewayCard({
   city,
@@ -305,10 +315,6 @@ function CityGatewayCard({
   );
 }
 
-/* ───────────────────────────────────────────
-   HELPERS
-   ─────────────────────────────────────────── */
-
 function pickByCategory(all: Article[], category: string, count: number) {
   return all.filter((a) => a.category === category).slice(0, count);
 }
@@ -321,34 +327,24 @@ function pickFirstByCategory(all: Article[], category: string) {
   return all.find((a) => a.category === category);
 }
 
-/* ───────────────────────────────────────────
-   HOMEPAGE
-   ─────────────────────────────────────────── */
-
 export default function HomePage() {
   const featured = articleIndex.find((a) => a.featured) ?? articleIndex[0];
   const rest = articleIndex.filter((a) => a.slug !== featured.slug);
 
-  // SECTION A
   const middleCol = rest.slice(0, 3);
   const rightCol = rest.slice(3, 6);
-
-  // SECTION B
   const latestGrid = rest.slice(6, 12);
 
-  // ROWS
   const flicks = pickByCategory(rest, "Flicks", 3);
   const grub = pickByCategory(rest, "Grub", 3);
   const drinks = pickByCategory(rest, "Drinks", 3);
   const politics = pickByCategory(rest, "Politics", 3);
 
-  // City images
   const londonImg = pickFirstImageForCity(articleIndex, "London");
   const beirutImg = pickFirstImageForCity(articleIndex, "Beirut");
   const madridImg = pickFirstImageForCity(articleIndex, "Madrid");
   const globalImg = pickFirstImageForCity(articleIndex, "Global");
 
-  // Briefing picks (never breaks)
   const bRead = pickFirstByCategory(rest, "Politics") ?? latestGrid[0] ?? rest[0];
   const bWatch = pickFirstByCategory(rest, "Flicks") ?? latestGrid[1] ?? rest[1] ?? rest[0];
   const bEat = pickFirstByCategory(rest, "Grub") ?? latestGrid[2] ?? rest[2] ?? rest[0];
@@ -364,15 +360,14 @@ export default function HomePage() {
   return (
     <div className="w-full bg-paper">
       <div className="max-w-[1320px] mx-auto px-5 sm:px-8 lg:px-10">
-        {/* SECTION A */}
         <div className="grid grid-cols-1 lg:grid-cols-12">
-          {/* Lead (sticky on lg+) */}
           <div className="lg:col-span-6 py-6 lg:py-7 lg:pr-10 lg:border-r border-grey-line">
             <div className="lg:sticky lg:top-24">
               <CategoryLabel category={featured.category} />
 
               <Link
                 href={`/articles/${featured.slug}`}
+                aria-label={`Read featured article: ${featured.title}`}
                 className="no-underline block mt-3 group"
               >
                 <h1 className="font-serif text-[2.25rem] sm:text-[2.85rem] lg:text-[3.15rem] font-semibold leading-[1.03] text-ink group-hover:underline decoration-[1.5px] underline-offset-[6px]">
@@ -397,6 +392,7 @@ export default function HomePage() {
 
               <Link
                 href={`/articles/${featured.slug}`}
+                aria-label={`Open featured article: ${featured.title}`}
                 className="block mt-5 no-underline"
               >
                 <ImageBox
@@ -409,7 +405,6 @@ export default function HomePage() {
             </div>
           </div>
 
-          {/* Middle */}
           <div className="lg:col-span-3 py-6 lg:py-7 lg:px-8 lg:border-r border-grey-line">
             {middleCol.map((article, i) => (
               <div
@@ -418,6 +413,7 @@ export default function HomePage() {
               >
                 <Link
                   href={`/articles/${article.slug}`}
+                  aria-label={`Open article: ${article.title}`}
                   className="block no-underline mb-3"
                 >
                   <ImageBox
@@ -432,7 +428,6 @@ export default function HomePage() {
             ))}
           </div>
 
-          {/* Right */}
           <div className="lg:col-span-3 py-6 lg:py-7 lg:pl-8">
             {rightCol.map((article, i) => (
               <div
@@ -441,6 +436,7 @@ export default function HomePage() {
               >
                 <Link
                   href={`/articles/${article.slug}`}
+                  aria-label={`Open article: ${article.title}`}
                   className="block no-underline mb-3"
                 >
                   <ImageBox
@@ -456,7 +452,6 @@ export default function HomePage() {
           </div>
         </div>
 
-        {/* SECTION B — LATEST GRID */}
         <div className="mt-1 border-t border-ink" />
         <div className="mt-0">
           <div className="relative">
@@ -466,7 +461,6 @@ export default function HomePage() {
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-12">
-            {/* Left: text-heavy list */}
             <div className="md:col-span-4 lg:col-span-3 py-6 md:pr-8 md:border-r border-grey-line">
               <div className="space-y-6">
                 {latestGrid.slice(0, 3).map((a) => (
@@ -477,11 +471,12 @@ export default function HomePage() {
                     <CategoryLabel category={a.category} />
                     <Link
                       href={`/articles/${a.slug}`}
+                      aria-label={`Read article: ${a.title}`}
                       className="no-underline block mt-2 group"
                     >
-                      <h3 className="font-serif text-[1.28rem] font-semibold leading-[1.15] text-ink group-hover:underline decoration-1 underline-offset-4">
+                      <h2 className="font-serif text-[1.28rem] font-semibold leading-[1.15] text-ink group-hover:underline decoration-1 underline-offset-4">
                         {a.title}
-                      </h3>
+                      </h2>
                     </Link>
                     <p className="font-serif text-[0.98rem] leading-[1.65] text-grey-dark mt-2 line-clamp-3">
                       {a.excerpt}
@@ -495,12 +490,9 @@ export default function HomePage() {
               </div>
             </div>
 
-            {/* Right: Briefing gateway + cards */}
             <div className="md:col-span-8 lg:col-span-9 py-6 md:pl-8">
-              {/* NEW: Weekend Briefing gateway (fixes the “worse” look) */}
               <WeekendBriefingGateway items={briefingItems} />
 
-              {/* Cards */}
               <div className="mt-8 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-9 gap-y-8">
                 {latestGrid.slice(3, 9).map((article) => (
                   <RowCard key={article.slug} article={article} />
@@ -510,7 +502,6 @@ export default function HomePage() {
           </div>
         </div>
 
-        {/* ROWS */}
         {flicks.length > 0 && (
           <>
             <SectionHeader label="Flicks" />
@@ -555,7 +546,6 @@ export default function HomePage() {
           </>
         )}
 
-        {/* SECTION C — CITY FOCUS GATEWAY */}
         <div className="border-t border-ink mt-10" />
 
         <div className="mt-8">

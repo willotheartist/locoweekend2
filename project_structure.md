@@ -1,12 +1,12 @@
 # 📁 locoweekend2 - Project Structure
 
-*Generated on: 20/02/2026, 08:09:34*
+*Generated on: 06/03/2026, 17:06:13*
 
 ## 📋 Quick Overview
 
 | Metric | Value |
 |--------|-------|
-| 📄 Total Files | 65 |
+| 📄 Total Files | 70 |
 | 📁 Total Folders | 24 |
 | 🌳 Max Depth | 4 levels |
 | 🛠️ Tech Stack | React, TypeScript, CSS, Node.js |
@@ -23,39 +23,39 @@
 
 ### By File Type
 
-- 📄 **.mdx** (Other files): 15 files (23.1%)
-- ⚛️ **.tsx** (React TypeScript files): 13 files (20.0%)
-- 🖼️ **.jpg** (JPEG images): 12 files (18.5%)
-- 🔷 **.ts** (TypeScript files): 5 files (7.7%)
-- 🎨 **.svg** (SVG images): 5 files (7.7%)
-- ⚙️ **.json** (JSON files): 4 files (6.2%)
-- 📄 **.mjs** (Other files): 3 files (4.6%)
-- 📖 **.md** (Markdown files): 2 files (3.1%)
-- 🚫 **.gitignore** (Git ignore): 1 files (1.5%)
-- 📄 **.txt** (Text files): 1 files (1.5%)
-- ⚙️ **.yaml** (YAML files): 1 files (1.5%)
-- 🖼️ **.png** (PNG images): 1 files (1.5%)
-- 🖼️ **.ico** (Icon files): 1 files (1.5%)
-- 🎨 **.css** (Stylesheets): 1 files (1.5%)
+- 📄 **.mdx** (Other files): 20 files (28.6%)
+- ⚛️ **.tsx** (React TypeScript files): 13 files (18.6%)
+- 🖼️ **.jpg** (JPEG images): 12 files (17.1%)
+- 🔷 **.ts** (TypeScript files): 5 files (7.1%)
+- 🎨 **.svg** (SVG images): 5 files (7.1%)
+- ⚙️ **.json** (JSON files): 4 files (5.7%)
+- 📄 **.mjs** (Other files): 3 files (4.3%)
+- 📖 **.md** (Markdown files): 2 files (2.9%)
+- 🚫 **.gitignore** (Git ignore): 1 files (1.4%)
+- 📄 **.txt** (Text files): 1 files (1.4%)
+- ⚙️ **.yaml** (YAML files): 1 files (1.4%)
+- 🖼️ **.png** (PNG images): 1 files (1.4%)
+- 🖼️ **.ico** (Icon files): 1 files (1.4%)
+- 🎨 **.css** (Stylesheets): 1 files (1.4%)
 
 ### By Category
 
-- **Assets**: 19 files (29.2%)
-- **Other**: 18 files (27.7%)
-- **React**: 13 files (20.0%)
-- **Config**: 5 files (7.7%)
-- **TypeScript**: 5 files (7.7%)
-- **Docs**: 3 files (4.6%)
-- **DevOps**: 1 files (1.5%)
-- **Styles**: 1 files (1.5%)
+- **Other**: 23 files (32.9%)
+- **Assets**: 19 files (27.1%)
+- **React**: 13 files (18.6%)
+- **Config**: 5 files (7.1%)
+- **TypeScript**: 5 files (7.1%)
+- **Docs**: 3 files (4.3%)
+- **DevOps**: 1 files (1.4%)
+- **Styles**: 1 files (1.4%)
 
 ### 📁 Largest Directories
 
-- **root**: 65 files
-- **src**: 33 files
+- **root**: 70 files
+- **src**: 38 files
+- **src/content/articles**: 22 files
+- **src/content**: 22 files
 - **public**: 18 files
-- **src/content/articles**: 17 files
-- **src/content**: 17 files
 
 ## 🌳 Directory Structure
 
@@ -126,15 +126,20 @@ locoweekend2/
 │   │   └── 📂 articles/
 │   │   │   ├── 🔷 data.ts
 │   │   │   ├── 📂 global/
+│   │   │   │   ├── 📄 best-cities-for-cinephiles.mdx
+│   │   │   │   ├── 📄 europes-new-sobriety.mdx
 │   │   │   │   ├── 📄 hawala-the-invisible-bank.mdx
 │   │   │   │   ├── 📄 lebanons-infinite-crisis.mdx
+│   │   │   │   ├── 📄 old-cinemas-in-europe.mdx
 │   │   │   │   ├── 📄 the-22-pound-smash-burger-problem.mdx
+│   │   │   │   ├── 📄 the-best-cities-to-visit-for-cinephiles.mdx
 │   │   │   │   ├── 📄 the-gorpcore-plateau.mdx
 │   │   │   │   ├── 📄 the-greenland-question.mdx
 │   │   │   │   ├── 📄 the-hotel-lobby-as-coworking-space.mdx
 │   │   │   │   ├── 📄 the-netflix-effect.mdx
 │   │   │   │   ├── 📄 the-passport-economy.mdx
 │   │   │   │   ├── 📄 the-subscription-trap.mdx
+│   │   │   │   ├── 📄 vinyl-renaissance.mdx
 │   │   │   │   ├── 📄 who-owns-the-mediterranean.mdx
 │   │   │   │   └── 📄 why-menswear-is-suddenly-interesting-again.mdx
 │   │   │   ├── 🔷 index.ts

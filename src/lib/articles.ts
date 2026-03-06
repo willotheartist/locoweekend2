@@ -1,4 +1,3 @@
-// src/lib/articles.ts
 import fs from "fs";
 import path from "path";
 
@@ -17,13 +16,9 @@ export interface ArticleMeta {
 }
 
 const ARTICLES_DIR = path.join(process.cwd(), "src/content/articles");
+const SITE_URL = "https://locoweekend.com";
 
-/**
- * Extract `export const meta = { ... }` from an MDX file.
- */
 function extractMeta(source: string): Record<string, unknown> | null {
-  // ✅ More tolerant: doesn't require a newline before the closing brace
-  //    and allows an optional trailing semicolon.
   const match = source.match(
     /export\s+const\s+meta\s*=\s*(\{[\s\S]*?\})\s*;?/m
   );
@@ -36,9 +31,6 @@ function extractMeta(source: string): Record<string, unknown> | null {
   }
 }
 
-/**
- * Get all articles, sorted by date (newest first).
- */
 export function getAllArticles(): ArticleMeta[] {
   const articles: ArticleMeta[] = [];
 
@@ -81,16 +73,10 @@ export function getAllArticles(): ArticleMeta[] {
   );
 }
 
-/**
- * Get a single article by slug.
- */
 export function getArticleBySlug(slug: string): ArticleMeta | undefined {
   return getAllArticles().find((a) => a.slug === slug);
 }
 
-/**
- * Find the MDX file path for a given slug.
- */
 export function getArticlePath(slug: string): string | null {
   if (!fs.existsSync(ARTICLES_DIR)) return null;
 
@@ -115,4 +101,67 @@ export function getArticlePath(slug: string): string | null {
   }
 
   return null;
+}
+
+export function getArticleUrl(slug: string): string {
+  return `${SITE_URL}/articles/${slug}`;
+}
+
+export function getAbsoluteImageUrl(image?: string): string | undefined {
+  if (!image) return undefined;
+  if (image.startsWith("http://") || image.startsWith("https://")) return image;
+  return `${SITE_URL}${image}`;
+}
+
+export function getRelatedArticles(
+  current: ArticleMeta,
+  limit = 4
+): ArticleMeta[] {
+  const all = getAllArticles().filter((a) => a.slug !== current.slug);
+
+  return all
+    .map((article) => {
+      let score = 0;
+
+      if (article.category === current.category) score += 4;
+      if (article.city === current.city) score += 3;
+
+      const currentTerms = `${current.title} ${current.subtitle ?? ""} ${current.excerpt}`
+        .toLowerCase()
+        .split(/[^a-z0-9£]+/i)
+        .filter((t) => t.length > 3);
+
+      const articleText = `${article.title} ${article.subtitle ?? ""} ${article.excerpt}`.toLowerCase();
+
+      for (const term of currentTerms) {
+        if (articleText.includes(term)) score += 0.5;
+      }
+
+      return { article, score };
+    })
+    .sort((a, b) => {
+      if (b.score !== a.score) return b.score - a.score;
+      return new Date(b.article.date).getTime() - new Date(a.article.date).getTime();
+    })
+    .slice(0, limit)
+    .map((item) => item.article);
+}
+
+export function getRecommendedArticles(
+  current: ArticleMeta,
+  limit = 4
+): ArticleMeta[] {
+  const relatedSlugs = new Set(getRelatedArticles(current, limit).map((a) => a.slug));
+
+  return getAllArticles()
+    .filter((a) => a.slug !== current.slug && !relatedSlugs.has(a.slug))
+    .slice(0, limit);
+}
+
+export function buildArticleTitle(article: ArticleMeta): string {
+  return article.subtitle ? `${article.title}: ${article.subtitle}` : article.title;
+}
+
+export function buildArticleDescription(article: ArticleMeta): string {
+  return article.excerpt;
 }

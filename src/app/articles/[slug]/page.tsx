@@ -1,17 +1,19 @@
-// src/app/articles/[slug]/page.tsx
+import type { Metadata } from "next";
 import Link from "next/link";
 import Image from "next/image";
 import { notFound } from "next/navigation";
 import {
+  buildArticleDescription,
+  buildArticleTitle,
+  getAbsoluteImageUrl,
   getAllArticles,
   getArticleBySlug,
   getArticlePath,
+  getArticleUrl,
+  getRecommendedArticles,
+  getRelatedArticles,
 } from "@/lib/articles";
 import type { ArticleMeta } from "@/lib/articles";
-
-/* ───────────────────────────────────────────
-   SHARE ICONS
-   ─────────────────────────────────────────── */
 
 function ShareIcon({
   label,
@@ -22,6 +24,7 @@ function ShareIcon({
 }) {
   return (
     <button
+      type="button"
       aria-label={`Share on ${label}`}
       className="w-9 h-9 flex items-center justify-center text-ink hover:text-grey-text transition-colors duration-200"
     >
@@ -80,14 +83,11 @@ function ShareBar() {
   );
 }
 
-/* ───────────────────────────────────────────
-   RECOMMENDATION + RELATED CARDS
-   ─────────────────────────────────────────── */
-
 function RecommendationCard({ article }: { article: ArticleMeta }) {
   return (
     <Link
       href={`/articles/${article.slug}`}
+      aria-label={`Read article: ${article.title}`}
       className="group block no-underline py-4 border-b border-grey-line last:border-b-0"
     >
       {article.image ? (
@@ -103,9 +103,9 @@ function RecommendationCard({ article }: { article: ArticleMeta }) {
         </div>
       ) : null}
 
-      <h4 className="font-serif text-[15px] font-bold leading-snug text-ink group-hover:underline decoration-1 underline-offset-2">
+      <h3 className="font-serif text-[15px] font-bold leading-snug text-ink group-hover:underline decoration-1 underline-offset-2">
         {article.title}
-      </h4>
+      </h3>
       <div className="flex items-center gap-2 mt-1.5">
         <span className="font-mono text-[9px] font-bold tracking-wider uppercase text-grey-text">
           {article.category}
@@ -121,7 +121,11 @@ function RecommendationCard({ article }: { article: ArticleMeta }) {
 
 function RelatedCard({ article }: { article: ArticleMeta }) {
   return (
-    <Link href={`/articles/${article.slug}`} className="group block no-underline">
+    <Link
+      href={`/articles/${article.slug}`}
+      aria-label={`Read related article: ${article.title}`}
+      className="group block no-underline"
+    >
       {article.image ? (
         <div className="relative aspect-4/3 bg-grey-line/50 mb-3 overflow-hidden">
           <Image
@@ -144,9 +148,9 @@ function RelatedCard({ article }: { article: ArticleMeta }) {
       <span className="font-mono text-[9px] font-bold tracking-[0.14em] uppercase text-grey-text">
         {article.category}
       </span>
-      <h4 className="font-serif text-lg font-bold leading-snug text-ink mt-1 group-hover:underline decoration-1 underline-offset-2">
+      <h3 className="font-serif text-lg font-bold leading-snug text-ink mt-1 group-hover:underline decoration-1 underline-offset-2">
         {article.title}
-      </h4>
+      </h3>
       <div className="mt-2">
         <span className="font-mono text-[9px] tracking-widest uppercase text-grey-text">
           {article.readTime} read
@@ -156,17 +160,73 @@ function RelatedCard({ article }: { article: ArticleMeta }) {
   );
 }
 
-/* ───────────────────────────────────────────
-   STATIC PARAMS
-   ─────────────────────────────────────────── */
-
 export function generateStaticParams() {
   return getAllArticles().map((a) => ({ slug: a.slug }));
 }
 
-/* ───────────────────────────────────────────
-   ARTICLE PAGE
-   ─────────────────────────────────────────── */
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ slug: string }>;
+}): Promise<Metadata> {
+  const { slug } = await params;
+  const article = getArticleBySlug(slug);
+
+  if (!article) {
+    return {
+      title: "Article Not Found",
+      robots: {
+        index: false,
+        follow: false,
+      },
+    };
+  }
+
+  const title = buildArticleTitle(article);
+  const description = buildArticleDescription(article);
+  const url = getArticleUrl(article.slug);
+  const image = getAbsoluteImageUrl(article.image);
+
+  return {
+    title,
+    description,
+    keywords: [
+      article.title,
+      article.category,
+      article.city,
+      `${article.category} article`,
+      `${article.city} culture`,
+      "LocoWeekend",
+    ],
+    alternates: {
+      canonical: url,
+    },
+    openGraph: {
+      type: "article",
+      url,
+      title,
+      description,
+      siteName: "LocoWeekend",
+      publishedTime: article.date,
+      authors: [article.author],
+      section: article.category,
+      images: image
+        ? [
+            {
+              url: image,
+              alt: article.title,
+            },
+          ]
+        : [],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title,
+      description,
+      images: image ? [image] : [],
+    },
+  };
+}
 
 export default async function ArticlePage({
   params,
@@ -189,12 +249,8 @@ export default async function ArticlePage({
     }
   }
 
-  const recommendations = getAllArticles()
-    .filter((a) => a.slug !== slug)
-    .slice(0, 4);
-  const related = getAllArticles()
-    .filter((a) => a.slug !== slug)
-    .slice(4, 7);
+  const recommendations = getRecommendedArticles(article, 4);
+  const related = getRelatedArticles(article, 3);
 
   const formattedDate = new Date(article.date).toLocaleDateString("en-GB", {
     month: "long",
@@ -202,9 +258,41 @@ export default async function ArticlePage({
     year: "numeric",
   });
 
+  const articleUrl = getArticleUrl(article.slug);
+  const imageUrl = getAbsoluteImageUrl(article.image);
+
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    headline: buildArticleTitle(article),
+    description: buildArticleDescription(article),
+    author: {
+      "@type": "Person",
+      name: article.author,
+    },
+    publisher: {
+      "@type": "Organization",
+      name: "LocoWeekend",
+      logo: {
+        "@type": "ImageObject",
+        url: "https://locoweekend.com/LWICON.png",
+      },
+    },
+    mainEntityOfPage: articleUrl,
+    datePublished: article.date,
+    dateModified: article.date,
+    image: imageUrl ? [imageUrl] : undefined,
+    articleSection: article.category,
+    url: articleUrl,
+  };
+
   return (
     <article>
-      {/* ═══ HEADER ═══ */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
+
       <header className="max-w-5xl mx-auto px-5 sm:px-8 pt-10 pb-8 text-center">
         <div className="flex items-center justify-center gap-2 flex-wrap">
           <span className="font-mono text-[11px] font-bold tracking-[0.14em] uppercase text-ink">
@@ -236,10 +324,9 @@ export default async function ArticlePage({
         <ShareBar />
       </header>
 
-      {/* ═══ FEATURED IMAGE (ABOVE EXCERPT) ═══ */}
       {article.image && (
         <div className="max-w-6xl mx-auto px-5 sm:px-8 -mt-2">
-          <div className="relative w-full aspect-[16/9] overflow-hidden bg-grey-line/50">
+          <div className="relative w-full aspect-video overflow-hidden bg-grey-line/50">
             <Image
               src={article.image}
               alt={article.title}
@@ -261,10 +348,9 @@ export default async function ArticlePage({
         <hr className="border-t border-dashed border-grey-line" />
       </div>
 
-      {/* ═══ BODY + SIDEBAR ═══ */}
       <div className="max-w-6xl mx-auto px-5 sm:px-8 pt-10 pb-12 grid grid-cols-1 lg:grid-cols-[1fr_280px] gap-12">
         <div className="max-w-[660px]">
-          <p className="font-[family-name:var(--font-crimson)] text-[19px] leading-[1.48] tracking-[-0.01em] text-ink mb-7">
+          <p className="font-crimson text-[19px] leading-[1.48] tracking-[-0.01em] text-ink mb-7">
             {article.excerpt}
           </p>
 
@@ -279,7 +365,7 @@ export default async function ArticlePage({
           )}
 
           <div className="mt-10 pt-6 border-t border-dashed border-grey-line">
-            <p className="font-[family-name:var(--font-crimson)] text-[16px] italic text-grey-dark leading-[1.45] tracking-[-0.005em]">
+            <p className="font-crimson text-[16px] italic text-grey-dark leading-[1.45] tracking-[-0.005em]">
               {article.author} writes for LocoWeekend. For more,{" "}
               <Link
                 href="/subscribe"
@@ -298,7 +384,7 @@ export default async function ArticlePage({
               </span>
               <Link
                 href={`/articles/${recommendations[0].slug}`}
-                className="font-[family-name:var(--font-crimson)] text-[17px] tracking-[-0.01em] text-ink underline underline-offset-2 decoration-1 hover:text-grey-dark transition-colors"
+                className="font-crimson text-[17px] tracking-[-0.01em] text-ink underline underline-offset-2 decoration-1 hover:text-grey-dark transition-colors"
               >
                 {recommendations[0].title}
               </Link>
@@ -309,9 +395,9 @@ export default async function ArticlePage({
         <aside className="hidden lg:block">
           <div className="sticky top-8">
             <div className="border-t-2 border-ink pt-4 mb-2">
-              <span className="font-mono text-[11px] font-bold tracking-wider uppercase text-ink">
+              <h2 className="font-mono text-[11px] font-bold tracking-wider uppercase text-ink">
                 Recommendations
-              </span>
+              </h2>
             </div>
             {recommendations.map((rec) => (
               <RecommendationCard key={rec.slug} article={rec} />
@@ -320,11 +406,13 @@ export default async function ArticlePage({
         </aside>
       </div>
 
-      {/* ═══ RELATED ═══ */}
       {related.length > 0 && (
-        <div className="border-t-2 border-ink">
+        <section className="border-t-2 border-ink" aria-labelledby="related-articles-heading">
           <div className="max-w-6xl mx-auto px-5 sm:px-8 py-10">
-            <h2 className="font-mono text-sm font-bold tracking-widest uppercase text-ink mb-8">
+            <h2
+              id="related-articles-heading"
+              className="font-mono text-sm font-bold tracking-widest uppercase text-ink mb-8"
+            >
               Related
             </h2>
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
@@ -333,7 +421,7 @@ export default async function ArticlePage({
               ))}
             </div>
           </div>
-        </div>
+        </section>
       )}
     </article>
   );
