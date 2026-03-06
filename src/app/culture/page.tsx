@@ -56,7 +56,7 @@ export default function CulturePage() {
           Culture
         </h1>
 
-        <p className="mt-4 max-w-3xl font-crimson text-[20px] leading-[1.5] tracking-[-0.01em] text-grey-dark">
+        <p className="mt-4 max-w-3xl font-crimson text-[20px] leading-normal tracking-[-0.01em] text-grey-dark">
           Essays, film, fashion, media, city moods, and the strange details that
           reveal what a place is really becoming.
         </p>
@@ -73,7 +73,7 @@ export default function CulturePage() {
               aria-label={`Read featured culture article: ${featured.title}`}
               className="block no-underline group"
             >
-              <div className="relative overflow-hidden bg-grey-line/30 aspect-[16/9]">
+              <div className="relative overflow-hidden bg-grey-line/30 aspect-video">
                 {featured.image ? (
                   <Image
                     src={featured.image}
@@ -153,7 +153,7 @@ export default function CulturePage() {
                   aria-label={`Read culture article: ${a.title}`}
                   className="block no-underline"
                 >
-                  <div className="relative overflow-hidden bg-grey-line/30 aspect-[4/3]">
+                  <div className="relative overflow-hidden bg-grey-line/30 aspect-4/3">
                     {a.image ? (
                       <Image
                         src={a.image}
