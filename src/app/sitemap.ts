@@ -6,21 +6,41 @@ const SITE_URL = "https://locoweekend.com";
 export default function sitemap(): MetadataRoute.Sitemap {
   const now = new Date();
 
-  const homepage: MetadataRoute.Sitemap = [
-    {
-      url: `${SITE_URL}/`,
-      lastModified: now,
-      changeFrequency: "daily",
-      priority: 1,
-    },
+  const staticRoutes = [
+    "",
+    "/culture",
+    "/affairs",
+    "/fashion",
+    "/travel",
+    "/guides",
+    "/politics",
+    "/magazine",
+    "/the-sauce",
+    "/dead-stock",
+    "/drinks",
+    "/grub",
+    "/flicks",
+    "/art",
+    "/picks",
+    "/shop",
+    "/lisbon",
+    "/subscribe",
+    "/signin",
   ];
 
-  const articleEntries: MetadataRoute.Sitemap = getAllArticles().map((article) => ({
-    url: `${SITE_URL}/articles/${article.slug}`,
-    lastModified: new Date(article.date),
-    changeFrequency: "monthly",
-    priority: 0.8,
+  const staticEntries: MetadataRoute.Sitemap = staticRoutes.map((route) => ({
+    url: `${SITE_URL}${route}`,
+    lastModified: now,
+    changeFrequency: route === "" ? "daily" : "weekly",
+    priority: route === "" ? 1 : route === "/lisbon" ? 0.9 : 0.8,
   }));
 
-  return [...homepage, ...articleEntries];
+  const articleEntries = getAllArticles().map((article) => ({
+    url: `${SITE_URL}/articles/${article.slug}`,
+    lastModified: new Date(article.date),
+    changeFrequency: "monthly" as const,
+    priority: article.city.toLowerCase() === "lisbon" ? 0.85 : 0.75,
+  }));
+
+  return [...staticEntries, ...articleEntries];
 }
