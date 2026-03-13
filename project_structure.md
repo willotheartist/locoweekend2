@@ -1,13 +1,13 @@
 # 📁 locoweekend2 - Project Structure
 
-*Generated on: 06/03/2026, 17:06:13*
+*Generated on: 13/03/2026, 22:55:23*
 
 ## 📋 Quick Overview
 
 | Metric | Value |
 |--------|-------|
-| 📄 Total Files | 70 |
-| 📁 Total Folders | 24 |
+| 📄 Total Files | 101 |
+| 📁 Total Folders | 28 |
 | 🌳 Max Depth | 4 levels |
 | 🛠️ Tech Stack | React, TypeScript, CSS, Node.js |
 
@@ -23,39 +23,39 @@
 
 ### By File Type
 
-- 📄 **.mdx** (Other files): 20 files (28.6%)
-- ⚛️ **.tsx** (React TypeScript files): 13 files (18.6%)
-- 🖼️ **.jpg** (JPEG images): 12 files (17.1%)
-- 🔷 **.ts** (TypeScript files): 5 files (7.1%)
-- 🎨 **.svg** (SVG images): 5 files (7.1%)
-- ⚙️ **.json** (JSON files): 4 files (5.7%)
-- 📄 **.mjs** (Other files): 3 files (4.3%)
-- 📖 **.md** (Markdown files): 2 files (2.9%)
-- 🚫 **.gitignore** (Git ignore): 1 files (1.4%)
-- 📄 **.txt** (Text files): 1 files (1.4%)
-- ⚙️ **.yaml** (YAML files): 1 files (1.4%)
-- 🖼️ **.png** (PNG images): 1 files (1.4%)
-- 🖼️ **.ico** (Icon files): 1 files (1.4%)
-- 🎨 **.css** (Stylesheets): 1 files (1.4%)
+- 📄 **.mdx** (Other files): 38 files (37.6%)
+- 🖼️ **.jpg** (JPEG images): 23 files (22.8%)
+- ⚛️ **.tsx** (React TypeScript files): 13 files (12.9%)
+- 🔷 **.ts** (TypeScript files): 7 files (6.9%)
+- 🎨 **.svg** (SVG images): 5 files (5.0%)
+- ⚙️ **.json** (JSON files): 4 files (4.0%)
+- 📄 **.mjs** (Other files): 3 files (3.0%)
+- 📖 **.md** (Markdown files): 2 files (2.0%)
+- 🚫 **.gitignore** (Git ignore): 1 files (1.0%)
+- 📄 **.txt** (Text files): 1 files (1.0%)
+- ⚙️ **.yaml** (YAML files): 1 files (1.0%)
+- 🖼️ **.png** (PNG images): 1 files (1.0%)
+- 🖼️ **.ico** (Icon files): 1 files (1.0%)
+- 🎨 **.css** (Stylesheets): 1 files (1.0%)
 
 ### By Category
 
-- **Other**: 23 files (32.9%)
-- **Assets**: 19 files (27.1%)
-- **React**: 13 files (18.6%)
-- **Config**: 5 files (7.1%)
-- **TypeScript**: 5 files (7.1%)
-- **Docs**: 3 files (4.3%)
-- **DevOps**: 1 files (1.4%)
-- **Styles**: 1 files (1.4%)
+- **Other**: 41 files (40.6%)
+- **Assets**: 30 files (29.7%)
+- **React**: 13 files (12.9%)
+- **TypeScript**: 7 files (6.9%)
+- **Config**: 5 files (5.0%)
+- **Docs**: 3 files (3.0%)
+- **DevOps**: 1 files (1.0%)
+- **Styles**: 1 files (1.0%)
 
 ### 📁 Largest Directories
 
-- **root**: 70 files
-- **src**: 38 files
-- **src/content/articles**: 22 files
-- **src/content**: 22 files
-- **public**: 18 files
+- **root**: 101 files
+- **src**: 58 files
+- **src/content/articles**: 40 files
+- **src/content**: 40 files
+- **public**: 29 files
 
 ## 🌳 Directory Structure
 
@@ -76,6 +76,9 @@ locoweekend2/
 │   ├── 🎨 file.svg
 │   ├── 🎨 globe.svg
 │   ├── 🖼️ images/
+│   │   ├── 📂 europe/
+│   │   │   ├── 🖼️ hotel-lobby-bars.jpg
+│   │   │   └── 🖼️ natural-wine-bars.jpg
 │   │   ├── 📂 global/
 │   │   │   ├── 🖼️ 22-burger.jpg
 │   │   │   ├── 🖼️ gorpcore.jpg
@@ -88,7 +91,17 @@ locoweekend2/
 │   │   │   ├── 🖼️ netflix-effect.jpg
 │   │   │   ├── 🖼️ passport-economy.jpg
 │   │   │   └── 🖼️ subscription-trap.jpg
+│   │   ├── 📂 lisbon/
+│   │   │   ├── 🖼️ bookshops.jpg
+│   │   │   ├── 🖼️ breakfast-spots.jpg
+│   │   │   ├── 🖼️ cafes-reading-writing.jpg
+│   │   │   ├── 🖼️ coolest-streets.jpg
+│   │   │   ├── 🖼️ neighbourhoods-weekend.jpg
+│   │   │   ├── 🖼️ rooftop-bars.jpg
+│   │   │   ├── 🖼️ weekend-energy.jpg
+│   │   │   └── 🖼️ wine-bars.jpg
 │   │   └── 📂 london/
+│   │   │   ├── 🖼️ beige-empire.jpg
 │   │   │   └── 🖼️ shoreditch.jpg
 │   ├── 🖼️ LWICON.png
 │   ├── 🎨 next.svg
@@ -116,8 +129,10 @@ locoweekend2/
 │   │   ├── ⚛️ page.tsx
 │   │   ├── 📂 picks/
 │   │   │   └── ⚛️ page.tsx
-│   │   └── 📂 shop/
+│   │   ├── 🔷 robots.ts
+│   │   ├── 📂 shop/
 │   │   │   └── ⚛️ page.tsx
+│   │   └── 🔷 sitemap.ts
 │   ├── 🧩 components/
 │   │   └── 📂 site/
 │   │   │   ├── ⚛️ Footer.tsx
@@ -125,12 +140,21 @@ locoweekend2/
 │   ├── 📂 content/
 │   │   └── 📂 articles/
 │   │   │   ├── 🔷 data.ts
+│   │   │   ├── 📂 europe/
+│   │   │   │   ├── 📄 best-hotel-lobby-bars-in-europe.mdx
+│   │   │   │   └── 📄 best-natural-wine-bars-in-europe.mdx
 │   │   │   ├── 📂 global/
 │   │   │   │   ├── 📄 best-cities-for-cinephiles.mdx
+│   │   │   │   ├── 📄 best-cocktail-bars-in-madrid-2024.mdx
+│   │   │   │   ├── 📄 bilbao-an-overlooked-city-definitely-worth-visiting.mdx
+│   │   │   │   ├── 📄 discovering-vintage-shops-and-speakeasies-in-barcelona.mdx
+│   │   │   │   ├── 📄 europes-new-sobriety-a-generation-redefining-fun-and-health.mdx
 │   │   │   │   ├── 📄 europes-new-sobriety.mdx
 │   │   │   │   ├── 📄 hawala-the-invisible-bank.mdx
+│   │   │   │   ├── 📄 is-berlin-overrated-in-2024.mdx
 │   │   │   │   ├── 📄 lebanons-infinite-crisis.mdx
 │   │   │   │   ├── 📄 old-cinemas-in-europe.mdx
+│   │   │   │   ├── 📄 sailing-the-balearics-weekend-guide-mallorca-ibiza-menorca-by-boat.mdx
 │   │   │   │   ├── 📄 the-22-pound-smash-burger-problem.mdx
 │   │   │   │   ├── 📄 the-best-cities-to-visit-for-cinephiles.mdx
 │   │   │   │   ├── 📄 the-gorpcore-plateau.mdx
@@ -139,10 +163,21 @@ locoweekend2/
 │   │   │   │   ├── 📄 the-netflix-effect.mdx
 │   │   │   │   ├── 📄 the-passport-economy.mdx
 │   │   │   │   ├── 📄 the-subscription-trap.mdx
+│   │   │   │   ├── 📄 top-30-pubs-in-london.mdx
+│   │   │   │   ├── 📄 vinyl-renaissance-celebrating-the-surge-of-independent-record-shops-across-the-uk.mdx
 │   │   │   │   ├── 📄 vinyl-renaissance.mdx
 │   │   │   │   ├── 📄 who-owns-the-mediterranean.mdx
 │   │   │   │   └── 📄 why-menswear-is-suddenly-interesting-again.mdx
 │   │   │   ├── 🔷 index.ts
+│   │   │   ├── 📂 lisbon/
+│   │   │   │   ├── 📄 best-bookshops-in-lisbon.mdx
+│   │   │   │   ├── 📄 best-breakfast-spots-in-lisbon.mdx
+│   │   │   │   ├── 📄 best-cafes-in-lisbon-for-reading-writing-and-hiding-out.mdx
+│   │   │   │   ├── 📄 best-neighbourhoods-in-lisbon-for-a-weekend.mdx
+│   │   │   │   ├── 📄 best-rooftop-bars-in-lisbon.mdx
+│   │   │   │   ├── 📄 best-wine-bars-in-lisbon-right-now.mdx
+│   │   │   │   ├── 📄 the-coolest-streets-in-lisbon.mdx
+│   │   │   │   └── 📄 why-lisbon-still-has-better-weekend-energy-than-bigger-cities.mdx
 │   │   │   ├── 📂 london/
 │   │   │   │   ├── 📄 is-shoreditch-still-cool.mdx
 │   │   │   │   ├── 📄 the-bar-you-only-find-twice.mdx

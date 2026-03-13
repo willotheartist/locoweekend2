@@ -1,8 +1,10 @@
 import Link from "next/link";
-import { articleIndex } from "@/content/articles";
+import { getAllArticles } from "@/lib/articles";
 
 export default function DrinksPage() {
-  const articles = articleIndex; // later: filter to bars, pubs, nightlife
+  const articles = getAllArticles().filter(
+    (a) => a.category.toLowerCase() === "drinks"
+  );
 
   return (
     <div className="mx-auto max-w-6xl px-4 py-10">
@@ -10,7 +12,8 @@ export default function DrinksPage() {
         Drinks
       </h1>
       <p className="mb-6 text-sm text-neutral-800">
-        Pubs, basements, corner shops, sticky floors. If it has a dress code, it doesn&apos;t belong here.
+        Wine bars, listening rooms, hotel pours, corner spots, serious bottles,
+        bad decisions, good nights.
       </p>
 
       <div className="grid gap-5 md:grid-cols-3">
