@@ -2,8 +2,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import Image from "next/image";
-import { articleIndex } from "@/content/articles";
-import type { Article } from "@/content/articles";
+import { getAllArticles, type ArticleMeta as Article } from "@/lib/articles";
 
 export const metadata: Metadata = {
   title: "LocoWeekend · Culture, Affairs, & anything interesting",
@@ -41,7 +40,7 @@ function Meta({ time }: { time: string }) {
         <line x1="8" y1="21" x2="16" y2="21" />
         <line x1="12" y1="17" x2="12" y2="21" />
       </svg>
-      <span>{time} read</span>
+      <span>{time}</span>
     </div>
   );
 }
@@ -316,18 +315,26 @@ function CityGatewayCard({
 }
 
 function pickByCategory(all: Article[], category: string, count: number) {
-  return all.filter((a) => a.category === category).slice(0, count);
+  return all
+    .filter((a) => a.category.toLowerCase() === category.toLowerCase())
+    .slice(0, count);
 }
 
 function pickFirstImageForCity(all: Article[], city: string) {
-  return all.find((a) => a.city === city && a.image)?.image;
+  return all.find((a) => a.city.toLowerCase() === city.toLowerCase() && a.image)?.image;
 }
 
 function pickFirstByCategory(all: Article[], category: string) {
-  return all.find((a) => a.category === category);
+  return all.find((a) => a.category.toLowerCase() === category.toLowerCase());
+}
+
+function pickFirstArticleForCity(all: Article[], city: string) {
+  return all.find((a) => a.city.toLowerCase() === city.toLowerCase());
 }
 
 export default function HomePage() {
+  const articleIndex = getAllArticles();
+
   const featured = articleIndex.find((a) => a.featured) ?? articleIndex[0];
   const rest = articleIndex.filter((a) => a.slug !== featured.slug);
 
@@ -338,17 +345,56 @@ export default function HomePage() {
   const flicks = pickByCategory(rest, "Flicks", 3);
   const grub = pickByCategory(rest, "Grub", 3);
   const drinks = pickByCategory(rest, "Drinks", 3);
-  const politics = pickByCategory(rest, "Politics", 3);
+
+  const politics = rest
+    .filter((a) => {
+      const c = a.category.toLowerCase();
+      return c === "politics" || c === "affairs" || c === "business";
+    })
+    .slice(0, 3);
+
+  const lisbon = rest
+    .filter((a) => a.city.toLowerCase() === "lisbon")
+    .slice(0, 4);
 
   const londonImg = pickFirstImageForCity(articleIndex, "London");
   const beirutImg = pickFirstImageForCity(articleIndex, "Beirut");
+  const lisbonImg = pickFirstImageForCity(articleIndex, "Lisbon");
   const madridImg = pickFirstImageForCity(articleIndex, "Madrid");
-  const globalImg = pickFirstImageForCity(articleIndex, "Global");
+  const globalImg =
+    pickFirstImageForCity(articleIndex, "Global") ??
+    pickFirstImageForCity(articleIndex, "Europe");
 
-  const bRead = pickFirstByCategory(rest, "Politics") ?? latestGrid[0] ?? rest[0];
-  const bWatch = pickFirstByCategory(rest, "Flicks") ?? latestGrid[1] ?? rest[1] ?? rest[0];
-  const bEat = pickFirstByCategory(rest, "Grub") ?? latestGrid[2] ?? rest[2] ?? rest[0];
-  const bUnderstand = latestGrid[3] ?? rest[3] ?? rest[0];
+  const londonArticle = pickFirstArticleForCity(articleIndex, "London");
+  const beirutArticle = pickFirstArticleForCity(articleIndex, "Beirut");
+  const madridArticle = pickFirstArticleForCity(articleIndex, "Madrid");
+  const globalArticle =
+    pickFirstArticleForCity(articleIndex, "Global") ??
+    pickFirstArticleForCity(articleIndex, "Europe");
+
+  const bRead =
+    pickFirstByCategory(rest, "Politics") ??
+    pickFirstByCategory(rest, "Affairs") ??
+    latestGrid[0] ??
+    rest[0];
+
+  const bWatch =
+    pickFirstByCategory(rest, "Flicks") ??
+    latestGrid[1] ??
+    rest[1] ??
+    rest[0];
+
+  const bEat =
+    pickFirstByCategory(rest, "Grub") ??
+    latestGrid[2] ??
+    rest[2] ??
+    rest[0];
+
+  const bUnderstand =
+    pickFirstByCategory(rest, "Drinks") ??
+    latestGrid[3] ??
+    rest[3] ??
+    rest[0];
 
   const briefingItems = [
     { kicker: "Read", article: bRead },
@@ -546,33 +592,94 @@ export default function HomePage() {
           </>
         )}
 
+        {lisbon.length > 0 && (
+          <>
+            <SectionHeader label="Lisbon" />
+            <div className="grid grid-cols-1 lg:grid-cols-3 gap-x-9 gap-y-9 pt-6 items-start">
+              <article className="group">
+                <Link href="/lisbon" className="block no-underline mb-3">
+                  <ImageBox
+                    city="Lisbon"
+                    src={lisbonImg}
+                    alt="Lisbon"
+                    aspect="3/2"
+                  />
+                </Link>
+
+                <div className="flex items-baseline justify-between gap-4">
+                  <h3 className="font-serif text-[1.45rem] leading-[1.08] font-semibold text-ink">
+                    Lisbon
+                  </h3>
+                  <span className="font-mono text-[10px] tracking-[0.14em] uppercase text-grey-text">
+                    Cluster
+                  </span>
+                </div>
+
+                <p className="font-serif text-[0.98rem] leading-[1.65] text-grey-dark mt-2">
+                  Wine bars, rooftops, breakfasts, streets, cafés, bookshops and neighbourhood logic — all grouped properly in one place.
+                </p>
+
+                <div className="mt-4 inline-flex items-center gap-2 font-mono text-[11px] font-bold tracking-[0.14em] uppercase text-ink">
+                  <Link href="/lisbon" className="no-underline group-hover:underline decoration-1 underline-offset-4">
+                    Explore Lisbon
+                  </Link>
+                  <span aria-hidden="true">→</span>
+                </div>
+              </article>
+
+              <div>
+                <RowCard article={lisbon[0]} />
+              </div>
+
+              <div className="border-t border-grey-line pt-5">
+                <div className="space-y-5">
+                  {lisbon.slice(1, 3).map((a, i) => (
+                    <div
+                      key={a.slug}
+                      className={i > 0 ? "pt-5 border-t border-grey-line" : ""}
+                    >
+                      <CompactStory article={a} />
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </div>
+          </>
+        )}
+
         <div className="border-t border-ink mt-10" />
 
         <div className="mt-8">
           <RuleLabel label="City Focus" />
 
-          <div className="mt-6 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-x-8 gap-y-10">
+          <div className="mt-6 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-x-8 gap-y-10">
             <CityGatewayCard
               city="London"
-              href="/city/london"
+              href={londonArticle ? `/articles/${londonArticle.slug}` : "/culture"}
               blurb="Zone 2 culture, over-designed cafés, real opinions."
               image={londonImg}
             />
             <CityGatewayCard
               city="Beirut"
-              href="/city/beirut"
+              href={beirutArticle ? `/articles/${beirutArticle.slug}` : "/affairs"}
               blurb="Currency collapse, dark humour, daily life continuing anyway."
               image={beirutImg}
             />
             <CityGatewayCard
+              city="Lisbon"
+              href="/lisbon"
+              blurb="Wine bars, rooftops, breakfasts, bookshops and a city that still knows how to do weekends."
+              image={lisbonImg}
+            />
+            <CityGatewayCard
               city="Madrid"
-              href="/city/madrid"
-              blurb="Late nights, sharper politics, a city that never explains itself."
+              href={madridArticle ? `/articles/${madridArticle.slug}` : "/madrid"}
+              blurb="Neighbourhood logic, wine-led evenings, smarter mornings and a capital that still gets nightlife right."
               image={madridImg}
             />
             <CityGatewayCard
               city="Global"
-              href="/city/global"
+              href={globalArticle ? `/articles/${globalArticle.slug}` : "/magazine"}
               blurb="Systems, money, media, power, mood — the connective tissue."
               image={globalImg}
             />

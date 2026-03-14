@@ -1,13 +1,13 @@
 # 📁 locoweekend2 - Project Structure
 
-*Generated on: 13/03/2026, 23:04:46*
+*Generated on: 14/03/2026, 09:57:06*
 
 ## 📋 Quick Overview
 
 | Metric | Value |
 |--------|-------|
-| 📄 Total Files | 101 |
-| 📁 Total Folders | 28 |
+| 📄 Total Files | 114 |
+| 📁 Total Folders | 39 |
 | 🌳 Max Depth | 4 levels |
 | 🛠️ Tech Stack | React, TypeScript, CSS, Node.js |
 
@@ -23,36 +23,36 @@
 
 ### By File Type
 
-- 📄 **.mdx** (Other files): 38 files (37.6%)
-- 🖼️ **.jpg** (JPEG images): 23 files (22.8%)
-- ⚛️ **.tsx** (React TypeScript files): 13 files (12.9%)
-- 🔷 **.ts** (TypeScript files): 7 files (6.9%)
-- 🎨 **.svg** (SVG images): 5 files (5.0%)
-- ⚙️ **.json** (JSON files): 4 files (4.0%)
-- 📄 **.mjs** (Other files): 3 files (3.0%)
-- 📖 **.md** (Markdown files): 2 files (2.0%)
-- 🚫 **.gitignore** (Git ignore): 1 files (1.0%)
-- 📄 **.txt** (Text files): 1 files (1.0%)
-- ⚙️ **.yaml** (YAML files): 1 files (1.0%)
-- 🖼️ **.png** (PNG images): 1 files (1.0%)
-- 🖼️ **.ico** (Icon files): 1 files (1.0%)
-- 🎨 **.css** (Stylesheets): 1 files (1.0%)
+- 📄 **.mdx** (Other files): 38 files (33.3%)
+- ⚛️ **.tsx** (React TypeScript files): 25 files (21.9%)
+- 🖼️ **.jpg** (JPEG images): 23 files (20.2%)
+- 🔷 **.ts** (TypeScript files): 8 files (7.0%)
+- 🎨 **.svg** (SVG images): 5 files (4.4%)
+- ⚙️ **.json** (JSON files): 4 files (3.5%)
+- 📄 **.mjs** (Other files): 3 files (2.6%)
+- 📖 **.md** (Markdown files): 2 files (1.8%)
+- 🚫 **.gitignore** (Git ignore): 1 files (0.9%)
+- 📄 **.txt** (Text files): 1 files (0.9%)
+- ⚙️ **.yaml** (YAML files): 1 files (0.9%)
+- 🖼️ **.png** (PNG images): 1 files (0.9%)
+- 🖼️ **.ico** (Icon files): 1 files (0.9%)
+- 🎨 **.css** (Stylesheets): 1 files (0.9%)
 
 ### By Category
 
-- **Other**: 41 files (40.6%)
-- **Assets**: 30 files (29.7%)
-- **React**: 13 files (12.9%)
-- **TypeScript**: 7 files (6.9%)
-- **Config**: 5 files (5.0%)
-- **Docs**: 3 files (3.0%)
-- **DevOps**: 1 files (1.0%)
-- **Styles**: 1 files (1.0%)
+- **Other**: 41 files (36.0%)
+- **Assets**: 30 files (26.3%)
+- **React**: 25 files (21.9%)
+- **TypeScript**: 8 files (7.0%)
+- **Config**: 5 files (4.4%)
+- **Docs**: 3 files (2.6%)
+- **DevOps**: 1 files (0.9%)
+- **Styles**: 1 files (0.9%)
 
 ### 📁 Largest Directories
 
-- **root**: 101 files
-- **src**: 58 files
+- **root**: 114 files
+- **src**: 71 files
 - **src/content/articles**: 40 files
 - **src/content**: 40 files
 - **public**: 29 files
@@ -110,6 +110,8 @@ locoweekend2/
 ├── 🔴 📖 **README.md**
 ├── 📁 src/
 │   ├── 🚀 app/
+│   │   ├── 📂 affairs/
+│   │   │   └── ⚛️ page.tsx
 │   │   ├── 📂 art/
 │   │   │   └── ⚛️ page.tsx
 │   │   ├── 📂 articles/
@@ -117,7 +119,11 @@ locoweekend2/
 │   │   │   │   └── ⚛️ page.tsx
 │   │   ├── 📂 culture/
 │   │   │   └── ⚛️ page.tsx
+│   │   ├── 📂 dead-stock/
+│   │   │   └── ⚛️ page.tsx
 │   │   ├── 📂 drinks/
+│   │   │   └── ⚛️ page.tsx
+│   │   ├── 📂 fashion/
 │   │   │   └── ⚛️ page.tsx
 │   │   ├── 🖼️ favicon.ico
 │   │   ├── 📂 flicks/
@@ -125,18 +131,35 @@ locoweekend2/
 │   │   ├── 🎨 globals.css
 │   │   ├── 📂 grub/
 │   │   │   └── ⚛️ page.tsx
+│   │   ├── 📂 guides/
+│   │   │   └── ⚛️ page.tsx
 │   │   ├── ⚛️ layout.tsx
+│   │   ├── 📂 lisbon/
+│   │   │   └── ⚛️ page.tsx
+│   │   ├── 📂 magazine/
+│   │   │   └── ⚛️ page.tsx
 │   │   ├── ⚛️ page.tsx
 │   │   ├── 📂 picks/
+│   │   │   └── ⚛️ page.tsx
+│   │   ├── 📂 politics/
 │   │   │   └── ⚛️ page.tsx
 │   │   ├── 🔷 robots.ts
 │   │   ├── 📂 shop/
 │   │   │   └── ⚛️ page.tsx
-│   │   └── 🔷 sitemap.ts
+│   │   ├── 📂 signin/
+│   │   │   └── ⚛️ page.tsx
+│   │   ├── 🔷 sitemap.ts
+│   │   ├── 📂 subscribe/
+│   │   │   └── ⚛️ page.tsx
+│   │   ├── 📂 the-sauce/
+│   │   │   └── ⚛️ page.tsx
+│   │   └── 📂 travel/
+│   │   │   └── ⚛️ page.tsx
 │   ├── 🧩 components/
 │   │   └── 📂 site/
 │   │   │   ├── ⚛️ Footer.tsx
-│   │   │   └── ⚛️ Header.tsx
+│   │   │   ├── ⚛️ Header.tsx
+│   │   │   └── ⚛️ SectionPage.tsx
 │   ├── 📂 content/
 │   │   └── 📂 articles/
 │   │   │   ├── 🔷 data.ts
@@ -185,6 +208,7 @@ locoweekend2/
 │   │   │   │   └── 📄 welcome-to-the-beige-empire.mdx
 │   │   │   └── 📂 madrid/
 │   ├── 📚 lib/
+│   │   ├── 🔷 article-collections.ts
 │   │   └── 🔷 articles.ts
 │   └── ⚛️ mdx-components.tsx
 ├── 🔷 tailwind.config.ts
