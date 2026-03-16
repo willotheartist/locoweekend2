@@ -1,13 +1,13 @@
 # 📁 locoweekend2 - Project Structure
 
-*Generated on: 14/03/2026, 09:57:06*
+*Generated on: 16/03/2026, 17:02:34*
 
 ## 📋 Quick Overview
 
 | Metric | Value |
 |--------|-------|
-| 📄 Total Files | 114 |
-| 📁 Total Folders | 39 |
+| 📄 Total Files | 139 |
+| 📁 Total Folders | 41 |
 | 🌳 Max Depth | 4 levels |
 | 🛠️ Tech Stack | React, TypeScript, CSS, Node.js |
 
@@ -23,39 +23,39 @@
 
 ### By File Type
 
-- 📄 **.mdx** (Other files): 38 files (33.3%)
-- ⚛️ **.tsx** (React TypeScript files): 25 files (21.9%)
-- 🖼️ **.jpg** (JPEG images): 23 files (20.2%)
-- 🔷 **.ts** (TypeScript files): 8 files (7.0%)
-- 🎨 **.svg** (SVG images): 5 files (4.4%)
-- ⚙️ **.json** (JSON files): 4 files (3.5%)
-- 📄 **.mjs** (Other files): 3 files (2.6%)
-- 📖 **.md** (Markdown files): 2 files (1.8%)
-- 🚫 **.gitignore** (Git ignore): 1 files (0.9%)
-- 📄 **.txt** (Text files): 1 files (0.9%)
-- ⚙️ **.yaml** (YAML files): 1 files (0.9%)
-- 🖼️ **.png** (PNG images): 1 files (0.9%)
-- 🖼️ **.ico** (Icon files): 1 files (0.9%)
-- 🎨 **.css** (Stylesheets): 1 files (0.9%)
+- 📄 **.mdx** (Other files): 46 files (33.1%)
+- 🖼️ **.jpg** (JPEG images): 39 files (28.1%)
+- ⚛️ **.tsx** (React TypeScript files): 26 files (18.7%)
+- 🔷 **.ts** (TypeScript files): 8 files (5.8%)
+- 🎨 **.svg** (SVG images): 5 files (3.6%)
+- ⚙️ **.json** (JSON files): 4 files (2.9%)
+- 📄 **.mjs** (Other files): 3 files (2.2%)
+- 📖 **.md** (Markdown files): 2 files (1.4%)
+- 🚫 **.gitignore** (Git ignore): 1 files (0.7%)
+- 📄 **.txt** (Text files): 1 files (0.7%)
+- ⚙️ **.yaml** (YAML files): 1 files (0.7%)
+- 🖼️ **.png** (PNG images): 1 files (0.7%)
+- 🖼️ **.ico** (Icon files): 1 files (0.7%)
+- 🎨 **.css** (Stylesheets): 1 files (0.7%)
 
 ### By Category
 
-- **Other**: 41 files (36.0%)
-- **Assets**: 30 files (26.3%)
-- **React**: 25 files (21.9%)
-- **TypeScript**: 8 files (7.0%)
-- **Config**: 5 files (4.4%)
-- **Docs**: 3 files (2.6%)
-- **DevOps**: 1 files (0.9%)
-- **Styles**: 1 files (0.9%)
+- **Other**: 49 files (35.3%)
+- **Assets**: 46 files (33.1%)
+- **React**: 26 files (18.7%)
+- **TypeScript**: 8 files (5.8%)
+- **Config**: 5 files (3.6%)
+- **Docs**: 3 files (2.2%)
+- **DevOps**: 1 files (0.7%)
+- **Styles**: 1 files (0.7%)
 
 ### 📁 Largest Directories
 
-- **root**: 114 files
-- **src**: 71 files
-- **src/content/articles**: 40 files
-- **src/content**: 40 files
-- **public**: 29 files
+- **root**: 139 files
+- **src**: 81 files
+- **src/content/articles**: 49 files
+- **src/content**: 49 files
+- **public**: 44 files
 
 ## 🌳 Directory Structure
 
@@ -92,17 +92,33 @@ locoweekend2/
 │   │   │   ├── 🖼️ passport-economy.jpg
 │   │   │   └── 🖼️ subscription-trap.jpg
 │   │   ├── 📂 lisbon/
+│   │   │   ├── 🖼️ best-bookshops-in-lisbon.jpg
+│   │   │   ├── 🖼️ best-cafes-in-lisbon-for-reading-writing-and-hiding-out.jpg
+│   │   │   ├── 🖼️ best-neighbourhoods-in-lisbon-for-a-weekend.jpg
+│   │   │   ├── 🖼️ best-rooftop-bars-in-lisbon.jpg
+│   │   │   ├── 🖼️ best-wine-bars-in-lisbon-right-now.jpg
 │   │   │   ├── 🖼️ bookshops.jpg
-│   │   │   ├── 🖼️ breakfast-spots.jpg
+│   │   │   ├── 🖼️ breakfast-spots-v2.jpg
 │   │   │   ├── 🖼️ cafes-reading-writing.jpg
 │   │   │   ├── 🖼️ coolest-streets.jpg
 │   │   │   ├── 🖼️ neighbourhoods-weekend.jpg
 │   │   │   ├── 🖼️ rooftop-bars.jpg
+│   │   │   ├── 🖼️ the-coolest-streets-in-lisbon.jpg
 │   │   │   ├── 🖼️ weekend-energy.jpg
+│   │   │   ├── 🖼️ why-lisbon-still-has-better-weekend-energy-than-bigger-cities.jpg
 │   │   │   └── 🖼️ wine-bars.jpg
-│   │   └── 📂 london/
+│   │   ├── 📂 london/
 │   │   │   ├── 🖼️ beige-empire.jpg
 │   │   │   └── 🖼️ shoreditch.jpg
+│   │   └── 📂 madrid/
+│   │   │   ├── 🖼️ best-bookshops-in-madrid.jpg
+│   │   │   ├── 🖼️ best-breakfast-spots-in-lisbon.jpg
+│   │   │   ├── 🖼️ best-breakfast-spots-in-madrid-right-now.jpg
+│   │   │   ├── 🖼️ best-cocktail-bars-in-madrid-right-now.jpg
+│   │   │   ├── 🖼️ best-neighbourhoods-in-madrid-for-a-weekend.jpg
+│   │   │   ├── 🖼️ best-wine-bars-in-madrid-right-now.jpg
+│   │   │   ├── 🖼️ the-coolest-streets-in-madrid.jpg
+│   │   │   └── 🖼️ why-madrid-still-has-better-night-energy-than-bigger-european-capitals.jpg
 │   ├── 🖼️ LWICON.png
 │   ├── 🎨 next.svg
 │   ├── 🎨 vercel.svg
@@ -135,6 +151,8 @@ locoweekend2/
 │   │   │   └── ⚛️ page.tsx
 │   │   ├── ⚛️ layout.tsx
 │   │   ├── 📂 lisbon/
+│   │   │   └── ⚛️ page.tsx
+│   │   ├── 📂 madrid/
 │   │   │   └── ⚛️ page.tsx
 │   │   ├── 📂 magazine/
 │   │   │   └── ⚛️ page.tsx
@@ -197,6 +215,7 @@ locoweekend2/
 │   │   │   │   ├── 📄 best-breakfast-spots-in-lisbon.mdx
 │   │   │   │   ├── 📄 best-cafes-in-lisbon-for-reading-writing-and-hiding-out.mdx
 │   │   │   │   ├── 📄 best-neighbourhoods-in-lisbon-for-a-weekend.mdx
+│   │   │   │   ├── 🖼️ best-rooftop-bars-in-lisbon.jpg
 │   │   │   │   ├── 📄 best-rooftop-bars-in-lisbon.mdx
 │   │   │   │   ├── 📄 best-wine-bars-in-lisbon-right-now.mdx
 │   │   │   │   ├── 📄 the-coolest-streets-in-lisbon.mdx
@@ -207,6 +226,14 @@ locoweekend2/
 │   │   │   │   ├── 📄 too-good-for-tourists.mdx
 │   │   │   │   └── 📄 welcome-to-the-beige-empire.mdx
 │   │   │   └── 📂 madrid/
+│   │   │   │   ├── 📄 best-bookshops-in-madrid.mdx
+│   │   │   │   ├── 📄 best-breakfast-spots-in-madrid-right-now.mdx
+│   │   │   │   ├── 📄 best-cafes-in-madrid-for-reading-writing-and-hiding-out.mdx
+│   │   │   │   ├── 📄 best-cocktail-bars-in-madrid-right-now.mdx
+│   │   │   │   ├── 📄 best-neighbourhoods-in-madrid-for-a-weekend.mdx
+│   │   │   │   ├── 📄 best-wine-bars-in-madrid-right-now.mdx
+│   │   │   │   ├── 📄 the-coolest-streets-in-madrid.mdx
+│   │   │   │   └── 📄 why-madrid-still-has-better-night-energy-than-bigger-european-capitals.mdx
 │   ├── 📚 lib/
 │   │   ├── 🔷 article-collections.ts
 │   │   └── 🔷 articles.ts
