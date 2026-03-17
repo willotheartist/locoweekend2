@@ -63,5 +63,6 @@ export default function SubscribePage() {
         Subscription flow coming next. For now, the route exists so the menu stops breaking.
       </p>
     </div>
+  </>
   );
 }

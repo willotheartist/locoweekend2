@@ -94,5 +94,6 @@ export default function GrubPage() {
         ))}
       </div>
     </div>
+  </>
   );
 }

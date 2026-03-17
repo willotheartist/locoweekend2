@@ -69,5 +69,6 @@ export default function ShopPage() {
         No drop-shipped nonsense. Only things we&apos;d actually wear, pin, or tape to a wall.
       </p>
     </div>
+  </>
   );
 }

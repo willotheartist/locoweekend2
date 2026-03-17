@@ -39,5 +39,6 @@ export default function SignInPage() {
         Sign-in flow coming next. For now, the route exists so the menu stops breaking.
       </p>
     </div>
+  </>
   );
 }

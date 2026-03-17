@@ -282,5 +282,6 @@ export default function CulturePage() {
         </section>
       ) : null}
     </div>
+  </>
   );
 }

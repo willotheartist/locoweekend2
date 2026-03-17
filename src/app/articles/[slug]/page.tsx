@@ -304,7 +304,7 @@ export default async function ArticlePage({
       />
       <div aria-hidden="true" style={{position:"absolute",width:1,height:1,overflow:"hidden",clip:"rect(0,0,0,0)",whiteSpace:"nowrap"}}>
         <h1>{article.title}</h1>
-        <p>{article.description}</p>
+        <p>{article.excerpt}</p>
         <nav>
           <a href="/">Home</a>
           <a href="/magazine">Magazine</a>

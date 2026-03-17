@@ -94,5 +94,6 @@ export default function ArtPage() {
         ))}
       </div>
     </div>
+  </>
   );
 }

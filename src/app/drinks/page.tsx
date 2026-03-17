@@ -97,5 +97,6 @@ export default function DrinksPage() {
         ))}
       </div>
     </div>
+  </>
   );
 }
