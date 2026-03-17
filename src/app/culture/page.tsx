@@ -11,6 +11,16 @@ export const metadata: Metadata = {
   alternates: {
     canonical: "/culture",
   },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+    },
+  },
   openGraph: {
     title: "Culture · LocoWeekend",
     description:
@@ -46,6 +56,31 @@ export default function CulturePage() {
   const grid = articles.slice(4);
 
   return (
+    <>
+      <div aria-hidden="true" style={{position:"absolute",width:1,height:1,overflow:"hidden",clip:"rect(0,0,0,0)",whiteSpace:"nowrap"}}>
+        <h1>Culture — Essays, Film, Fashion and Urban Life</h1>
+        <p>Culture at LocoWeekend: essays, film, fashion, media, city scenes, and the people, aesthetics, and systems shaping modern urban life.</p>
+        <nav>
+          <a href="/">Home</a>
+          <a href="/magazine">Magazine</a>
+          <a href="/the-sauce">The Sauce</a>
+          <a href="/culture">Culture</a>
+          <a href="/affairs">Affairs</a>
+          <a href="/fashion">Fashion</a>
+          <a href="/travel">Travel</a>
+          <a href="/guides">Guides</a>
+          <a href="/politics">Politics</a>
+          <a href="/art">Art</a>
+          <a href="/drinks">Drinks</a>
+          <a href="/flicks">Flicks</a>
+          <a href="/grub">Grub</a>
+          <a href="/dead-stock">Dead Stock</a>
+          <a href="/picks">Picks</a>
+          <a href="/lisbon">Lisbon</a>
+          <a href="/madrid">Madrid</a>
+          <a href="/subscribe">Subscribe</a>
+        </nav>
+      </div>
     <div className="mx-auto max-w-6xl px-5 sm:px-8 py-10 sm:py-12">
       <header className="border-b border-grey-line pb-8">
         <div className="font-mono text-[11px] font-bold tracking-[0.16em] uppercase text-grey-text">

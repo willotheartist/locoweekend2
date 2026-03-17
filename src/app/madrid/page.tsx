@@ -10,6 +10,30 @@ export const metadata: Metadata = {
   alternates: {
     canonical: "/madrid",
   },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+    },
+  },
+  openGraph: {
+    title: "Madrid · LocoWeekend",
+    description: "A sharper Madrid city guide covering neighbourhoods, cocktail bars, wine bars, cafés, breakfast spots, bookshops, streets and the night energy.",
+    url: "https://locoweekend.com/madrid",
+    siteName: "LocoWeekend",
+    type: "website",
+    images: [{ url: "https://locoweekend.com/LWICON.png", width: 1200, height: 630, alt: "LocoWeekend" }],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Madrid · LocoWeekend",
+    description: "A sharper Madrid city guide covering neighbourhoods, cocktail bars, wine bars, cafés, breakfast spots, bookshops, streets and the night energy.",
+    images: ["https://locoweekend.com/LWICON.png"],
+  },
 };
 
 function CategoryLabel({ category }: { category: string }) {

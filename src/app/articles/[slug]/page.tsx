@@ -201,6 +201,16 @@ export async function generateMetadata({
     alternates: {
       canonical: url,
     },
+    robots: {
+      index: true,
+      follow: true,
+      googleBot: {
+        index: true,
+        follow: true,
+        "max-image-preview": "large",
+        "max-snippet": -1,
+      },
+    },
     openGraph: {
       type: "article",
       url,
@@ -292,6 +302,18 @@ export default async function ArticlePage({
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
+      <div aria-hidden="true" style={{position:"absolute",width:1,height:1,overflow:"hidden",clip:"rect(0,0,0,0)",whiteSpace:"nowrap"}}>
+        <h1>{article.title}</h1>
+        <p>{article.description}</p>
+        <nav>
+          <a href="/">Home</a>
+          <a href="/magazine">Magazine</a>
+          <a href="/culture">Culture</a>
+          <a href="/travel">Travel</a>
+          <a href="/lisbon">Lisbon</a>
+          <a href="/madrid">Madrid</a>
+        </nav>
+      </div>
 
       <header className="max-w-5xl mx-auto px-5 sm:px-8 pt-10 pb-8 text-center">
         <div className="flex items-center justify-center gap-2 flex-wrap">

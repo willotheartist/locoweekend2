@@ -11,6 +11,30 @@ export const metadata: Metadata = {
   alternates: {
     canonical: "/",
   },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+    },
+  },
+  openGraph: {
+    title: "LocoWeekend · Culture, Affairs & Anything Interesting",
+    description: "Independent street magazine covering culture, affairs, film, food, cities, and anything interesting.",
+    url: "https://locoweekend.com/",
+    siteName: "LocoWeekend",
+    type: "website",
+    images: [{ url: "https://locoweekend.com/LWICON.png", width: 1200, height: 630, alt: "LocoWeekend" }],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "LocoWeekend · Culture, Affairs & Anything Interesting",
+    description: "Independent street magazine covering culture, affairs, film, food, cities, and anything interesting.",
+    images: ["https://locoweekend.com/LWICON.png"],
+  },
 };
 
 function CategoryLabel({ category }: { category: string }) {
