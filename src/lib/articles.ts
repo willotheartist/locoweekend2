@@ -32,6 +32,11 @@ function extractMeta(source: string): Record<string, unknown> | null {
   }
 }
 
+function normaliseAuthor(author?: string): string {
+  if (!author) return "LocoWeekend";
+  return author === "Wills Mayani" ? "Patrick Duroy" : author;
+}
+
 export function getAllArticles(): ArticleMeta[] {
   const articles: ArticleMeta[] = [];
 
@@ -60,7 +65,7 @@ export function getAllArticles(): ArticleMeta[] {
         excerpt: (meta.excerpt as string) || "",
         city: (meta.city as string) || entry.name,
         category: (meta.category as string) || "Culture",
-        author: (meta.author as string) || "LocoWeekend",
+        author: normaliseAuthor(meta.author as string | undefined),
         date: (meta.date as string) || "2026-01-01",
         updatedAt: (meta.updatedAt as string) || undefined,
         readTime: (meta.readTime as string) || "5 min",
