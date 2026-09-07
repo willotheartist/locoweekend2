@@ -1,6 +1,7 @@
 import Link from "next/link";
 
 const sections = [
+  { label: "Business", href: "/business" },
   { label: "Culture", href: "/culture" },
   { label: "Affairs", href: "/affairs" },
   { label: "Fashion", href: "/fashion" },
@@ -26,6 +27,7 @@ const editorial = [
 
 const quickLinks = [
   { label: "Home", href: "/" },
+  { label: "Business", href: "/business" },
   { label: "Culture", href: "/culture" },
   { label: "Travel", href: "/travel" },
   { label: "Lisbon", href: "/lisbon" },
@@ -81,9 +83,9 @@ export function Footer() {
             </h2>
 
             <p className="mt-6 max-w-[34ch] font-serif text-[1.06rem] leading-[1.72] text-grey-dark">
-              LocoWeekend covers culture, affairs, film, food, streets,
-              nightlife, weekends away and the stranger corners of modern city
-              life.
+              LocoWeekend covers culture, affairs, business, technology, film,
+              food, streets, nightlife, weekends away and the stranger corners
+              of modern city life.
             </p>
 
             <div className="mt-8 flex flex-wrap gap-x-5 gap-y-3">
