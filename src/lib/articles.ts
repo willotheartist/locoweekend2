@@ -105,8 +105,21 @@ export function getArticlePath(slug: string): string | null {
   return null;
 }
 
+export function isBusinessArticle(article: Pick<ArticleMeta, "category">): boolean {
+  const category = article.category.toLowerCase();
+  return category === "business" || category === "tech";
+}
+
+export function getArticleHref(article: Pick<ArticleMeta, "slug" | "category">): string {
+  return isBusinessArticle(article)
+    ? `/business/${article.slug}`
+    : `/articles/${article.slug}`;
+}
+
 export function getArticleUrl(slug: string): string {
-  return `${SITE_URL}/articles/${slug}`;
+  const article = getArticleBySlug(slug);
+  const href = article ? getArticleHref(article) : `/articles/${slug}`;
+  return `${SITE_URL}${href}`;
 }
 
 export function getAbsoluteImageUrl(image?: string): string | undefined {
