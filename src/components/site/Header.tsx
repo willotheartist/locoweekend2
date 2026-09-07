@@ -5,10 +5,6 @@ import { useEffect, useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 
-/* ───────────────────────────────────────────
-   CONFIG
-   ─────────────────────────────────────────── */
-
 const TOP_BAR_LEFT = [
   { label: "LOCOWEEKEND", href: "/" },
   { label: "THE SAUCE", href: "/the-sauce" },
@@ -22,6 +18,7 @@ const TOP_BAR_RIGHT = [
 ];
 
 const CATEGORY_NAV = [
+  { label: "Business", href: "/business" },
   { label: "Culture", href: "/culture" },
   { label: "Affairs", href: "/affairs" },
   { label: "Fashion", href: "/fashion" },
@@ -29,10 +26,6 @@ const CATEGORY_NAV = [
   { label: "Guides", href: "/guides" },
   { label: "Politics", href: "/politics" },
 ];
-
-/* ───────────────────────────────────────────
-   HEADER
-   ─────────────────────────────────────────── */
 
 export function Header() {
   const [menuOpen, setMenuOpen] = useState(false);
@@ -118,9 +111,6 @@ export function Header() {
       `}</style>
 
       <header className="w-full bg-paper relative z-50">
-        {/* ─────────────────────────────
-           TOP UTILITY ROW
-           ───────────────────────────── */}
         <div className="lw-anim-topbar">
           <div className="max-w-[1320px] mx-auto px-4 sm:px-8 lg:px-10">
             <div className="h-10 flex items-center">
@@ -144,15 +134,11 @@ export function Header() {
                 </div>
 
                 <div className="flex items-center justify-center">
-                  <span className="text-grey-line text-xs select-none mx-2">
-                    |
-                  </span>
+                  <span className="text-grey-line text-xs select-none mx-2">|</span>
                   <span className="font-serif text-xl font-medium italic tracking-tight normal-case px-3 select-none text-ink">
                     Wall&Fifth
                   </span>
-                  <span className="text-grey-line text-xs select-none mx-2">
-                    |
-                  </span>
+                  <span className="text-grey-line text-xs select-none mx-2">|</span>
                 </div>
 
                 <div className="flex items-center justify-end">
@@ -165,24 +151,18 @@ export function Header() {
                         {item.label}
                       </Link>
                       {i < TOP_BAR_RIGHT.length - 1 && (
-                        <span className="text-grey-line text-xs select-none mx-2">
-                          |
-                        </span>
+                        <span className="text-grey-line text-xs select-none mx-2">|</span>
                       )}
                     </span>
                   ))}
-                  <span className="text-grey-line text-xs select-none mx-2">
-                    |
-                  </span>
+                  <span className="text-grey-line text-xs select-none mx-2">|</span>
                   <Link
                     href="/subscribe"
                     className="text-ink px-2.5 py-0.5 text-[10.5px] font-bold tracking-widest uppercase whitespace-nowrap underline underline-offset-2 hover:text-grey-text transition-colors duration-200 font-mono"
                   >
                     Subscribe
                   </Link>
-                  <span className="text-grey-line text-xs select-none mx-2">
-                    |
-                  </span>
+                  <span className="text-grey-line text-xs select-none mx-2">|</span>
                   <Link
                     href="/signin"
                     className="text-ink no-underline px-2.5 py-0.5 text-[10.5px] font-bold tracking-widest uppercase whitespace-nowrap hover:text-grey-text transition-colors duration-200 font-mono"
@@ -192,7 +172,6 @@ export function Header() {
                 </div>
               </div>
 
-              {/* Mobile */}
               <div className="md:hidden w-full flex items-center justify-between gap-3">
                 <Link
                   href="/"
@@ -203,10 +182,10 @@ export function Header() {
 
                 <div className="flex items-center gap-4 shrink-0">
                   <Link
-                    href="/culture"
+                    href="/business"
                     className="font-mono text-[10px] sm:text-[10.5px] font-bold tracking-[0.16em] uppercase text-ink no-underline"
                   >
-                    Culture
+                    Business
                   </Link>
                   <Link
                     href="/subscribe"
@@ -222,9 +201,6 @@ export function Header() {
           </div>
         </div>
 
-        {/* ─────────────────────────────
-           MASTHEAD
-           ───────────────────────────── */}
         <div className="max-w-[1320px] mx-auto px-4 sm:px-8 lg:px-10">
           <div className="relative py-5 sm:py-7">
             <button
@@ -271,7 +247,6 @@ export function Header() {
 
             <div className="relative z-0 text-center lw-anim-mast px-12 sm:px-16">
               <Link href="/" className="no-underline inline-block">
-                {/* Desktop / tablet */}
                 <span className="hidden sm:inline-flex items-baseline justify-center">
                   <span className="font-serif font-extrabold leading-none -tracking-[0.03em] text-ink text-[104px] md:text-[122px]">
                     Loco
@@ -293,7 +268,6 @@ export function Header() {
                   </span>
                 </span>
 
-                {/* Mobile */}
                 <span className="sm:hidden block">
                   <span className="flex items-center justify-center gap-2">
                     <span className="font-serif font-extrabold leading-none -tracking-[0.03em] text-ink text-[46px]">
@@ -321,9 +295,6 @@ export function Header() {
           </div>
         </div>
 
-        {/* ─────────────────────────────
-           SEARCH
-           ───────────────────────────── */}
         <div className={`lw-search-wrap ${searchOpen ? "open" : ""}`}>
           <div>
             <div className="max-w-2xl mx-auto flex items-center gap-3 border-b-2 border-ink pb-2">
@@ -349,9 +320,6 @@ export function Header() {
           </div>
         </div>
 
-        {/* ─────────────────────────────
-           CATEGORY ROW
-           ───────────────────────────── */}
         <div className="bg-paper">
           <div className="max-w-[1320px] mx-auto px-4 sm:px-8 lg:px-10">
             <div className="h-px bg-grey-line lw-anim-border" />
@@ -360,7 +328,6 @@ export function Header() {
               aria-label="Primary categories"
               className="lw-anim-catnav py-3 sm:py-4"
             >
-              {/* Mobile: compact horizontal scroll */}
               <div className="sm:hidden overflow-x-auto lw-scrollbar-none">
                 <div className="flex items-center gap-5 min-w-max px-0.5">
                   {CATEGORY_NAV.map((item) => (
@@ -375,7 +342,6 @@ export function Header() {
                 </div>
               </div>
 
-              {/* Desktop: centered with separators */}
               <div className="hidden sm:flex items-center justify-center overflow-x-auto">
                 {CATEGORY_NAV.map((item, i) => (
                   <span
@@ -401,9 +367,6 @@ export function Header() {
         </div>
       </header>
 
-      {/* ─────────────────────────────
-         MOBILE MENU OVERLAY
-         ───────────────────────────── */}
       <div
         className={`fixed inset-0 bg-ink z-[999] transition-opacity duration-300 ${
           menuOpen
