@@ -10,6 +10,7 @@ export interface ArticleMeta {
   category: string;
   author: string;
   date: string;
+  updatedAt?: string;
   readTime: string;
   image?: string;
   featured?: boolean;
@@ -61,6 +62,7 @@ export function getAllArticles(): ArticleMeta[] {
         category: (meta.category as string) || "Culture",
         author: (meta.author as string) || "LocoWeekend",
         date: (meta.date as string) || "2026-01-01",
+        updatedAt: (meta.updatedAt as string) || undefined,
         readTime: (meta.readTime as string) || "5 min",
         image: (meta.image as string) || undefined,
         featured: meta.featured === true,
