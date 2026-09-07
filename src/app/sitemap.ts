@@ -34,6 +34,11 @@ const staticRoutes: Array<{
 
   { path: "/lisbon", priority: 0.8, changeFrequency: "weekly" },
   { path: "/madrid", priority: 0.8, changeFrequency: "weekly" },
+  {
+    path: "/authors/patrick-duroy",
+    priority: 0.65,
+    changeFrequency: "weekly",
+  },
 
   { path: "/subscribe", priority: 0.5, changeFrequency: "monthly" },
   { path: "/shop", priority: 0.4, changeFrequency: "monthly" },
