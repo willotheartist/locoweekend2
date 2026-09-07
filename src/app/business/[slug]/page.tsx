@@ -1,8 +1,9 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
-import ArticlePage, {
-  generateMetadata as generateBaseMetadata,
-} from "@/app/articles/[slug]/page";
+import {
+  ArticlePageView,
+  buildMetadataForArticle,
+} from "@/components/site/ArticlePageView";
 import {
   getAllArticles,
   getArticleBySlug,
@@ -30,7 +31,7 @@ export async function generateMetadata({
     };
   }
 
-  return generateBaseMetadata({ params: Promise.resolve({ slug }) });
+  return buildMetadataForArticle(article);
 }
 
 export default async function BusinessArticlePage({
@@ -43,5 +44,5 @@ export default async function BusinessArticlePage({
 
   if (!article || !isBusinessArticle(article)) notFound();
 
-  return ArticlePage({ params: Promise.resolve({ slug }) });
+  return <ArticlePageView article={article} />;
 }
