@@ -1,6 +1,6 @@
 // src/app/sitemap.ts
 import type { MetadataRoute } from "next";
-import { getAllArticles } from "@/lib/articles";
+import { getAllArticles, getArticleHref } from "@/lib/articles";
 
 const SITE_URL = (
   process.env.NEXT_PUBLIC_SITE_URL || "https://locoweekend.com"
@@ -70,7 +70,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
   const articleEntries: MetadataRoute.Sitemap = getAllArticles()
     .filter((article) => article.slug)
     .map((article) => ({
-      url: toAbsoluteUrl(`/articles/${article.slug}`),
+      url: toAbsoluteUrl(getArticleHref(article)),
       lastModified: getArticleLastModified(article),
       changeFrequency: "monthly",
       priority: 0.7,
