@@ -89,12 +89,6 @@ export default function PatrickDuroyPage() {
       {
         "@type": "ListItem",
         position: 2,
-        name: "Authors",
-        item: "https://locoweekend.com/authors",
-      },
-      {
-        "@type": "ListItem",
-        position: 3,
         name: AUTHOR_NAME,
         item: AUTHOR_URL,
       },
@@ -128,7 +122,9 @@ export default function PatrickDuroyPage() {
         </p>
 
         <div className="mt-6 flex flex-wrap items-center gap-2 font-mono text-[10px] uppercase tracking-[0.15em] text-grey-text">
-          <span>{articles.length} published {articles.length === 1 ? "article" : "articles"}</span>
+          <span>
+            {articles.length} published {articles.length === 1 ? "article" : "articles"}
+          </span>
           <span className="text-grey-line">|</span>
           <Link href="/business" className="text-ink underline underline-offset-4">
             Business
