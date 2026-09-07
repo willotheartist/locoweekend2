@@ -1,6 +1,6 @@
 import Link from "next/link";
 import Image from "next/image";
-import type { ArticleMeta } from "@/lib/articles";
+import { getArticleHref, type ArticleMeta } from "@/lib/articles";
 
 type Props = {
   title: string;
@@ -35,7 +35,7 @@ export function SectionPage({ title, description, eyebrow, articles }: Props) {
         <section className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-10 py-8 border-b border-grey-line">
           <div className="lg:col-span-7">
             <Link
-              href={`/articles/${featured.slug}`}
+              href={getArticleHref(featured)}
               className="block no-underline group"
             >
               <div className="relative overflow-hidden bg-grey-line/30 aspect-video">
@@ -67,7 +67,7 @@ export function SectionPage({ title, description, eyebrow, articles }: Props) {
             </div>
 
             <Link
-              href={`/articles/${featured.slug}`}
+              href={getArticleHref(featured)}
               className="block no-underline group mt-4"
             >
               <h2 className="font-serif text-[2rem] sm:text-[2.35rem] font-semibold leading-[1.04] tracking-[-0.02em] text-ink group-hover:underline decoration-1 underline-offset-4">
@@ -98,7 +98,7 @@ export function SectionPage({ title, description, eyebrow, articles }: Props) {
             {rest.map((a) => (
               <article key={a.slug} className="group">
                 <Link
-                  href={`/articles/${a.slug}`}
+                  href={getArticleHref(a)}
                   className="group flex h-full flex-col justify-between border border-black/15 bg-paper px-4 py-4 no-underline transition-transform duration-150 hover:-translate-y-1"
                 >
                   <div>
