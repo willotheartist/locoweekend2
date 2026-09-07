@@ -25,15 +25,21 @@ export function lisbonArticles() {
   return getAllArticles().filter((a) => n(a.city) === "lisbon");
 }
 
-
 export function madridArticles() {
   return getAllArticles().filter((a) => n(a.city) === "madrid");
+}
+
+export function businessArticles() {
+  return getAllArticles().filter((a) => {
+    const c = n(a.category);
+    return c === "business" || c === "tech";
+  });
 }
 
 export function affairsArticles() {
   return getAllArticles().filter((a) => {
     const c = n(a.category);
-    return c === "affairs" || c === "politics" || c === "business";
+    return c === "affairs" || c === "politics";
   });
 }
 
@@ -108,7 +114,7 @@ export function magazineArticles() {
   return uniqueBySlug(
     getAllArticles().filter((a) => {
       const c = n(a.category);
-      return c === "culture" || c === "affairs" || c === "politics" || c === "business";
+      return c === "culture" || c === "affairs" || c === "politics" || c === "business" || c === "tech";
     })
   );
 }
