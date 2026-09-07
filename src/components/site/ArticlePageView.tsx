@@ -16,6 +16,17 @@ import {
 } from "@/lib/articles";
 import type { ArticleMeta } from "@/lib/articles";
 
+const PATRICK_DUROY_HREF = "/authors/patrick-duroy";
+const PATRICK_DUROY_URL = "https://locoweekend.com/authors/patrick-duroy";
+
+function getAuthorHref(author: string): string | null {
+  return author === "Patrick Duroy" ? PATRICK_DUROY_HREF : null;
+}
+
+function getAuthorUrl(author: string): string | null {
+  return author === "Patrick Duroy" ? PATRICK_DUROY_URL : null;
+}
+
 function ShareIcon({
   label,
   children,
@@ -166,6 +177,7 @@ export function buildMetadataForArticle(article: ArticleMeta): Metadata {
   const description = buildArticleDescription(article);
   const url = getArticleUrl(article.slug);
   const image = getAbsoluteImageUrl(article.image);
+  const authorUrl = getAuthorUrl(article.author);
 
   return {
     title,
@@ -189,7 +201,7 @@ export function buildMetadataForArticle(article: ArticleMeta): Metadata {
       siteName: "LocoWeekend",
       publishedTime: article.date,
       modifiedTime: article.updatedAt || article.date,
-      authors: [article.author],
+      authors: [authorUrl || article.author],
       section: article.category,
       images: image ? [{ url: image, alt: article.title }] : [],
     },
@@ -226,6 +238,8 @@ export async function ArticlePageView({ article }: { article: ArticleMeta }) {
 
   const articleUrl = getArticleUrl(article.slug);
   const imageUrl = getAbsoluteImageUrl(article.image);
+  const authorHref = getAuthorHref(article.author);
+  const authorUrl = getAuthorUrl(article.author);
   const sectionHref = isBusinessArticle(article) ? "/business" : "/magazine";
   const sectionLabel = isBusinessArticle(article) ? "Business" : "Magazine";
 
@@ -236,6 +250,7 @@ export async function ArticlePageView({ article }: { article: ArticleMeta }) {
     description: buildArticleDescription(article),
     author: {
       "@type": "Person",
+      ...(authorUrl ? { "@id": `${authorUrl}#person`, url: authorUrl } : {}),
       name: article.author,
     },
     publisher: {
@@ -309,6 +324,7 @@ export async function ArticlePageView({ article }: { article: ArticleMeta }) {
           <a href="/magazine">Magazine</a>
           <a href="/culture">Culture</a>
           <a href="/travel">Travel</a>
+          {authorHref ? <a href={authorHref}>{article.author}</a> : null}
         </nav>
       </div>
 
@@ -337,7 +353,17 @@ export async function ArticlePageView({ article }: { article: ArticleMeta }) {
           <span className="font-mono text-[11px] tracking-widest uppercase text-grey-text">
             Writer{" "}
           </span>
-          <span className="font-serif text-base text-ink">{article.author}</span>
+          {authorHref ? (
+            <Link
+              href={authorHref}
+              rel="author"
+              className="font-serif text-base text-ink underline underline-offset-4 decoration-1"
+            >
+              {article.author}
+            </Link>
+          ) : (
+            <span className="font-serif text-base text-ink">{article.author}</span>
+          )}
         </p>
 
         <ShareBar />
@@ -385,7 +411,18 @@ export async function ArticlePageView({ article }: { article: ArticleMeta }) {
 
           <div className="mt-10 pt-6 border-t border-dashed border-grey-line">
             <p className="font-crimson text-[16px] italic text-grey-dark leading-[1.45] tracking-[-0.005em]">
-              {article.author} writes for LocoWeekend. For more,{" "}
+              {authorHref ? (
+                <Link
+                  href={authorHref}
+                  rel="author"
+                  className="text-ink underline underline-offset-2 decoration-1"
+                >
+                  {article.author}
+                </Link>
+              ) : (
+                article.author
+              )}{" "}
+              writes for LocoWeekend. For more,{" "}
               <Link
                 href="/subscribe"
                 className="text-ink underline underline-offset-2 decoration-1"
