@@ -1,6 +1,6 @@
 // src/app/sitemap.ts
 import type { MetadataRoute } from "next";
-import { articleIndex } from "@/content/articles";
+import { getAllArticles } from "@/lib/articles";
 
 const SITE_URL = (
   process.env.NEXT_PUBLIC_SITE_URL || "https://locoweekend.com"
@@ -38,20 +38,16 @@ const staticRoutes: Array<{
   { path: "/shop", priority: 0.4, changeFrequency: "monthly" },
 ];
 
-// Keep this loose so it works with your current article shape.
-type SitemapArticle = {
-  slug: string;
-  date?: string;
-  publishedAt?: string;
-  updatedAt?: string;
-  lastModified?: string;
-};
-
 function toAbsoluteUrl(path: string) {
   return `${SITE_URL}${path.startsWith("/") ? path : `/${path}`}`;
 }
 
-function getArticleLastModified(article: SitemapArticle) {
+function getArticleLastModified(article: {
+  date?: string;
+  publishedAt?: string;
+  updatedAt?: string;
+  lastModified?: string;
+}) {
   const raw =
     article.updatedAt ||
     article.lastModified ||
@@ -70,7 +66,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: route.priority,
   }));
 
-  const articleEntries: MetadataRoute.Sitemap = (articleIndex as SitemapArticle[])
+  const articleEntries: MetadataRoute.Sitemap = getAllArticles()
     .filter((article) => article.slug)
     .map((article) => ({
       url: toAbsoluteUrl(`/articles/${article.slug}`),
