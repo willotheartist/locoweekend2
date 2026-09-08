@@ -19,6 +19,61 @@ export interface ArticleMeta {
 const ARTICLES_DIR = path.join(process.cwd(), "src/content/articles");
 const SITE_URL = "https://locoweekend.com";
 
+const BUSINESS_TOPIC_DEFINITIONS = [
+  {
+    id: "mvp",
+    terms: [
+      " mvp ",
+      " minimum viable product ",
+      " prototype ",
+      " proof of concept ",
+      " freelancer vs agency ",
+    ],
+  },
+  {
+    id: "saas",
+    terms: [" saas ", " software as a service ", " multi tenant ", " multi tenancy "],
+  },
+  {
+    id: "ai",
+    terms: [
+      " ai ",
+      " artificial intelligence ",
+      " llm ",
+      " rag ",
+      " agentic ",
+      " generative ai ",
+    ],
+  },
+  {
+    id: "web-apps",
+    terms: [" web app ", " web apps ", " web application ", " web applications "],
+  },
+  {
+    id: "custom-software",
+    terms: [" custom software ", " bespoke software ", " software development company "],
+  },
+  {
+    id: "apps",
+    terms: [
+      " app development ",
+      " mobile app ",
+      " mobile apps ",
+      " react native ",
+      " ios app ",
+      " android app ",
+    ],
+  },
+  {
+    id: "marketplaces",
+    terms: [" marketplace ", " marketplaces ", " two sided platform ", " two sided marketplace "],
+  },
+  {
+    id: "digital-products",
+    terms: [" digital product ", " product company ", " product studio ", " product development "],
+  },
+] as const;
+
 function extractMeta(source: string): Record<string, unknown> | null {
   const match = source.match(
     /export\s+const\s+meta\s*=\s*(\{[\s\S]*?\})\s*;?/m
@@ -35,6 +90,24 @@ function extractMeta(source: string): Record<string, unknown> | null {
 function normaliseAuthor(author?: string): string {
   if (!author) return "LocoWeekend";
   return author === "Wills Mayani" ? "Patrick Duroy" : author;
+}
+
+function normaliseTopicText(article: Pick<ArticleMeta, "slug" | "title" | "subtitle" | "excerpt">) {
+  return ` ${`${article.slug} ${article.title} ${article.subtitle ?? ""} ${article.excerpt}`
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, " ")
+    .replace(/\s+/g, " ")
+    .trim()} `;
+}
+
+export function getBusinessTopics(
+  article: Pick<ArticleMeta, "slug" | "title" | "subtitle" | "excerpt">
+): string[] {
+  const text = normaliseTopicText(article);
+
+  return BUSINESS_TOPIC_DEFINITIONS.filter(({ terms }) =>
+    terms.some((term) => text.includes(term))
+  ).map(({ id }) => id);
 }
 
 export function getAllArticles(): ArticleMeta[] {
@@ -133,32 +206,62 @@ export function getAbsoluteImageUrl(image?: string): string | undefined {
   return `${SITE_URL}${image}`;
 }
 
+function relatedScore(current: ArticleMeta, article: ArticleMeta) {
+  let score = 0;
+  const currentIsBusiness = isBusinessArticle(current);
+
+  if (article.category === current.category) score += 4;
+  if (!currentIsBusiness && article.city === current.city) score += 3;
+
+  if (currentIsBusiness && isBusinessArticle(article)) {
+    score += 8;
+
+    const currentTopics = new Set(getBusinessTopics(current));
+    const articleTopics = getBusinessTopics(article);
+    const sharedTopics = articleTopics.filter((topic) => currentTopics.has(topic));
+
+    score += sharedTopics.length * 14;
+
+    const currentIsComparison = current.slug.startsWith("best-");
+    const articleIsComparison = article.slug.startsWith("best-");
+    if (currentIsComparison === articleIsComparison) score += 1;
+
+    const currentIsCost = current.slug.includes("how-much") || current.slug.includes("cost");
+    const articleIsCost = article.slug.includes("how-much") || article.slug.includes("cost");
+    if (currentIsCost === articleIsCost) score += 1;
+  }
+
+  const currentTerms = Array.from(
+    new Set(
+      `${current.title} ${current.subtitle ?? ""} ${current.excerpt}`
+        .toLowerCase()
+        .split(/[^a-z0-9£]+/i)
+        .filter((term) => term.length > 3 && !/^\d+$/.test(term))
+    )
+  );
+
+  const articleText = `${article.title} ${article.subtitle ?? ""} ${article.excerpt}`.toLowerCase();
+
+  for (const term of currentTerms) {
+    if (articleText.includes(term)) score += 0.35;
+  }
+
+  return score;
+}
+
 export function getRelatedArticles(
   current: ArticleMeta,
   limit = 4
 ): ArticleMeta[] {
-  const all = getAllArticles().filter((a) => a.slug !== current.slug);
+  const currentIsBusiness = isBusinessArticle(current);
+  const all = getAllArticles().filter(
+    (article) =>
+      article.slug !== current.slug &&
+      (!currentIsBusiness || isBusinessArticle(article))
+  );
 
   return all
-    .map((article) => {
-      let score = 0;
-
-      if (article.category === current.category) score += 4;
-      if (article.city === current.city) score += 3;
-
-      const currentTerms = `${current.title} ${current.subtitle ?? ""} ${current.excerpt}`
-        .toLowerCase()
-        .split(/[^a-z0-9£]+/i)
-        .filter((t) => t.length > 3);
-
-      const articleText = `${article.title} ${article.subtitle ?? ""} ${article.excerpt}`.toLowerCase();
-
-      for (const term of currentTerms) {
-        if (articleText.includes(term)) score += 0.5;
-      }
-
-      return { article, score };
-    })
+    .map((article) => ({ article, score: relatedScore(current, article) }))
     .sort((a, b) => {
       if (b.score !== a.score) return b.score - a.score;
       return new Date(b.article.date).getTime() - new Date(a.article.date).getTime();
@@ -171,6 +274,10 @@ export function getRecommendedArticles(
   current: ArticleMeta,
   limit = 4
 ): ArticleMeta[] {
+  if (isBusinessArticle(current)) {
+    return getRelatedArticles(current, limit * 2).slice(limit, limit * 2);
+  }
+
   const relatedSlugs = new Set(getRelatedArticles(current, limit).map((a) => a.slug));
 
   return getAllArticles()
