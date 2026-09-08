@@ -1,5 +1,24 @@
 import { getAllArticles, type ArticleMeta } from "@/lib/articles";
 
+const BUSINESS_PILLAR_ORDER = [
+  "best-mvp-development-companies-uk-2026",
+  "how-much-does-an-mvp-cost-uk-2026",
+  "best-saas-development-companies-uk-2026",
+  "how-much-does-a-saas-mvp-cost-uk-2026",
+  "best-ai-app-development-companies-uk-2026",
+  "how-much-does-it-cost-to-build-an-ai-app-uk-2026",
+  "best-web-app-development-companies-uk-2026",
+  "best-custom-software-development-companies-uk-2026",
+  "best-marketplace-development-companies-uk-2026",
+  "best-app-development-companies-london-2026",
+  "how-much-does-it-cost-to-build-an-app-uk-2026",
+  "best-uk-digital-product-companies-2026",
+  "freelancer-vs-agency-vs-in-house-mvp-uk-2026",
+  "how-long-does-it-take-to-build-an-mvp-uk-2026",
+  "who-owns-the-code-when-an-agency-builds-your-app-uk-2026",
+  "mvp-vs-prototype-vs-proof-of-concept-uk-2026",
+];
+
 function n(value: string) {
   return value.toLowerCase();
 }
@@ -30,10 +49,27 @@ export function madridArticles() {
 }
 
 export function businessArticles() {
-  return getAllArticles().filter((a) => {
-    const c = n(a.category);
-    return c === "business" || c === "tech";
-  });
+  const priority = new Map(
+    BUSINESS_PILLAR_ORDER.map((slug, index) => [slug, index])
+  );
+
+  return getAllArticles()
+    .filter((a) => {
+      const c = n(a.category);
+      return c === "business" || c === "tech";
+    })
+    .sort((a, b) => {
+      const aPriority = priority.get(a.slug);
+      const bPriority = priority.get(b.slug);
+
+      if (aPriority !== undefined || bPriority !== undefined) {
+        if (aPriority === undefined) return 1;
+        if (bPriority === undefined) return -1;
+        return aPriority - bPriority;
+      }
+
+      return new Date(b.date).getTime() - new Date(a.date).getTime();
+    });
 }
 
 export function affairsArticles() {
