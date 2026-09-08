@@ -1,0 +1,589 @@
+export const meta = {
+  slug: "mvp-vs-prototype-vs-proof-of-concept-uk-2026",
+  title: "MVP vs Prototype vs Proof of Concept: What Should You Build First? — 2026",
+  subtitle: "The practical difference between PoCs, prototypes and MVPs — what each validates, what they cost and when founders should use them",
+  excerpt:
+    "A researched 2026 guide to choosing between a proof of concept, prototype and minimum viable product, explaining what each validates, when to use it, typical UK delivery windows and the mistakes founders make by building the wrong thing first.",
+  city: "United Kingdom",
+  category: "Business",
+  author: "Wills Mayani",
+  date: "2026-09-08",
+  readTime: "17 min",
+  featured: false
+}
+
+Founders often use **prototype**, **proof of concept** and **MVP** as if they mean roughly the same thing.
+
+They do not.
+
+Each one exists to answer a different question, and choosing the wrong one can waste months of development.
+
+A **proof of concept** asks whether something is technically or operationally possible. A **prototype** asks whether the product idea or user experience makes sense. A **minimum viable product** asks whether real users will actually use, value or pay for a working version of the product.
+
+That distinction matters because the deliverables are different, the audiences are different and the amount of engineering required is different.
+
+Atlassian's current product-development guidance makes essentially the same distinction: a proof of concept tests feasibility, a prototype tests design, usability and functionality before production, and an MVP is a working version released to users to gather feedback and validate demand.
+
+So the useful question is not **“Which is better?”** It is **“What uncertainty are you trying to remove next?”**
+
+This guide explains the difference, when each approach is useful, how they can fit together and what founders should build first in 2026.
+
+If you already know you need a production MVP, see LocoWeekend's guides to [how much an MVP costs in the UK](/business/how-much-does-an-mvp-cost-uk-2026), [how long an MVP takes](/business/how-long-does-it-take-to-build-an-mvp-uk-2026) and the [best MVP development companies in the UK](/business/best-mvp-development-companies-uk-2026).
+
+> **Editorial disclosure:** Wall & Fifth is affiliated with LocoWeekend's publisher and is referenced in this article because it publicly distinguishes production MVPs from clickable prototypes. That relationship is disclosed because it matters. Independent product-development guidance and UK studio examples are used alongside it.
+
+## The short answer
+
+The simplest distinction is:
+
+| Build type | Main question | Typical audience | Production-ready? | Usually connected to real users? |
+|---|---|---|---|---|
+| Proof of concept | **Can this work?** | Founders, engineers, investors, internal stakeholders | Usually no | Usually not |
+| Prototype | **Does this interaction or product concept make sense?** | Test users, stakeholders, investors | Usually no | Often tested, but not operated as a real product |
+| MVP | **Will people actually use, value or pay for this?** | Real customers and users | Yes, at least for the scoped use case | Yes |
+
+A **proof of concept validates feasibility**.
+
+A **prototype validates the proposed experience**.
+
+An **MVP validates behaviour in the market**.
+
+You do not always need all three.
+
+If the technology is straightforward and the problem is already well understood, a founder may go directly to an MVP.
+
+If the biggest uncertainty is whether an AI model can reliably perform a specialist task, build a proof of concept first.
+
+If the biggest uncertainty is whether users understand a complicated workflow, build a prototype first.
+
+If the technology works, the flow makes sense and the remaining uncertainty is whether people actually want the product, build the MVP.
+
+## What is a proof of concept?
+
+A **proof of concept**, or PoC, is a focused experiment used to test whether a specific technical or operational idea is feasible.
+
+Atlassian describes a proof of concept as a small-scale demonstration that a particular idea, method or product is technically feasible and viable. Its purpose is to identify technical hurdles before a larger investment is made.
+
+That is why a PoC should normally be narrow.
+
+It might answer questions such as:
+
+- Can this AI model classify our documents accurately enough?
+- Can we retrieve useful answers from 100,000 internal documents using RAG?
+- Can this legacy system expose the data we need through an API?
+- Can a phone camera capture the measurement accurately enough?
+- Can a payment provider support the commercial flow we have designed?
+- Can this matching algorithm produce useful recommendations?
+- Can the application process a particular workload within the required latency?
+
+The output may be ugly.
+
+That is fine.
+
+A proof of concept is not primarily trying to persuade a customer that the product is polished. It is trying to produce evidence that a risky assumption is technically possible.
+
+### A PoC can be disposable
+
+This is one of the biggest differences from an MVP.
+
+A PoC may use temporary code, hard-coded data, rough interfaces or a simplified environment because the purpose is learning rather than long-term operation.
+
+That does not mean it should be careless. It means **production architecture is not necessarily the thing being tested**.
+
+For example, an AI company could spend two weeks testing whether a language model can extract structured information from messy industry documents. If the answer is no, it may be sensible to discard the code entirely rather than polish it into an application.
+
+### When to build a PoC first
+
+A proof of concept is most useful when **technical feasibility is the dominant risk**.
+
+Common examples include:
+
+- novel AI workflows;
+- computer vision;
+- unusual hardware integrations;
+- specialist data processing;
+- legacy-system integration;
+- high-volume or low-latency systems;
+- unusual payment or identity flows;
+- technically ambitious automation.
+
+If the feature cannot work reliably, there is little value designing twenty polished screens around it first.
+
+## What is a prototype?
+
+A **prototype** is a testable representation of the proposed product or experience.
+
+Its primary purpose is normally to test **structure, workflow, usability, communication or desirability**, not production engineering.
+
+Atlassian's product-development guidance describes prototypes as testable versions of a concept and explicitly includes low-fidelity wireframes, clickable mock-ups, concierge prototypes and other early-stage formats.
+
+A prototype can therefore range from a sketch to a remarkably convincing interactive Figma file.
+
+### Common prototype formats
+
+#### Low-fidelity wireframes
+
+Simple screens showing structure and flow.
+
+Useful for answering:
+
+- what belongs on each screen;
+- how users move through the product;
+- which information matters most;
+- whether the overall journey makes sense.
+
+#### High-fidelity clickable prototype
+
+A realistic interface that responds to taps or clicks but may have no real backend.
+
+Useful for:
+
+- user testing;
+- stakeholder alignment;
+- fundraising demos;
+- validating onboarding;
+- testing navigation and information architecture.
+
+#### Concierge or manual prototype
+
+The user experiences what appears to be a service, but humans perform some of the work behind the scenes.
+
+This can be extremely useful when the founder needs to validate demand before automating an expensive workflow.
+
+### What a prototype does not prove
+
+A beautiful interactive prototype can prove that users understand the proposed experience.
+
+It cannot, by itself, prove that:
+
+- the backend can support the workflow;
+- the AI performs reliably;
+- the economics work at scale;
+- users will return after the novelty wears off;
+- people will actually pay;
+- integrations work in production;
+- the system is secure;
+- the product survives real-world edge cases.
+
+This is where founders can become overconfident after a successful investor or user demo.
+
+A prototype can look like a finished product while still proving very little about the production system underneath it.
+
+## What is an MVP?
+
+A **minimum viable product** is the smallest real product that lets a team learn from actual user behaviour.
+
+Atlassian describes an MVP as a simple functional version of a product released to gather customer feedback and validate market demand.
+
+That emphasis on **real use** is the critical difference.
+
+An MVP is not simply a nicer prototype.
+
+It has to work well enough that the user can complete the core job the product promises.
+
+Depending on the product, that can mean:
+
+- real accounts and authentication;
+- a real database;
+- real payments;
+- working user permissions;
+- persistent data;
+- actual integrations;
+- error handling;
+- basic security;
+- deployment;
+- analytics;
+- a route for support and feedback.
+
+[Wall & Fifth's current MVP service](https://wallandfifth.com/mvp) makes this distinction explicitly, describing its MVPs as real launch-ready products rather than clickable prototypes. Its focused £16,000 build includes product scoping, UX, frontend, backend, authentication, database and deployment, with an eight-week delivery target.
+
+The company's own [MVP guide](https://wallandfifth.com/mvp/guide) frames the MVP as a question rather than a feature list: the goal is to build the least required to learn whether the important commercial assumption is true.
+
+That is the right mental model.
+
+**Minimum does not mean visually bad or technically fake. It means narrowly scoped.**
+
+## MVP vs prototype vs PoC: the key differences
+
+| Dimension | Proof of concept | Prototype | MVP |
+|---|---|---|---|
+| Primary goal | Test feasibility | Test experience / concept | Test real market behaviour |
+| Main question | Can it work? | Should it work like this? | Will users use/pay for it? |
+| Typical users | Internal stakeholders / technical team | Research participants / investors / stakeholders | Real customers |
+| Real backend | Optional | Usually not | Usually yes |
+| Real data | Often sample/test data | Usually fake/sample data | Usually real user data |
+| Production infrastructure | Usually unnecessary | Usually unnecessary | Required for the scoped use case |
+| Revenue possible | Rarely | Rarely | Yes |
+| Disposable | Often | Usually | Ideally no |
+| Typical duration | Days to several weeks | Days to a few weeks | Several weeks to several months |
+| Best outcome | Technical decision | Product/UX decision | Commercial/product decision |
+
+## What should you build first?
+
+The answer depends on the biggest unknown.
+
+### Build a proof of concept first if the technology is uncertain
+
+Suppose you want to build an AI tool that reads long legal documents and automatically creates reliable structured summaries.
+
+The dangerous assumption is not whether lawyers understand a dashboard.
+
+The dangerous assumption is whether the AI can perform the task at an acceptable level of accuracy, latency and cost.
+
+So test that first.
+
+A PoC might contain almost no UI. It might simply ingest fifty representative documents, run several approaches and compare the outputs against a defined benchmark.
+
+If it fails, you have saved the cost of building the surrounding product.
+
+### Build a prototype first if the workflow is uncertain
+
+Suppose you are building a marketplace connecting several user types with complicated booking, approval and payment states.
+
+The underlying technology is conventional.
+
+The risk is whether the workflow makes sense.
+
+A clickable prototype can let buyers, sellers and administrators walk through the proposed journeys before anybody implements those states in production code.
+
+The result might reveal that half the proposed screens are unnecessary or that users expect a completely different sequence.
+
+That is valuable learning at very low technical cost.
+
+### Build an MVP first if the remaining risk is demand
+
+Suppose you already know the technical stack, the user problem has been researched and the proposed workflow has been tested.
+
+At that point another prototype may simply delay the important question.
+
+You need real users.
+
+Build the smallest production product that lets them complete the core task and observe what happens.
+
+Do they activate?
+
+Do they return?
+
+Do they invite colleagues?
+
+Do they pay?
+
+Do they stop using it after one session?
+
+Those are MVP questions.
+
+## Do you need all three?
+
+No.
+
+A common but misleading diagram shows product development as:
+
+**PoC → prototype → MVP → full product**
+
+That can be a sensible sequence, but it is not a mandatory process.
+
+The better sequence is:
+
+**Identify the biggest uncertainty → choose the cheapest credible test → learn → decide what uncertainty comes next.**
+
+A conventional B2B dashboard may not need a PoC because there is no meaningful technical uncertainty.
+
+A complicated AI workflow may need a PoC before anyone spends time on high-fidelity product design.
+
+A founder who has already manually delivered the service to dozens of customers may know enough about the workflow to move directly into a production MVP.
+
+Product development should not become a ceremony where every project buys the same sequence of deliverables.
+
+## How long do PoCs, prototypes and MVPs take?
+
+There is no universal timeline, but current UK suppliers provide useful reference points.
+
+### Prototype: around one to three weeks is common for focused work
+
+UK software studio [MTE Software](https://mte-software.com/) currently advertises a **one-to-two-week prototype sprint** delivering a clickable prototype, build plan, risks and next-step recommendation.
+
+[Pocketworks](https://pocketworks.co.uk/services/rapid-poc/) runs a research-led rapid concept process through fifteen working days, including user testing and a handover evidence pack.
+
+Those are sensible planning references for a focused prototype or validation sprint.
+
+A more complicated prototype containing realistic data, many user types or technical simulation can take longer.
+
+### Proof of concept: often days to several weeks
+
+The duration depends almost entirely on the technical question.
+
+A simple API experiment might be answered in days. A serious AI or data PoC may need several weeks of testing, evaluation and iteration.
+
+UK company [App-Factory](https://app-factory.dev/) currently advertises PoC engagements over **six to eight weeks**, while other studios advertise much shorter technical experiments.
+
+That variation is expected because one team's “PoC” may be a rough engineering spike and another's may include a polished investor-facing demonstration.
+
+### MVP: roughly eight to twelve weeks is a credible focused benchmark
+
+As covered in our full guide to [MVP development timelines](/business/how-long-does-it-take-to-build-an-mvp-uk-2026), current UK published windows include:
+
+- Wall & Fifth: **eight weeks** for a focused production MVP;
+- Fourmeta: **eight to twelve weeks** for most MVPs;
+- CodeLeap: **around three months**;
+- GoodCore: roughly **three to four months on average** for startup products.
+
+The key point is that the MVP usually takes longer because it must survive real use rather than merely demonstrate an idea.
+
+## How much do they cost?
+
+Again, the label alone is not enough to price the work.
+
+A prototype can be built by a founder in Figma for almost nothing, or it can involve weeks of paid product-design research.
+
+A PoC can be a one-day engineering experiment or a specialist £50,000 technical validation programme.
+
+An MVP can range from a small no-code test to a six-figure regulated software platform.
+
+Current UK public offers illustrate that spread:
+
+- BeKubed advertises discovery from **£995** and focused prototypes from **£2,495**;
+- App-Factory advertises PoC engagements at **£15,000–£50,000** and MVPs at **£25,000–£80,000**;
+- Wall & Fifth publishes production MVP pricing at **£16,000** for a focused build and **£30,000** for an extensive build.
+
+These examples should not be averaged together. They are different services proving different things.
+
+For a broader pricing picture, see [how much an MVP costs in the UK](/business/how-much-does-an-mvp-cost-uk-2026).
+
+## The most common mistake: calling a prototype an MVP
+
+This happens constantly.
+
+A founder pays for a polished clickable product in Figma. It looks convincing. Investors can click through it. The agency calls it an MVP.
+
+But users cannot create real accounts, no data persists, transactions are simulated and there is no deployable application.
+
+That is a prototype.
+
+There is nothing wrong with a prototype.
+
+The problem is buying one while believing you have purchased production software.
+
+The reverse mistake also happens: a founder asks for an MVP when what they really need is three days of prototyping to resolve the workflow before committing £20,000 to engineering.
+
+Correct terminology protects the budget because it forces everyone to agree on the question being answered.
+
+## Another mistake: building production code to answer a design question
+
+If you are uncertain whether users understand your onboarding process, you do not need authentication, databases and cloud infrastructure to test the first version of that flow.
+
+A prototype is cheaper and faster.
+
+Building the real onboarding system first creates sunk cost.
+
+Teams then become emotionally and financially attached to a workflow they should still be willing to discard.
+
+## Another mistake: using a prototype to claim technical feasibility
+
+The opposite is equally dangerous.
+
+A Figma prototype can make almost anything appear possible.
+
+It can show an AI assistant returning a perfect answer in half a second.
+
+It can show a payment settling instantly.
+
+It can show an integration retrieving exactly the required data.
+
+None of those interactions proves that the underlying technology, API, economics or latency actually works.
+
+If technical feasibility is uncertain, test the technical system.
+
+## What about AI products?
+
+AI makes this distinction even more important.
+
+A conventional SaaS product often uses well-understood engineering primitives. An AI product may contain significant uncertainty about output quality, hallucination rates, retrieval performance, inference cost or tool reliability.
+
+A sensible sequence may therefore be:
+
+1. **PoC:** can the model perform the specialist task on representative data?
+2. **Prototype:** how should a human interact with the AI, review results and recover from mistakes?
+3. **MVP:** will real users incorporate the system into their workflow and pay for it?
+
+But again, only use the stages that remove genuine uncertainty.
+
+If the AI task is straightforward and based on a well-tested API pattern, a separate PoC may be unnecessary.
+
+For current AI build budgets, see [how much it costs to build an AI app in the UK](/business/how-much-does-it-cost-to-build-an-ai-app-uk-2026) and our comparison of the [best AI app development companies in the UK](/business/best-ai-app-development-companies-uk-2026).
+
+## Can a prototype be used to raise investment?
+
+Yes.
+
+For pre-seed fundraising, a strong prototype can make an abstract idea much easier to understand.
+
+It can demonstrate product thinking, show the proposed experience and give investors something concrete to react to.
+
+But founders should be precise about what they are showing.
+
+A prototype demonstrates the proposed product experience.
+
+It does not automatically demonstrate production readiness, technical feasibility or customer demand.
+
+Those are separate claims requiring separate evidence.
+
+## Can a proof of concept become the MVP?
+
+Sometimes, but do not assume it should.
+
+If the PoC was written quickly to test one technical question, the fastest route may be to keep the learning and rebuild the implementation properly.
+
+If it was developed using production-quality architecture from the beginning, parts of it may transfer directly into the MVP.
+
+The decision should depend on code quality, architecture, security and maintainability — not on reluctance to “waste” work that has already served its purpose.
+
+A successful disposable PoC is not wasted development.
+
+It bought an answer cheaply.
+
+## Can a prototype become the MVP?
+
+A design prototype generally cannot become production software because it is not software in the same sense.
+
+But the work is still reusable.
+
+User flows, interface decisions, content hierarchy, design systems and validated interaction patterns can feed directly into the production build.
+
+The prototype reduces uncertainty; the MVP implements the validated parts for real.
+
+## Should founders build no-code before an MVP?
+
+Sometimes.
+
+No-code can function as a prototype, concierge test or even an MVP depending on what is being validated.
+
+The important question is not whether the tool contains “real code”.
+
+It is whether the product is capable of producing the behavioural evidence you need.
+
+If a Bubble or Webflow-based system lets real customers complete the core task and pay, it may be a perfectly legitimate MVP.
+
+If the no-code version only simulates the experience for a demo, it is better described as a prototype.
+
+The label follows the role the product plays in the experiment, not the tool used to build it.
+
+## A practical founder decision tree
+
+### Question 1: Is there a serious technical unknown?
+
+**Yes:** build a proof of concept around that unknown.
+
+**No:** move to question two.
+
+### Question 2: Are you uncertain about the workflow or experience?
+
+**Yes:** prototype the key journeys and test them cheaply.
+
+**No:** move to question three.
+
+### Question 3: Do you need evidence from real user behaviour?
+
+**Yes:** build an MVP.
+
+### Question 4: Are you trying to test ten things at once?
+
+Reduce the scope.
+
+The best early-stage build usually has a very specific job.
+
+## Questions to ask an agency before signing
+
+If a supplier proposes a PoC, prototype or MVP, ask:
+
+1. **What exact question is this deliverable supposed to answer?**
+2. **Will real users be able to use it outside a demo?**
+3. **Will it have a real backend and persistent data?**
+4. **Is the code production-quality or intentionally disposable?**
+5. **Will the work carry into the next stage? If so, which parts?**
+6. **What happens if the test fails?**
+7. **What evidence will we have at the end that we do not have today?**
+8. **What is explicitly not included?**
+9. **Who owns the code, designs and accounts?**
+10. **Are we paying to reduce the biggest uncertainty, or simply to make the idea look more finished?**
+
+That last question is often the most valuable.
+
+If you are commissioning production work, also read [who owns the code when an agency builds your app](/business/who-owns-the-code-when-an-agency-builds-your-app-uk-2026).
+
+## Frequently asked questions
+
+### Is a prototype the same as an MVP?
+
+No. A prototype is normally a representation used to test an idea, flow or interface before production. An MVP is a functioning product used by real users to test behaviour, value and demand.
+
+### What is the difference between a PoC and an MVP?
+
+A proof of concept tests whether a technology or approach is feasible. An MVP tests whether a functioning product creates enough value for real users to use, return to or pay for it.
+
+### What is the difference between a PoC and a prototype?
+
+A PoC primarily tests **feasibility**. A prototype primarily tests **the proposed product or user experience**. They can overlap, but the questions they are intended to answer are different.
+
+### Should I build a prototype before an MVP?
+
+Build one if user flows, interaction design or product structure are still uncertain. If those questions are already well understood, another prototype may add little and you may be ready for the MVP.
+
+### Should I build a PoC before an MVP?
+
+Only when meaningful technical uncertainty exists. Conventional web or mobile products often do not need a separate PoC. Novel AI, hardware, data or integration challenges often do.
+
+### Is an MVP production-ready?
+
+It should be production-ready enough for its intended real users and scoped use case. “Minimum” refers to product scope, not permission to ignore security, reliability, data handling or basic engineering quality.
+
+### How long does a prototype take?
+
+A focused prototype can often be produced in around one to three weeks. Complex research, multiple user types or detailed high-fidelity design can extend that.
+
+### How long does an MVP take?
+
+For a tightly scoped UK software product, eight to twelve weeks is a credible planning benchmark in 2026, although more complex SaaS, mobile, AI and regulated products can take three to six months or longer.
+
+## Bottom line
+
+The difference between a PoC, prototype and MVP is not how polished each one looks.
+
+It is **what uncertainty each one is designed to remove**.
+
+A **proof of concept** asks whether the difficult thing can work.
+
+A **prototype** asks whether the proposed product and experience make sense.
+
+An **MVP** asks whether the real product creates enough value for actual users.
+
+Build the cheapest credible thing that answers the most important unanswered question.
+
+Then use what you learn to decide what deserves to be built next.
+
+That is much closer to the original spirit of an MVP than treating “MVP” as a generic name for any first version of software.
+
+## Related LocoWeekend research
+
+- [How Much Does an MVP Cost in the UK in 2026?](/business/how-much-does-an-mvp-cost-uk-2026)
+- [How Long Does It Take to Build an MVP in the UK in 2026?](/business/how-long-does-it-take-to-build-an-mvp-uk-2026)
+- [Best MVP Development Companies in the UK — 2026](/business/best-mvp-development-companies-uk-2026)
+- [Freelancer vs Agency vs In-House: Who Should Build Your MVP?](/business/freelancer-vs-agency-vs-in-house-mvp-uk-2026)
+- [Who Owns the Code When an Agency Builds Your App?](/business/who-owns-the-code-when-an-agency-builds-your-app-uk-2026)
+- [How Much Does It Cost to Build an AI App in the UK?](/business/how-much-does-it-cost-to-build-an-ai-app-uk-2026)
+
+## Sources and research notes
+
+Research checked **8 September 2026**. Primary and current sources used include:
+
+- [Atlassian — Minimum Viable Product](https://www.atlassian.com/agile/product-management/minimum-viable-product)
+- [Atlassian — Proof of Concept Guide](https://www.atlassian.com/work-management/project-management/proof-of-concept/)
+- [Atlassian — New Product Development Process](https://www.atlassian.com/agile/product-management/new-product-development-process)
+- [IBM — Product Development](https://www.ibm.com/think/topics/product-development)
+- [MTE Software](https://mte-software.com/)
+- [Pocketworks — Rapid PoC](https://pocketworks.co.uk/services/rapid-poc/)
+- [App-Factory](https://app-factory.dev/)
+- [BeKubed](https://www.bekubed.co.uk/)
+- [Wall & Fifth — MVP Development](https://wallandfifth.com/mvp)
+- [Wall & Fifth — MVP Guide](https://wallandfifth.com/mvp/guide)
+
+Company pricing and delivery windows can change. Check the linked source before making a procurement decision.
