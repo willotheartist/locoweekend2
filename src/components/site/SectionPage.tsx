@@ -1,3 +1,4 @@
+import type { ReactNode } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { getArticleHref, type ArticleMeta } from "@/lib/articles";
@@ -7,9 +8,16 @@ type Props = {
   description: string;
   eyebrow?: string;
   articles: ArticleMeta[];
+  children?: ReactNode;
 };
 
-export function SectionPage({ title, description, eyebrow, articles }: Props) {
+export function SectionPage({
+  title,
+  description,
+  eyebrow,
+  articles,
+  children,
+}: Props) {
   const featured = articles[0];
   const rest = articles.slice(1);
 
@@ -30,6 +38,8 @@ export function SectionPage({ title, description, eyebrow, articles }: Props) {
           {description}
         </p>
       </header>
+
+      {children}
 
       {featured ? (
         <section className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-10 py-8 border-b border-grey-line">
