@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import "./globals.css";
 import { Header } from "@/components/site/Header";
 import { Footer } from "@/components/site/Footer";
-import { EB_Garamond, Anonymous_Pro, Crimson_Pro } from "next/font/google";
+import { Barlow_Condensed, IBM_Plex_Mono, Crimson_Pro } from "next/font/google";
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://locoweekend.com"),
@@ -58,19 +58,17 @@ export const metadata: Metadata = {
   category: "culture",
 };
 
-const serif = EB_Garamond({
+const display = Barlow_Condensed({
   subsets: ["latin"],
-  variable: "--font-eb-garamond",
-  weight: ["400", "500", "600", "700", "800"],
-  style: ["normal", "italic"],
+  variable: "--font-barlow-condensed",
+  weight: ["600", "700", "800"],
   display: "swap",
 });
 
-const mono = Anonymous_Pro({
+const mono = IBM_Plex_Mono({
   subsets: ["latin"],
-  variable: "--font-anon-pro",
-  weight: ["400", "700"],
-  style: ["normal", "italic"],
+  variable: "--font-ibm-plex-mono",
+  weight: ["400", "500", "600"],
   display: "swap",
 });
 
@@ -82,19 +80,24 @@ const crimson = Crimson_Pro({
   display: "swap",
 });
 
-export default function RootLayout({ children }: { children: React.ReactNode }) {
+export default function RootLayout({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
   return (
     <html
       lang="en"
-      className={`${serif.variable} ${mono.variable} ${crimson.variable}`}
+      className={`${display.variable} ${mono.variable} ${crimson.variable}`}
     >
       <body className="min-h-screen bg-paper text-ink flex flex-col">
-        <div
-          className="fixed inset-0 -z-10 lw-noise-bg opacity-30"
-          aria-hidden="true"
-        />
+        <a className="skip-link" href="#main-content">
+          Skip to content
+        </a>
         <Header />
-        <main className="flex-1">{children}</main>
+        <main id="main-content" className="flex-1">
+          {children}
+        </main>
         <Footer />
       </body>
     </html>

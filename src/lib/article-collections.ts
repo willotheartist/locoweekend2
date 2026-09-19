@@ -110,6 +110,7 @@ export function travelArticles() {
     getAllArticles().filter((a) => {
       const t = textOf(a);
       const c = n(a.category);
+      if (c === "business" || c === "tech") return false;
       return (
         c === "travel" ||
         t.includes("weekend") ||
@@ -147,12 +148,7 @@ export function guidesArticles() {
 }
 
 export function magazineArticles() {
-  return uniqueBySlug(
-    getAllArticles().filter((a) => {
-      const c = n(a.category);
-      return c === "culture" || c === "affairs" || c === "politics" || c === "business" || c === "tech";
-    })
-  );
+  return getAllArticles();
 }
 
 export function theSauceArticles() {

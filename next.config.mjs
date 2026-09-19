@@ -22,7 +22,7 @@ function getBusinessArticleSlugs() {
 
       const source = fs.readFileSync(path.join(directoryPath, file), "utf-8");
       const metaMatch = source.match(
-        /export\s+const\s+meta\s*=\s*(\{[\s\S]*?\})\s*;?/m
+        /export\s+const\s+meta\s*=\s*(\{[\s\S]*?\})\s*;?/m,
       );
 
       if (!metaMatch) continue;
@@ -56,11 +56,11 @@ const nextConfig = {
   },
 };
 
-const withMDX = createMDX({});
+const withMDX = createMDX({ options: { remarkPlugins: ["remark-gfm"] } });
 
 if (process.env.NODE_ENV === "production") {
   fetch(
-    "https://www.google.com/ping?sitemap=https%3A%2F%2Flocoweekend.com%2Fsitemap.xml"
+    "https://www.google.com/ping?sitemap=https%3A%2F%2Flocoweekend.com%2Fsitemap.xml",
   )
     .then(() => console.log("✓ Google pinged"))
     .catch(() => {});
