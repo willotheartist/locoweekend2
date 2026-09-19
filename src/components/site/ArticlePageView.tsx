@@ -166,7 +166,7 @@ export async function ArticlePageView({ article }: { article: ArticleMeta }) {
       <header className="article-header">
         <div className="article-meta">
           <Link href={sectionHref}>{sectionLabel}</Link>
-          <span>{article.category}</span>
+          {article.category !== sectionLabel && <span>{article.category}</span>}
           <time dateTime={article.date}>{formattedDate}</time>
         </div>
         <h1>{article.title}</h1>
