@@ -66,13 +66,13 @@ export default function HomePage() {
   const articles = getAllArticles();
   const lead =
     articles.find(
-      (article) => article.slug === "the-22-pound-smash-burger-problem",
+      (article) => article.slug === "too-good-for-tourists",
     ) || articles[0];
   const picks = select(articles, [
     "the-bar-you-only-find-twice",
     "placebo-are-still-here",
-    "the-gorpcore-plateau",
-    "the-subscription-trap",
+    "english-teacher-join-victoria-park-bill",
+    "how-long-does-it-take-to-build-an-mvp-uk-2026",
   ]);
   const secondary = select(articles, [
     "hawala-the-invisible-bank",
@@ -97,7 +97,7 @@ export default function HomePage() {
     "freelancer-vs-agency-vs-in-house-mvp-uk-2026",
   ]);
   const afterHours = select(articles, [
-    "too-good-for-tourists",
+    "the-22-pound-smash-burger-problem",
     "best-natural-wine-bars-in-europe",
     "best-hotel-lobby-bars-in-europe",
     "best-breakfast-spots-in-madrid-right-now",
