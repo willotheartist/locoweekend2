@@ -5,6 +5,8 @@ export interface ArticleMeta {
   slug: string;
   title: string;
   subtitle?: string;
+  seoTitle?: string;
+  seoDescription?: string;
   excerpt: string;
   city: string;
   category: string;
@@ -135,6 +137,8 @@ export function getAllArticles(): ArticleMeta[] {
         slug: (meta.slug as string) || path.basename(file, ".mdx"),
         title: meta.title as string,
         subtitle: (meta.subtitle as string) || undefined,
+        seoTitle: (meta.seoTitle as string) || undefined,
+        seoDescription: (meta.seoDescription as string) || undefined,
         excerpt: (meta.excerpt as string) || "",
         city: (meta.city as string) || entry.name,
         category: (meta.category as string) || "Culture",

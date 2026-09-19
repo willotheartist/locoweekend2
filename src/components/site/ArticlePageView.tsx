@@ -28,8 +28,8 @@ function getAuthorUrl(author: string): string | null {
 }
 
 export function buildMetadataForArticle(article: ArticleMeta): Metadata {
-  const title = buildArticleTitle(article);
-  const description = buildArticleDescription(article);
+  const title = article.seoTitle || buildArticleTitle(article);
+  const description = article.seoDescription || buildArticleDescription(article);
   const url = getArticleUrl(article.slug);
   const image = getAbsoluteImageUrl(article.image);
   const authorUrl = getAuthorUrl(article.author);
@@ -104,7 +104,7 @@ export async function ArticlePageView({ article }: { article: ArticleMeta }) {
     headline: buildArticleTitle(article),
     description: buildArticleDescription(article),
     author: {
-      "@type": "Person",
+      "@type": article.author === "LocoWeekend" ? "Organization" : "Person",
       ...(authorUrl ? { "@id": `${authorUrl}#person`, url: authorUrl } : {}),
       name: article.author,
     },
