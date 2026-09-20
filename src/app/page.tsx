@@ -1,3 +1,4 @@
+import { getArticleSection } from "@/lib/sections";
 import type { Metadata } from "next";
 import Link from "next/link";
 import {
@@ -88,7 +89,7 @@ export default function HomePage() {
     "yard-act-take-november-english-teacher-takes-the-support-slot",
     "welcome-to-the-beige-empire",
     "the-netflix-effect",
-    "why-menswear-is-suddenly-interesting-again",
+    "how-spotify-royalties-work",
   ]);
   const business = select(articles, [
     "best-ai-app-development-companies-uk-2026",
@@ -215,9 +216,13 @@ export default function HomePage() {
           ))}
         </div>
       </section>
+      <section className="home-section" aria-labelledby="technology-heading">
+        <SectionHeading id="technology-heading" href="/technology">Technology</SectionHeading>
+        <div className="story-grid">{articles.filter(article => getArticleSection(article).id === "technology").slice(0, 4).map(article => <StoryCard key={article.slug} article={article} />)}</div>
+      </section>
       <section className="home-section" aria-labelledby="business-heading">
         <SectionHeading id="business-heading" href="/business">
-          Business & technology
+          Business
         </SectionHeading>
         <div className="story-grid">
           {business.map((article) => (
@@ -236,7 +241,7 @@ export default function HomePage() {
         </div>
       </section>
       <section className="home-section" aria-labelledby="after-hours-heading">
-        <SectionHeading id="after-hours-heading" href="/drinks">
+        <SectionHeading id="after-hours-heading" href="/food-drink">
           After hours
         </SectionHeading>
         <div className="story-grid">

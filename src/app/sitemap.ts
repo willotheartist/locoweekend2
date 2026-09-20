@@ -21,7 +21,9 @@ const staticRoutes: Array<{
 
   { path: "/culture", priority: 0.8, changeFrequency: "weekly" },
   { path: "/affairs", priority: 0.8, changeFrequency: "weekly" },
-  { path: "/fashion", priority: 0.8, changeFrequency: "weekly" },
+  { path: "/style", priority: 0.8, changeFrequency: "weekly" },
+  { path: "/technology", priority: 0.8, changeFrequency: "weekly" },
+  { path: "/food-drink", priority: 0.8, changeFrequency: "weekly" },
   { path: "/travel", priority: 0.8, changeFrequency: "weekly" },
   { path: "/guides", priority: 0.8, changeFrequency: "weekly" },
   { path: "/politics", priority: 0.75, changeFrequency: "weekly" },

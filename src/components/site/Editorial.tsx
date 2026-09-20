@@ -1,3 +1,4 @@
+import { getArticleSection } from "@/lib/sections";
 import Image from "next/image";
 import Link from "next/link";
 import { getArticleHref, type ArticleMeta } from "@/lib/articles";
@@ -79,7 +80,7 @@ export function StoryCard({
           />
         )}
         <div className="story-copy">
-          <p className="eyebrow">{categoryName(article.category)}</p>
+          <p className="eyebrow">{getArticleSection(article).title}</p>
           <h3>{article.title}</h3>
           <Byline article={article} />
         </div>

@@ -1,8 +1,8 @@
+import { getArticleSection } from "@/lib/sections";
 import Link from "next/link";
 import { getArticleHref, type ArticleMeta } from "@/lib/articles";
 import {
   Byline,
-  categoryName,
   SectionHeading,
   StoryCard,
   StoryImage,
@@ -14,6 +14,7 @@ type Props = {
   eyebrow?: string;
   articles: ArticleMeta[];
   children?: React.ReactNode;
+  breadcrumb?: React.ReactNode;
 };
 
 export function SectionPage({
@@ -22,18 +23,20 @@ export function SectionPage({
   eyebrow = "LocoWeekend",
   articles,
   children,
+  breadcrumb,
 }: Props) {
   const [featured, ...rest] = articles;
   return (
     <div className="page-shell section-page">
       <header className="collection-header">
-        <p className="eyebrow">{eyebrow}</p>
+        <div className="eyebrow">{breadcrumb || eyebrow}</div>
         <h1>{title}</h1>
         <p className="deck">{description}</p>
       </header>
       {featured ? (
         <>
-          <article className="collection-lead">
+          <article className={`collection-lead${featured.image ? "" : " collection-lead--text"}`}>
+            {featured.image && (
             <Link
               href={getArticleHref(featured)}
               className="collection-lead-image"
@@ -44,9 +47,10 @@ export function SectionPage({
                 sizes="(min-width: 1200px) 850px, (min-width: 768px) 60vw, 100vw"
               />
             </Link>
+            )}
             <div className="collection-lead-copy">
               <p className="eyebrow">
-                {categoryName(featured.category)} / {featured.city}
+                {getArticleSection(featured).title} / {featured.city}
               </p>
               <Link href={getArticleHref(featured)}>
                 <h2>{featured.title}</h2>

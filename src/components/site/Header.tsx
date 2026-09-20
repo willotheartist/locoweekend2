@@ -1,18 +1,12 @@
 "use client";
+import { sections as editorialSections } from "@/lib/sections";
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useRef } from "react";
 import { ArrowUpRight, Menu, Search, X } from "lucide-react";
 
-const navigation = [
-  ["Culture", "/culture"],
-  ["Business", "/business"],
-  ["Affairs", "/affairs"],
-  ["Style", "/fashion"],
-  ["Food & drink", "/grub"],
-  ["Travel", "/travel"],
-] as const;
+const navigation = editorialSections.map(section => [section.title, section.href] as const);
 const moreNavigation = [
   ["The magazine", "/magazine"],
   ["The Sauce", "/the-sauce"],

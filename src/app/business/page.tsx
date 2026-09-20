@@ -1,12 +1,5 @@
-import type { Metadata } from "next";
 import Link from "next/link";
-import { SectionPage } from "@/components/site/SectionPage";
-import { businessArticles } from "@/lib/article-collections";
-import { getArticleHref } from "@/lib/articles";
-
-const BUSINESS_DESCRIPTION =
-  "Independent UK research on software companies, MVP development, SaaS, AI apps, web apps, marketplaces, custom software, product costs and how digital products get built.";
-
+import { EditorialSectionPage, sectionMetadata } from "@/components/site/EditorialSectionPage";
 const BUSINESS_TOPICS = [
   {
     title: "MVPs",
@@ -104,88 +97,8 @@ const BUSINESS_TOPICS = [
   },
 ] as const;
 
-export const metadata: Metadata = {
-  title: "Business: UK Software, SaaS, AI & Product Guides",
-  description: BUSINESS_DESCRIPTION,
-  alternates: { canonical: "/business" },
-  robots: {
-    index: true,
-    follow: true,
-    googleBot: {
-      index: true,
-      follow: true,
-      "max-image-preview": "large",
-      "max-snippet": -1,
-    },
-  },
-  openGraph: {
-    title: "LocoWeekend Business · Software, SaaS, AI & Product Research",
-    description: BUSINESS_DESCRIPTION,
-    url: "https://locoweekend.com/business",
-    siteName: "LocoWeekend",
-    type: "website",
-    images: [
-      {
-        url: "https://locoweekend.com/LWICON.png",
-        width: 1200,
-        height: 630,
-        alt: "LocoWeekend Business",
-      },
-    ],
-  },
-  twitter: {
-    card: "summary_large_image",
-    title: "LocoWeekend Business · Software, SaaS, AI & Product Research",
-    description: BUSINESS_DESCRIPTION,
-    images: ["https://locoweekend.com/LWICON.png"],
-  },
-};
-
-export default function BusinessPage() {
-  const articles = businessArticles();
-
-  const collectionLd = {
-    "@context": "https://schema.org",
-    "@type": "CollectionPage",
-    "@id": "https://locoweekend.com/business#collection",
-    url: "https://locoweekend.com/business",
-    name: "LocoWeekend Business",
-    description: BUSINESS_DESCRIPTION,
-    about: [
-      "MVP development",
-      "SaaS development",
-      "AI app development",
-      "Web app development",
-      "Custom software development",
-      "Marketplace development",
-      "Digital product development",
-    ].map((name) => ({ "@type": "Thing", name })),
-    mainEntity: {
-      "@type": "ItemList",
-      itemListOrder: "https://schema.org/ItemListOrderAscending",
-      numberOfItems: articles.length,
-      itemListElement: articles.slice(0, 30).map((article, index) => ({
-        "@type": "ListItem",
-        position: index + 1,
-        url: `https://locoweekend.com${getArticleHref(article)}`,
-        name: article.title,
-      })),
-    },
-  };
-
-  return (
-    <>
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(collectionLd) }}
-      />
-
-      <SectionPage
-        eyebrow="LocoWeekend / Business"
-        title="Business"
-        description={BUSINESS_DESCRIPTION}
-        articles={articles}
-      >
+export const metadata = sectionMetadata("business");
+export default function Page() { return <EditorialSectionPage id="business">
         <nav
           aria-label="Business research topics"
           className="border-b border-grey-line py-8"
@@ -226,7 +139,5 @@ export default function BusinessPage() {
             ))}
           </div>
         </nav>
-      </SectionPage>
-    </>
-  );
-}
+
+</EditorialSectionPage>; }

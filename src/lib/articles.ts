@@ -1,4 +1,5 @@
 import fs from "fs";
+import { getArticleSection } from "./sections";
 import path from "path";
 
 export interface ArticleMeta {
@@ -212,12 +213,13 @@ export function getAbsoluteImageUrl(image?: string): string | undefined {
 
 function relatedScore(current: ArticleMeta, article: ArticleMeta) {
   let score = 0;
-  const currentIsBusiness = isBusinessArticle(current);
+  const currentIsBusiness = getArticleSection(current).id === "business";
 
+  if (getArticleSection(article).id === getArticleSection(current).id) score += 30;
   if (article.category === current.category) score += 4;
   if (!currentIsBusiness && article.city === current.city) score += 3;
 
-  if (currentIsBusiness && isBusinessArticle(article)) {
+  if (currentIsBusiness && getArticleSection(article).id === "business") {
     score += 8;
 
     const currentTopics = new Set(getBusinessTopics(current));
@@ -257,11 +259,10 @@ export function getRelatedArticles(
   current: ArticleMeta,
   limit = 4
 ): ArticleMeta[] {
-  const currentIsBusiness = isBusinessArticle(current);
   const all = getAllArticles().filter(
     (article) =>
       article.slug !== current.slug &&
-      (!currentIsBusiness || isBusinessArticle(article))
+      getArticleSection(article).id === getArticleSection(current).id
   );
 
   return all
@@ -278,14 +279,11 @@ export function getRecommendedArticles(
   current: ArticleMeta,
   limit = 4
 ): ArticleMeta[] {
-  if (isBusinessArticle(current)) {
-    return getRelatedArticles(current, limit * 2).slice(limit, limit * 2);
-  }
-
   const relatedSlugs = new Set(getRelatedArticles(current, limit).map((a) => a.slug));
 
   return getAllArticles()
     .filter((a) => a.slug !== current.slug && !relatedSlugs.has(a.slug))
+    .sort((a, b) => relatedScore(current, b) - relatedScore(current, a))
     .slice(0, limit);
 }
 

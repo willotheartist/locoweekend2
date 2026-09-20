@@ -1,3 +1,4 @@
+import { getArticleSection } from "@/lib/sections";
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
@@ -10,7 +11,7 @@ import {
   getArticleUrl,
   getRecommendedArticles,
   getRelatedArticles,
-  isBusinessArticle,
+
 } from "@/lib/articles";
 import type { ArticleMeta } from "@/lib/articles";
 import { SectionHeading, StoryCard, StoryImage } from "./Editorial";
@@ -57,7 +58,7 @@ export function buildMetadataForArticle(article: ArticleMeta): Metadata {
       publishedTime: article.date,
       modifiedTime: article.updatedAt || article.date,
       authors: [authorUrl || article.author],
-      section: article.category,
+      section: getArticleSection(article).title,
       images: image ? [{ url: image, alt: article.title }] : [],
     },
     twitter: {
@@ -95,8 +96,9 @@ export async function ArticlePageView({ article }: { article: ArticleMeta }) {
   const imageUrl = getAbsoluteImageUrl(article.image);
   const authorHref = getAuthorHref(article.author);
   const authorUrl = getAuthorUrl(article.author);
-  const sectionHref = isBusinessArticle(article) ? "/business" : "/magazine";
-  const sectionLabel = isBusinessArticle(article) ? "Business" : "Magazine";
+  const section = getArticleSection(article);
+  const sectionHref = section.href;
+  const sectionLabel = section.title;
 
   const jsonLd = {
     "@context": "https://schema.org",
@@ -120,7 +122,7 @@ export async function ArticlePageView({ article }: { article: ArticleMeta }) {
     datePublished: article.date,
     dateModified: article.updatedAt || article.date,
     image: imageUrl ? [imageUrl] : undefined,
-    articleSection: article.category,
+    articleSection: sectionLabel,
     url: articleUrl,
   };
 
@@ -163,6 +165,11 @@ export async function ArticlePageView({ article }: { article: ArticleMeta }) {
           __html: JSON.stringify(breadcrumbLd).replace(/</g, "\\u003c"),
         }}
       />
+      <nav className="article-breadcrumb eyebrow" aria-label="Breadcrumb">
+        <Link href="/">Home</Link><span aria-hidden="true"> / </span>
+        <Link href={sectionHref}>{sectionLabel}</Link><span aria-hidden="true"> / </span>
+        <span aria-current="page">{article.title}</span>
+      </nav>
       <header className="article-header">
         <div className="article-meta">
           <Link href={sectionHref}>{sectionLabel}</Link>
@@ -229,7 +236,7 @@ export async function ArticlePageView({ article }: { article: ArticleMeta }) {
       </div>
       {related.length > 0 && (
         <section className="article-related" aria-labelledby="related-heading">
-          <SectionHeading id="related-heading">Keep reading</SectionHeading>
+          <SectionHeading id="related-heading" href={sectionHref}>More in {sectionLabel}</SectionHeading>
           <div className="story-grid story-grid--three">
             {related.map((rec) => (
               <StoryCard key={rec.slug} article={rec} />

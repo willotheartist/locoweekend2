@@ -1466,3 +1466,10 @@ dialog::backdrop {
     transition: none !important;
   }
 }
+
+/* Editorial parent pages and readable, image-free lead stories. */
+.collection-lead--text { grid-template-columns: 1fr; border-top: 3px solid #111; padding-top: 24px; }
+.collection-lead--text .collection-lead-copy { max-width: 920px; }
+.collection-lead--text .collection-lead-copy h2 { font-size: clamp(40px, 5vw, 76px); }
+.article-breadcrumb { padding-top: 24px; line-height: 1.8; }
+.article-breadcrumb a:hover, .collection-header nav a:hover { text-decoration: underline; }

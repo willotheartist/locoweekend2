@@ -1,15 +1,7 @@
+import { sections as editorialSections } from "@/lib/sections";
 import Link from "next/link";
 
-const sections = [
-  ["Culture", "/culture"],
-  ["Business", "/business"],
-  ["Affairs", "/affairs"],
-  ["Style", "/fashion"],
-  ["Food", "/grub"],
-  ["Drinks", "/drinks"],
-  ["Travel", "/travel"],
-  ["Film", "/flicks"],
-];
+const sections = editorialSections.map(section => [section.title, section.href] as const);
 const explore = [
   ["The magazine", "/magazine"],
   ["The Sauce", "/the-sauce"],
