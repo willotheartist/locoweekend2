@@ -214,6 +214,7 @@ export default function MadridPage() {
 
   const nightlife = madrid.filter((a) =>
     [
+      "must-visit-bars-in-madrid",
       "best-cocktail-bars-in-madrid-right-now",
       "best-wine-bars-in-madrid-right-now",
       "why-madrid-still-has-better-night-energy-than-bigger-european-capitals",
@@ -332,9 +333,9 @@ export default function MadridPage() {
                   title="Start the day with better timing"
                 />
                 <CompactLink
-                  href="/articles/best-cocktail-bars-in-madrid-right-now"
+                  href="/articles/must-visit-bars-in-madrid"
                   eyebrow="Night"
-                  title="Make one strong drinks decision"
+                  title="Seven bars worth making plans around"
                 />
               </div>
 
