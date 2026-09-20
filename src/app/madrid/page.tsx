@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import Image from "next/image";
-import { getAllArticles, type ArticleMeta as Article } from "@/lib/articles";
+import { getAllArticles, getArticleHref, type ArticleMeta as Article } from "@/lib/articles";
 
 export const metadata: Metadata = {
   title: "Madrid | LocoWeekend",
@@ -135,7 +135,7 @@ function RowCard({ article }: { article: Article }) {
   return (
     <article className="group">
       <Link
-        href={`/articles/${article.slug}`}
+        href={getArticleHref(article)}
         aria-label={`Read article: ${article.title}`}
         className="block no-underline mb-3"
       >
@@ -150,7 +150,7 @@ function RowCard({ article }: { article: Article }) {
       <CategoryLabel category={article.category} />
 
       <Link
-        href={`/articles/${article.slug}`}
+        href={getArticleHref(article)}
         aria-label={`Read article: ${article.title}`}
         className="no-underline block mt-2"
       >
@@ -274,7 +274,7 @@ export default function MadridPage() {
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 mt-10">
             <div className="lg:col-span-7">
               <Link
-                href={`/articles/${featured.slug}`}
+                href={getArticleHref(featured)}
                 aria-label={`Read featured Madrid article: ${featured.title}`}
                 className="block no-underline group"
               >
@@ -333,7 +333,7 @@ export default function MadridPage() {
                   title="Start the day with better timing"
                 />
                 <CompactLink
-                  href="/articles/must-visit-bars-in-madrid"
+                  href="/madrid/bars"
                   eyebrow="Night"
                   title="Seven bars worth making plans around"
                 />

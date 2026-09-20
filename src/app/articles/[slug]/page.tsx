@@ -8,6 +8,7 @@ import {
   getAllArticles,
   getArticleBySlug,
   isBusinessArticle,
+  getArticleHref,
 } from "@/lib/articles";
 
 export function generateStaticParams() {
@@ -44,8 +45,9 @@ export default async function ArticlePage({
 
   if (!article) notFound();
 
-  if (isBusinessArticle(article)) {
-    permanentRedirect(`/business/${article.slug}`);
+  const canonicalPath = getArticleHref(article);
+  if (canonicalPath !== `/articles/${article.slug}`) {
+    permanentRedirect(canonicalPath);
   }
 
   return <ArticlePageView article={article} />;

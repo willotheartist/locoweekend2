@@ -194,9 +194,17 @@ export function isBusinessArticle(article: Pick<ArticleMeta, "category">): boole
 }
 
 export function getArticleHref(article: Pick<ArticleMeta, "slug" | "category">): string {
+  if (article.slug === "must-visit-bars-in-madrid") return "/madrid/bars";
   return isBusinessArticle(article)
     ? `/business/${article.slug}`
     : `/articles/${article.slug}`;
+}
+
+export function getArticleParent(article: ArticleMeta) {
+  if (article.slug === "must-visit-bars-in-madrid") {
+    return { title: "Madrid", href: "/madrid" };
+  }
+  return getArticleSection(article);
 }
 
 export function getArticleUrl(slug: string): string {

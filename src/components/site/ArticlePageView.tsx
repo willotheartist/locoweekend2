@@ -8,6 +8,7 @@ import {
   getAbsoluteImageUrl,
   getArticleBySlug,
   getArticlePath,
+  getArticleParent,
   getArticleUrl,
   getRecommendedArticles,
   getRelatedArticles,
@@ -97,6 +98,7 @@ export async function ArticlePageView({ article }: { article: ArticleMeta }) {
   const authorHref = getAuthorHref(article.author);
   const authorUrl = getAuthorUrl(article.author);
   const section = getArticleSection(article);
+  const parent = getArticleParent(article);
   const sectionHref = section.href;
   const sectionLabel = section.title;
 
@@ -119,6 +121,7 @@ export async function ArticlePageView({ article }: { article: ArticleMeta }) {
       },
     },
     mainEntityOfPage: articleUrl,
+    isPartOf: { "@type": "CollectionPage", "@id": `https://locoweekend.com${parent.href}`, name: parent.title },
     datePublished: article.date,
     dateModified: article.updatedAt || article.date,
     image: imageUrl ? [imageUrl] : undefined,
@@ -139,8 +142,8 @@ export async function ArticlePageView({ article }: { article: ArticleMeta }) {
       {
         "@type": "ListItem",
         position: 2,
-        name: sectionLabel,
-        item: `https://locoweekend.com${sectionHref}`,
+        name: parent.title,
+        item: `https://locoweekend.com${parent.href}`,
       },
       {
         "@type": "ListItem",
@@ -167,7 +170,7 @@ export async function ArticlePageView({ article }: { article: ArticleMeta }) {
       />
       <nav className="article-breadcrumb eyebrow" aria-label="Breadcrumb">
         <Link href="/">Home</Link><span aria-hidden="true"> / </span>
-        <Link href={sectionHref}>{sectionLabel}</Link><span aria-hidden="true"> / </span>
+        <Link href={parent.href}>{parent.title}</Link><span aria-hidden="true"> / </span>
         <span aria-current="page">{article.title}</span>
       </nav>
       <header className="article-header">

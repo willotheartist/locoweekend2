@@ -1,4 +1,4 @@
-import { getAllArticles } from "./articles";
+import { getAllArticles, getArticleHref } from "./articles";
 
 const MAX_LINKS = 3;
 
@@ -82,7 +82,7 @@ export function addInternalLinks(body: string, current: LinkSubject): { body: st
     if (links.length >= MAX_LINKS) break;
     if (used.has(a.slug)) continue;
     for (const phrase of keyPhrases(a.title)) {
-      const next = linkFirst(working, phrase, `/articles/${a.slug}`);
+      const next = linkFirst(working, phrase, getArticleHref(a));
       if (next) { working = next; links.push({ slug: a.slug, anchor: phrase }); used.add(a.slug); break; }
     }
   }

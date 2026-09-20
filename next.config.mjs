@@ -48,11 +48,11 @@ const nextConfig = {
   pageExtensions: ["js", "jsx", "md", "mdx", "ts", "tsx"],
   reactCompiler: true,
   async redirects() {
-    return getBusinessArticleSlugs().map((slug) => ({
+    return [{ source: "/articles/must-visit-bars-in-madrid", destination: "/madrid/bars", permanent: true }, ...getBusinessArticleSlugs().map((slug) => ({
       source: `/articles/${slug}`,
       destination: `/business/${slug}`,
       permanent: true,
-    }));
+    }))];
   },
 };
 
