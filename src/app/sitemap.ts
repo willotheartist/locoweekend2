@@ -35,6 +35,7 @@ const staticRoutes: Array<{
   { path: "/dead-stock", priority: 0.7, changeFrequency: "weekly" },
 
   { path: "/lisbon", priority: 0.8, changeFrequency: "weekly" },
+  { path: "/madrid/bars", priority: 0.8, changeFrequency: "weekly" },
   { path: "/madrid", priority: 0.8, changeFrequency: "weekly" },
   {
     path: "/authors/patrick-duroy",

@@ -99,6 +99,9 @@ export async function ArticlePageView({ article }: { article: ArticleMeta }) {
   const authorUrl = getAuthorUrl(article.author);
   const section = getArticleSection(article);
   const parent = getArticleParent(article);
+  const ancestors = parent.href === "/madrid/bars"
+    ? [{ title: "Madrid", href: "/madrid" }, parent]
+    : [parent];
   const sectionHref = section.href;
   const sectionLabel = section.title;
 
@@ -139,15 +142,15 @@ export async function ArticlePageView({ article }: { article: ArticleMeta }) {
         name: "LocoWeekend",
         item: "https://locoweekend.com/",
       },
+      ...ancestors.map((ancestor, index) => ({
+        "@type": "ListItem",
+        position: index + 2,
+        name: ancestor.title,
+        item: `https://locoweekend.com${ancestor.href}`,
+      })),
       {
         "@type": "ListItem",
-        position: 2,
-        name: parent.title,
-        item: `https://locoweekend.com${parent.href}`,
-      },
-      {
-        "@type": "ListItem",
-        position: 3,
+        position: ancestors.length + 2,
         name: article.title,
         item: articleUrl,
       },
@@ -170,7 +173,9 @@ export async function ArticlePageView({ article }: { article: ArticleMeta }) {
       />
       <nav className="article-breadcrumb eyebrow" aria-label="Breadcrumb">
         <Link href="/">Home</Link><span aria-hidden="true"> / </span>
-        <Link href={parent.href}>{parent.title}</Link><span aria-hidden="true"> / </span>
+        {ancestors.map((ancestor) => (
+          <span key={ancestor.href}><Link href={ancestor.href}>{ancestor.title}</Link><span aria-hidden="true"> / </span></span>
+        ))}
         <span aria-current="page">{article.title}</span>
       </nav>
       <header className="article-header">

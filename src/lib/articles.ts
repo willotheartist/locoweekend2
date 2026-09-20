@@ -1,4 +1,5 @@
 import fs from "fs";
+import madridBars from "./madrid-bars.json";
 import { getArticleSection } from "./sections";
 import path from "path";
 
@@ -194,15 +195,16 @@ export function isBusinessArticle(article: Pick<ArticleMeta, "category">): boole
 }
 
 export function getArticleHref(article: Pick<ArticleMeta, "slug" | "category">): string {
-  if (article.slug === "must-visit-bars-in-madrid") return "/madrid/bars";
+  const barSlug = madridBars[article.slug as keyof typeof madridBars];
+  if (barSlug) return `/madrid/bars/${barSlug}`;
   return isBusinessArticle(article)
     ? `/business/${article.slug}`
     : `/articles/${article.slug}`;
 }
 
 export function getArticleParent(article: ArticleMeta) {
-  if (article.slug === "must-visit-bars-in-madrid") {
-    return { title: "Madrid", href: "/madrid" };
+  if (article.slug in madridBars) {
+    return { title: "Bars", href: "/madrid/bars" };
   }
   return getArticleSection(article);
 }
