@@ -1,0 +1,134 @@
+export const meta = {
+  "slug": "smart-tv-tracking-acr-explained",
+  "title": "Your Smart TV Is Watching a Different Show",
+  "category": "Technology",
+  "seoTitle": "Smart TV Tracking: What ACR Does and How to Turn It Off",
+  "seoDescription": "Automatic content recognition can identify what is on your screen. Here is how it works, what the evidence shows and which privacy controls to check.",
+  "subtitle": "Automatic content recognition can identify what is on your screen. Here is how it works, what the evidence shows and which privacy controls to check.",
+  "excerpt": "You bought a screen to watch things. Somewhere in the setup process, the screen may also have acquired permission to recognise them. Those are two very different jobs.",
+  "author": "LocoWeekend",
+  "city": "Global",
+  "date": "2026-09-20T11:49:22Z",
+  "readTime": "9 min"
+};
+
+**Automatic content recognition, or ACR, is a way for a television to identify content playing on its screen by comparing samples or fingerprints with a reference library. Depending on the television and its settings, that can include programmes arriving through an external input. It is separate from a streaming app keeping its own viewing history.**
+
+The distinction matters because the familiar advice to avoid a television's built-in apps does not answer every privacy question. A streaming box changes the software you interact with. It does not necessarily change what the screen itself can recognise.
+
+This is also a subject that rewards precision. Recognising a programme is not the same thing as recording your living room. An advertising identifier is not a microphone. Switching off personalised advertisements is not automatically the same thing as stopping the collection that made personalisation possible.
+
+Understanding which system does what is more useful than imagining a single switch marked “stop spying”.
+
+## What does ACR actually recognise?
+
+Think of recognition as matching, rather than watching in the human sense. A system can compare a representation of a small piece of content against known material, then associate a match with a programme or advertisement. It does not need a person to sit through your evening's television.
+
+A 2024 research paper, *Watching TV with the Second-Party*, describes this screen-content matching approach and audits ACR network traffic on Samsung and LG televisions. In the configurations tested, recognition could operate when the television was being used as an external display. Opting out stopped traffic to the ACR servers the researchers monitored. The researchers also observed differences between the UK and US. These are findings about tested devices and configurations, not a census of every television. [Read the researchers' paper](https://arxiv.org/abs/2409.06203).
+
+The useful lesson is about boundaries. A television can have knowledge of what is displayed even when the account, app and remote control belong to a different company. The signal entering through a cable is still being processed by the television.
+
+For an owner, that changes the question from “Which app am I using?” to “Which parts of this setup are collecting information?”
+
+## Three different histories can coexist
+
+A practical privacy review should separate the services involved.
+
+| Layer | What to investigate | Where to look |
+|---|---|---|
+| Streaming service | Account viewing history, recommendations and advertising preferences | The service's own account and privacy controls |
+| Television platform | ACR or viewing-information collection, diagnostics and advertising preferences | Television settings and the manufacturer’s policy |
+| External streaming device | Device usage and advertising controls | The box or stick's settings and account |
+| Voice service | Voice activation, permissions and recording history, where applicable | The relevant voice assistant settings |
+
+This table is an investigation guide, not a statement that every product collects every type of information. The point is that permissions live in different places.
+
+Imagine a household that declines viewing-information collection on the television, then signs into a subscription service. The service can still know what that account streams. That does not mean the television's opt-out failed. It means the two histories belong to different systems.
+
+Equally, removing a programme from an app's viewing history does not establish that a television manufacturer has deleted independently collected information. A local preference and a data-deletion request are different actions.
+
+## Why the Vizio case still matters
+
+In February 2017, the US Federal Trade Commission and New Jersey announced a settlement with Vizio over allegations involving viewing-data collection on 11 million televisions. The agencies alleged collection without consumers' knowledge or consent, including content from external sources. The settlement required prominent disclosure and affirmative express consent, among other measures. [FTC announcement and linked complaint](https://www.ftc.gov/news-events/news/press-releases/2017/02/vizio-pay-22-million-ftc-state-new-jersey-settle-charges-it-collected-viewing-histories-11-million).
+
+That is a dated enforcement case, not evidence that all current sets behave like those televisions did. Its continuing relevance is the gap it exposed between a feature's friendly description and the data processing behind it.
+
+“Recommendations” describes something a viewer receives. “Viewing-data collection” describes something a company obtains. A setting can support both, but a person cannot evaluate the exchange if only the benefit is obvious.
+
+When reading a setup screen, therefore, look for the verbs. Does it say recognise, collect, share, personalise or retain? A paragraph about making services better can leave several different operations bundled together. The details determine what you are agreeing to.
+
+## Find the control for collection, not just advertising
+
+Samsung's US support page describes ACR as an optional feature on certain Smart TVs, enabled during setup or subsequently in settings. It also explains the feature and its privacy controls. That manufacturer documentation is a better starting point for a Samsung set than a generic list of menu instructions copied across model years. [Samsung's ACR guide](https://www.samsung.com/us/support/answer/ANS10010616/).
+
+On a supported television, look for the manufacturer’s wording for viewing information or content recognition, then read the accompanying explanation. Use the model number and software version when searching support documentation. A menu path from another country or generation may not match.
+
+There is a practical reason to be methodical: a control can govern the *use* of information without governing its *collection*. An advertisement can stop being personalised while other functions continue. Conversely, declining a recognition feature does not necessarily disable all advertisements.
+
+Record the setting you changed and its exact wording. A photograph of the relevant screen is often more useful than remembering that you turned off “something about privacy”. It gives you a reference after an update or a factory reset, without assuming that updates necessarily change your choice.
+
+## A careful privacy check, in order
+
+Start with the equipment you actually own. Write down the television brand and model, whether you use its built-in apps, and any connected streaming devices. That small inventory prevents you from changing settings on the wrong layer.
+
+Next, open the television's privacy, terms or support area. Read the descriptions attached to viewing-information and recognition features. If you do not want that optional processing, withdraw the relevant permission where the product provides the control.
+
+Then review advertising preferences separately. If the interface offers several advertising controls, read each rather than assuming that one option covers them all.
+
+After that, check the streaming device and the accounts used on it. Those settings matter even if the television's own internet connection is disabled. An external device can still provide an account-based service with its own policies.
+
+Finally, review voice features if your equipment includes them. Do this as a separate exercise. There is no need to turn an ACR explanation into a claim that a microphone is permanently recording a household.
+
+These are documentation-led checks. They are not a claim that we have tested every model or confirmed every setting through packet capture. A user interface tells you what the manufacturer says a control does; an independent technical audit can test aspects of the actual behaviour.
+
+## Does disconnecting the television solve it?
+
+Disconnecting a television from the network prevents it from transmitting over that disconnected connection. It may also remove access to built-in streaming services and online features. That is a concrete trade-off rather than an abstract privacy preference.
+
+It does not disconnect an independently networked streaming box. Nor does it prove anything about information already transmitted or retained by a service. Think of unplugging as a change to future connectivity, not a retrospective deletion button.
+
+An offline screen plus a separate device can make the division of responsibilities easier to understand. It still leaves the external device and its apps to assess. Whether that arrangement is worthwhile depends on what the household uses and what controls its equipment offers.
+
+A factory reset raises a similar distinction. It may remove local accounts and restore setup options, but should not be treated as confirmation that remote records have been erased. Where deletion matters, consult the relevant account or privacy process.
+
+## The advertising question is bigger than the screen
+
+A viewing record becomes more revealing when it can be associated with other information. The historical Vizio allegations illustrate why regulators examine the relationships between data collection, matching and advertising, rather than considering a programme title in isolation.
+
+However, the existence of an identifier is not proof of a particular company's current data-sharing arrangement. To make that claim, a report needs the relevant policy, contract disclosure or technical evidence. “The television recognises content” and “the manufacturer sold this named person's full history” are not interchangeable statements.
+
+For readers, a useful policy checklist is: what is collected, for what purpose, with which recipients, for how long, and through which control can the choice be changed? If a policy mentions partners, follow the explanation of their roles. A service provider processing data on instructions is not necessarily doing the same job as an independent advertising business.
+
+The same distinction appears in our guide to [what you actually own when you buy digital films and games](/business/do-you-own-digital-movies-games). The hardware in the room is only one part of the relationship. Accounts, licences and ongoing services determine much of what happens around it.
+
+## What to check before buying another television
+
+Picture quality has visible demonstrations. Privacy controls are harder to compare on a showroom wall, but they are still product features.
+
+Before buying, find the support page for the exact model. Check whether essential functions require an account, whether optional viewing-data features can be declined, and what happens when the set is used without a network connection. If the answers are unclear, ask the retailer or manufacturer before the return period becomes your only research window.
+
+Also distinguish the television's useful physical life from the life of its software. A working panel and an adequately supported connected product are related but separate things, much like the different expiry dates in our guide to [how long a smartphone should last](/business/how-long-should-a-smartphone-last).
+
+There is no need to assume that the most expensive screen offers the clearest consent design. Make that part of the comparison explicitly. A premium picture does not answer a privacy question.
+
+## Questions worth asking
+
+### Can ACR recognise content from HDMI?
+
+It can in some implementations. The 2024 researchers observed ACR activity when tested sets were used as external displays. Check your own television's documentation rather than treating that result as universal.
+
+### Is ACR the same as a camera or microphone?
+
+No. Content recognition concerns the media displayed or played by the television. Camera and voice features have separate purposes and permissions.
+
+### Will switching off personalised ads stop all tracking?
+
+Do not assume so. Read what the control governs, and check viewing-information collection, device diagnostics and individual apps separately.
+
+### Can I still stream after declining ACR?
+
+Check the manufacturer's description for your model. An optional recognition feature should be evaluated separately from the requirements of the streaming services you use.
+
+The most useful privacy improvement is a more accurate picture of the machine. A smart television is a screen, a computer and a platform. Once those roles are visible, its settings become easier to interrogate.
+
+*Sources checked 20 September 2026. Manufacturer guidance can vary by model, region and software. Historical enforcement and research findings are identified by date; the checklist above is editorial guidance, not a universal device test.*

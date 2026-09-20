@@ -1,0 +1,134 @@
+export const meta = {
+  "slug": "why-ai-uses-so-much-electricity",
+  "title": "The Cloud Has a Power Bill",
+  "category": "Technology",
+  "seoTitle": "Why AI Uses So Much Electricity: The Data Centre Reality",
+  "seoDescription": "AI runs on physical computers that need power and cooling. Learn what data-centre forecasts measure, why location matters and why per-prompt figures vary.",
+  "subtitle": "AI runs on physical computers that need power and cooling. Learn what data-centre forecasts measure, why location matters and why per-prompt figures vary.",
+  "excerpt": "An AI answer arrives on a screen. Behind it sits a chain of chips, cooling systems and electricity infrastructure that cannot expand at software speed.",
+  "author": "LocoWeekend",
+  "city": "Global",
+  "date": "2026-09-20T11:57:07Z",
+  "readTime": "9 min"
+};
+
+AI uses electricity because training and running models require physical computation. The computers performing that work also sit inside facilities with networking, storage, power conversion and cooling. The useful question is how much energy a particular system uses to do a particular job, including the infrastructure around it.
+
+That sounds straightforward until a headline turns every data centre into an AI factory, a forecast into a measurement, or one laboratory result into the universal cost of asking a chatbot a question.
+
+The cloud metaphor encourages those mistakes. It makes digital services feel detached from geography. In reality, an answer can depend on a building, a grid connection and equipment that someone had to manufacture, install and keep operating.
+
+## Start by separating AI from the whole data-centre industry
+
+Data centres host many activities besides AI. A figure for all data-centre electricity consumption cannot be relabelled as AI's footprint without identifying the share attributable to AI workloads.
+
+The International Energy Agency's 2025 [Energy and AI executive summary](https://www.iea.org/reports/energy-and-ai/executive-summary) estimates that data centres used about 415 terawatt-hours of electricity in 2024, around 1.5% of global electricity consumption. Its base-case projection reaches about 945 terawatt-hours in 2030. The first number is an estimate for a past year; the second is a scenario-based forecast. Neither describes AI alone.
+
+Those distinctions deserve to travel with the numbers whenever they are quoted. Removing them changes what the evidence says.
+
+A forecast can still be useful. Electricity infrastructure must be planned before the future arrives. But a planning scenario is not a promise that demand will follow exactly that path. It depends on assumptions about deployment, efficiency, use and the ability to build the necessary facilities.
+
+## Training and answering are different activities
+
+Training is the work of adjusting a model using data. Inference is the work of using a trained model to produce an output. For a reader encountering the subject for the first time, that distinction is more useful than a long list of chip specifications.
+
+A training run is a bounded event, although development can involve many experiments and subsequent updates. Inference happens whenever the deployed system is used. Comparing one training run with one answer therefore misses the difference between an intensive development activity and a service delivered repeatedly.
+
+Imagine a hypothetical tool that required a substantial initial computation but was then used only a hundred times. Now imagine the same tool used a billion times. The training event has not changed; the total work delivered to users has.
+
+This is why claims about which stage “uses more” need a time period and a usage assumption. The question has no universal answer independent of the system being discussed.
+
+For the related question of what happens to the material used in training, our guide to [AI model collapse](/articles/ai-model-collapse-explained) examines why the origin and treatment of data matter as much as the volume collected.
+
+## An AI task is not a standard unit of work
+
+A short classification, a long generated answer and an image are different computational tasks. Even two text answers can involve different models, lengths and serving arrangements.
+
+In [Power Hungry Processing: Watts Driving the Cost of AI Deployment?](https://arxiv.org/abs/2311.16863), Alexandra Sasha Luccioni, Yacine Jernite and Emma Strubell measured energy use across models and tasks. Their experiments found substantial differences, including higher energy requirements for many general-purpose generative approaches compared with task-specific systems. The study supports asking what work a model is doing; it does not establish a permanent electricity price for every current chatbot request.
+
+The most useful consumer question is often whether a system needs its full capability for the task. A service extracting a date from a form and a service producing a detailed illustrated report should not automatically be assumed to require the same machinery.
+
+That is also a design question for the company offering the service. Model selection, output limits and when to invoke an AI system are decisions. Users see a button; the provider chooses what happens behind it.
+
+## Why the building matters as well as the chip
+
+The IT equipment is only part of a facility's electricity demand. Cooling, power systems and other supporting equipment also operate. The IEA's [analysis of AI energy demand](https://www.iea.org/reports/energy-and-ai/energy-demand-from-ai) describes these components and the variation between different types of data centre.
+
+For a reader assessing a claim, this creates a simple boundary question: what exactly was measured?
+
+A figure might refer to one accelerator, an entire server, a group of servers, the IT equipment in a facility or the whole facility. Those are different measurement boundaries. A result is not wrong merely because it covers a narrow boundary, but it becomes misleading if it is presented as the complete system without explanation.
+
+Consider a hypothetical café calculating the electricity used by its espresso machine. That measurement can be accurate while excluding the refrigerator, lights and ventilation. Whether the number is adequate depends on the question being asked.
+
+The same logic applies to computing. A chip measurement helps engineers compare hardware. A whole-facility measurement helps explain demand on the electricity network. Neither should silently stand in for the other.
+
+## Megawatts and megawatt-hours answer different questions
+
+Power is the rate of energy use. Energy is the amount used over time. Mixing them up produces some of the least useful arguments about data centres.
+
+A hypothetical facility drawing 100 megawatts continuously for 24 hours would use 2,400 megawatt-hours, or 2.4 gigawatt-hours. If that exact draw continued for a 365-day year, it would use 876 gigawatt-hours.
+
+These are calculations, not an estimate for a real facility. They assume a constant draw. A site's announced capacity does not establish that it operates at that level every hour.
+
+| Term in a headline | What it describes | What you still need to know |
+| --- | --- | --- |
+| Megawatts, or MW | Power at a moment, or a capacity rating | Actual use and how long it lasts |
+| Megawatt-hours, or MWh | Energy over a period | The period and measurement boundary |
+| Terawatt-hours, or TWh | A larger unit of energy | Whether it covers AI or all data centres |
+| Percentage growth | Change relative to a starting value | The original amount and dates |
+
+A very large percentage increase from a small starting point can remain a modest absolute quantity. A smaller percentage increase in a large system can require substantial infrastructure. Both the percentage and the underlying amount belong in a serious comparison.
+
+## A modest global share can be a large local problem
+
+A global electricity total averages over places that do not share the same grid connection. A new facility arrives somewhere specific.
+
+The IEA's [discussion of the energy–AI relationship](https://www.iea.org/reports/energy-and-ai/understanding-the-energy-ai-nexus) emphasises the concentration of data-centre activity. That geographical point is crucial: a manageable share of world demand can still create a significant planning challenge in a particular region.
+
+Imagine a town with sufficient annual generation on paper but a constrained connection to the area where new demand is proposed. The annual total alone cannot establish that power can be delivered at the required time and location.
+
+Equally, announcing new generation does not answer every question about network capacity. Generation, transmission, local connections and the pattern of demand are related parts of a system. A proposal needs to explain how they fit together.
+
+This is where an apparently abstract technology story becomes a local affairs story. Residents and businesses may reasonably ask about construction, land use, the connection timetable and who pays for network upgrades. Those questions require project-specific evidence, rather than a global statistic used as a universal answer.
+
+## Electricity consumption is not the same as carbon emissions
+
+An energy figure tells you how much electricity was used. An emissions estimate also needs information about how that electricity was generated and what accounting method is being used.
+
+For an illustrative calculation, 1 kilowatt-hour multiplied by an assumed 100 grams of carbon dioxide equivalent per kilowatt-hour gives 100 grams. Change the assumed intensity to 400 grams and the same electricity use produces a four-times-larger accounting result. These are invented inputs to explain the arithmetic, not measured emissions for a model or country.
+
+This is why two apparently conflicting estimates may be answering different questions. They may use different locations, time periods or boundaries. One may include equipment manufacture while another covers operating electricity only.
+
+Ask for those assumptions before deciding which number to share. An unusually precise figure is not automatically an unusually complete one.
+
+Water is another separate measurement. It should be reported with its own boundary and context, rather than inferred from an electricity number as if every facility used the same cooling arrangement. A claim about a particular site needs evidence about that site.
+
+## Why a single “energy per prompt” number can mislead
+
+A per-request estimate can be useful when it describes a defined model, task and measurement method. It becomes much less useful when detached from those details.
+
+Before treating one as representative, look for the model tested, output length, hardware, number of requests sharing the equipment and whether supporting facility energy is included. Also check whether the figure is directly measured or allocated from a larger total.
+
+Allocation is not inherently illegitimate. Shared services often require it. But an allocated average answers a different question from the extra electricity caused by one additional request at a particular moment.
+
+There is a further difference between estimating the footprint of a service and deciding whether it is useful. An energy-intensive task might replace another energy-intensive activity, or it might simply add new demand. Establishing either claim requires a real comparison. “AI saves time” does not by itself quantify an environmental saving.
+
+## Efficiency can improve while total demand rises
+
+Suppose an imaginary system halves the energy needed for each completed task. If it performs the same number of tasks, its task-related energy use falls by half. If use increases fourfold, that component of total demand doubles instead.
+
+That arithmetic explains why efficiency and rising consumption can appear together without contradiction. It does not predict how fast a real service will grow. It shows why reporting only one side leaves out an important variable.
+
+The practical target for operators is therefore broader than a more efficient chip. It includes avoiding unnecessary computation, selecting an appropriate system and measuring the service as it is actually used.
+
+For readers, the equivalent habit is to favour claims that disclose both efficiency and scale. Ask what happened to energy per task and to the total number of tasks. Together they say far more than either alone.
+
+## What a credible claim should tell you
+
+A strong account of AI electricity use names the activity, the time period, the system boundary and the source of the estimate. Forecasts disclose their assumptions. Comparisons use compatible units. Local proposals explain local infrastructure.
+
+The same insistence on following the physical system is useful when examining [how smart TVs collect viewing information](/articles/smart-tv-tracking-acr-explained). A smooth interface can hide a complicated chain of operations; understanding that chain makes the public debate more precise.
+
+The cloud's power bill is real. Reading it well requires more than finding the largest number on the page.
+
+*Sources checked 20 September 2026. IEA figures above are explicitly drawn from its 2025 report; the 2030 value is a forecast. Worked calculations are illustrative.*
