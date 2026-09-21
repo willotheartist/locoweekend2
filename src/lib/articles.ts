@@ -1,5 +1,6 @@
 import fs from "fs";
 import madridBars from "./madrid-bars.json";
+import watchRoutes from "./watch-routes.json";
 import { getArticleSection } from "./sections";
 import path from "path";
 
@@ -195,6 +196,8 @@ export function isBusinessArticle(article: Pick<ArticleMeta, "category">): boole
 }
 
 export function getArticleHref(article: Pick<ArticleMeta, "slug" | "category">): string {
+  const watchPath = watchRoutes[article.slug as keyof typeof watchRoutes];
+  if (watchPath) return `/movies-series/${watchPath}`;
   const barSlug = madridBars[article.slug as keyof typeof madridBars];
   if (barSlug) return `/madrid/bars/${barSlug}`;
   return isBusinessArticle(article)
@@ -203,6 +206,8 @@ export function getArticleHref(article: Pick<ArticleMeta, "slug" | "category">):
 }
 
 export function getArticleParent(article: ArticleMeta) {
+  const watchPath = watchRoutes[article.slug as keyof typeof watchRoutes];
+  if (watchPath?.startsWith("netflix/")) return { title: "Netflix", href: "/movies-series/netflix" };
   if (article.slug in madridBars) {
     return { title: "Bars", href: "/madrid/bars" };
   }

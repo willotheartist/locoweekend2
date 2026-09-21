@@ -5,6 +5,8 @@ import createMDX from "@next/mdx";
 
 const madridBars = JSON.parse(fs.readFileSync(new URL("./src/lib/madrid-bars.json", import.meta.url), "utf8"));
 
+const watchRoutes = JSON.parse(fs.readFileSync(new URL("./src/lib/watch-routes.json", import.meta.url), "utf8"));
+
 const ARTICLES_DIR = path.join(process.cwd(), "src/content/articles");
 
 function getBusinessArticleSlugs() {
@@ -50,7 +52,7 @@ const nextConfig = {
   pageExtensions: ["js", "jsx", "md", "mdx", "ts", "tsx"],
   reactCompiler: true,
   async redirects() {
-    return [...Object.entries(madridBars).map(([slug, child]) => ({ source: `/articles/${slug}`, destination: `/madrid/bars/${child}`, permanent: true })), ...getBusinessArticleSlugs().map((slug) => ({
+    return [{ source: "/flicks", destination: "/movies-series", permanent: true }, ...Object.entries(watchRoutes).map(([slug, child]) => ({ source: `/articles/${slug}`, destination: `/movies-series/${child}`, permanent: true })), ...Object.entries(madridBars).map(([slug, child]) => ({ source: `/articles/${slug}`, destination: `/madrid/bars/${child}`, permanent: true })), ...getBusinessArticleSlugs().map((slug) => ({
       source: `/articles/${slug}`,
       destination: `/business/${slug}`,
       permanent: true,

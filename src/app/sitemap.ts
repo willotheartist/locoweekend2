@@ -30,7 +30,9 @@ const staticRoutes: Array<{
 
   { path: "/art", priority: 0.7, changeFrequency: "weekly" },
   { path: "/drinks", priority: 0.7, changeFrequency: "weekly" },
-  { path: "/flicks", priority: 0.7, changeFrequency: "weekly" },
+  { path: "/movies-series", priority: 0.9, changeFrequency: "weekly" },
+  { path: "/movies-series/netflix", priority: 0.85, changeFrequency: "weekly" },
+  { path: "/movies-series/how-we-rate", priority: 0.6, changeFrequency: "monthly" },
   { path: "/grub", priority: 0.7, changeFrequency: "weekly" },
   { path: "/dead-stock", priority: 0.7, changeFrequency: "weekly" },
 

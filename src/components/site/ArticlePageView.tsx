@@ -99,7 +99,9 @@ export async function ArticlePageView({ article }: { article: ArticleMeta }) {
   const authorUrl = getAuthorUrl(article.author);
   const section = getArticleSection(article);
   const parent = getArticleParent(article);
-  const ancestors = parent.href === "/madrid/bars"
+  const ancestors = parent.href === "/movies-series/netflix"
+    ? [{ title: "Movies & Series", href: "/movies-series" }, parent]
+    : parent.href === "/madrid/bars"
     ? [{ title: "Madrid", href: "/madrid" }, parent]
     : [parent];
   const sectionHref = section.href;

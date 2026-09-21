@@ -1,5 +1,6 @@
 // Editorial ownership is independent of legacy article URLs.
 export const sections = [
+  { id: "movies-series", title: "Movies & Series", href: "/movies-series", description: "What to watch, why it works, and LocoWeekend ratings that explain the verdict." },
   { id: "culture", title: "Culture", href: "/culture", description: "Music, film, art and the ideas shaping how we spend our time. Stories about what we make, what we watch and what stays with us." },
   { id: "technology", title: "Technology", href: "/technology", description: "The devices, platforms and digital systems woven into everyday life. What they do, who controls them and what happens when they stop working." },
   { id: "business", title: "Business", href: "/business", description: "Follow the money. Pricing, ownership, work and the businesses behind everyday life, alongside practical research on building digital products." },
@@ -10,6 +11,8 @@ export const sections = [
 ] as const;
 export type SectionId = typeof sections[number]["id"];
 const overrides: Record<string, SectionId> = {
+  "the-netflix-effect": "movies-series",
+  "why-movie-dialogue-is-so-quiet": "movies-series",
   "do-you-own-digital-movies-games": "technology",
   "the-gorpcore-plateau": "style",
   "why-menswear-is-suddenly-interesting-again": "style",
@@ -20,7 +23,7 @@ const overrides: Record<string, SectionId> = {
   "who-owns-the-mediterranean": "affairs",
 };
 const categories: Record<string, SectionId> = {
-  culture: "culture", music: "culture", flicks: "culture", film: "culture", art: "culture",
+  culture: "culture", music: "culture", flicks: "movies-series", film: "movies-series", "movies & series": "movies-series", art: "culture",
   tech: "technology", technology: "technology", business: "business",
   affairs: "affairs", politics: "affairs", fashion: "style", style: "style",
   grub: "food-drink", food: "food-drink", drinks: "food-drink", "food & drink": "food-drink",

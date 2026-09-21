@@ -12,7 +12,6 @@ const moreNavigation = [
   ["The Sauce", "/the-sauce"],
   ["Dead Stock", "/dead-stock"],
   ["Our picks", "/picks"],
-  ["Film", "/flicks"],
   ["Drinks", "/drinks"],
   ["Guides", "/guides"],
   ["Lisbon", "/lisbon"],
