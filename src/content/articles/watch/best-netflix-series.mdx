@@ -1,4 +1,5 @@
 import { LocoRating } from '@/components/watch/LocoRating';
+import { Faq } from '@/components/site/Faq';
 
 export const meta = {
   slug: "best-netflix-series",
@@ -12,8 +13,41 @@ export const meta = {
   author: "LocoWeekend",
   date: "2026-09-21",
   updatedAt: "2026-09-21",
-  readTime: "7 min"
+  readTime: "7 min",
+  shortTitle: "Best Netflix Series",
+  keywords: ["best netflix series", "best series on netflix uk", "what to watch on netflix", "netflix series ratings", "dark", "the queen's gambit", "stranger things", "love, death & robots", "altered carbon"]
 }
+
+export const faq = [
+  {
+    q: "Which of these Netflix series is a limited series?",
+    a: "The Queen’s Gambit is listed by Netflix as a limited series. It is the clearest fit in this shortlist if you want one contained drama. [Netflix listing](https://www.netflix.com/gb/title/80234304).",
+  },
+  {
+    q: "Do I need to watch every season to use this guide?",
+    a: "No. The Stranger Things and Altered Carbon scores explicitly cover their first seasons. We identify the scope beside every score so that a recommendation does not silently expand into a much longer commitment.",
+  },
+  {
+    q: "Are LocoWeekend ratings the same as Netflix ratings?",
+    a: "No. These scores express LocoWeekend’s editorial recommendation. They are not Netflix audience data, a personal match percentage or a republished critics’ aggregate.",
+  },
+  {
+    q: "Are these titles available in every country?",
+    a: "No worldwide availability is implied. We checked the linked UK title pages on 21 September 2026. Netflix explains that its catalogue varies by country; check your own account before planning around a title. [Netflix’s regional availability explanation](https://help.netflix.com/en/node/14164).",
+  },
+  {
+    q: "Does a five out of five mean everyone will enjoy it?",
+    a: "No. Dark is our clearest example: the complexity is a strength for one viewer and a reason to choose something else for another. That is why the audience fit and caveat are part of the rating, rather than small print attached afterwards.",
+  },
+];
+
+export const picks = [
+  { name: "Dark", anchor: "dark", type: "TVSeries", url: "https://www.netflix.com/gb/title/80100172" },
+  { name: "The Queen’s Gambit", anchor: "the-queens-gambit", type: "TVSeries", url: "https://www.netflix.com/gb/title/80234304" },
+  { name: "Stranger Things", anchor: "stranger-things", type: "TVSeries", url: "https://www.netflix.com/gb/title/80057281" },
+  { name: "Love, Death & Robots", anchor: "love-death-robots", type: "TVSeries", url: "https://www.netflix.com/gb/title/80174608" },
+  { name: "Altered Carbon", anchor: "altered-carbon", type: "TVSeries", url: "https://www.netflix.com/gb/title/80097140" },
+];
 
 A streaming menu gives you abundance. What you need at half past nine is a decision. This shortlist starts with five different pleasures: a mystery that demands concentration, a self-contained drama, small-town adventure, animated experiments and a particularly atmospheric season of science fiction.
 
@@ -95,25 +129,7 @@ This is a recommendations list, so it naturally contains strong scores. That doe
 
 ## Frequently asked questions
 
-### Which of these Netflix series is a limited series?
-
-The Queen’s Gambit is listed by Netflix as a limited series. It is the clearest fit in this shortlist if you want one contained drama. [Netflix listing](https://www.netflix.com/gb/title/80234304).
-
-### Do I need to watch every season to use this guide?
-
-No. The Stranger Things and Altered Carbon scores explicitly cover their first seasons. We identify the scope beside every score so that a recommendation does not silently expand into a much longer commitment.
-
-### Are LocoWeekend ratings the same as Netflix ratings?
-
-No. These scores express LocoWeekend’s editorial recommendation. They are not Netflix audience data, a personal match percentage or a republished critics’ aggregate.
-
-### Are these titles available in every country?
-
-No worldwide availability is implied. We checked the linked UK title pages on 21 September 2026. Netflix explains that its catalogue varies by country; check your own account before planning around a title. [Netflix’s regional availability explanation](https://help.netflix.com/en/node/14164).
-
-### Does a five out of five mean everyone will enjoy it?
-
-No. Dark is our clearest example: the complexity is a strength for one viewer and a reason to choose something else for another. That is why the audience fit and caveat are part of the rating, rather than small print attached afterwards.
+<Faq items={faq} />
 
 ## More from Movies & Series
 

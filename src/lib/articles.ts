@@ -19,6 +19,16 @@ export interface ArticleMeta {
   readTime: string;
   image?: string;
   featured?: boolean;
+  /** Short label for breadcrumbs and hub listings. Falls back to `title`. */
+  shortTitle?: string;
+  /** Article-specific meta keywords. Falls back to category/section terms. */
+  keywords?: string[];
+  /** Hub listing copy (e.g. the Netflix hub). Falls back to a generic eyebrow / the excerpt. */
+  hubEyebrow?: string;
+  hubBlurb?: string;
+  hubCta?: string;
+  /** Drafts render in `pnpm dev` but are excluded from production builds, sitemap and hubs. */
+  draft?: boolean;
 }
 
 const ARTICLES_DIR = path.join(process.cwd(), "src/content/articles");
@@ -135,6 +145,7 @@ export function getAllArticles(): ArticleMeta[] {
       const meta = extractMeta(raw);
 
       if (!meta || !meta.title) continue;
+      if (meta.draft === true && process.env.NODE_ENV === "production") continue;
 
       articles.push({
         slug: (meta.slug as string) || path.basename(file, ".mdx"),
@@ -151,6 +162,14 @@ export function getAllArticles(): ArticleMeta[] {
         readTime: (meta.readTime as string) || "5 min",
         image: (meta.image as string) || undefined,
         featured: meta.featured === true,
+        shortTitle: (meta.shortTitle as string) || undefined,
+        hubEyebrow: (meta.hubEyebrow as string) || undefined,
+        hubBlurb: (meta.hubBlurb as string) || undefined,
+        hubCta: (meta.hubCta as string) || undefined,
+        draft: meta.draft === true,
+        keywords: Array.isArray(meta.keywords)
+          ? (meta.keywords as unknown[]).filter((k): k is string => typeof k === "string")
+          : undefined,
       });
     }
   }
@@ -214,6 +233,13 @@ export function getArticleParent(article: ArticleMeta) {
   return getArticleSection(article);
 }
 
+/** Every article routed under /movies-series/<prefix>/…, newest first. */
+export function getWatchHubArticles(prefix: string): ArticleMeta[] {
+  return getAllArticles().filter((article) =>
+    watchRoutes[article.slug as keyof typeof watchRoutes]?.startsWith(`${prefix}/`)
+  );
+}
+
 export function getArticleUrl(slug: string): string {
   const article = getArticleBySlug(slug);
   const href = article ? getArticleHref(article) : `/articles/${slug}`;
@@ -226,11 +252,42 @@ export function getAbsoluteImageUrl(image?: string): string | undefined {
   return `${SITE_URL}${image}`;
 }
 
+// Words that appear in almost every listicle headline. Matching on them made
+// "Best Wine Bars in Madrid" look related to "Best Horror Movies on Netflix".
+const GENERIC_TERMS = new Set([
+  "best", "right", "with", "your", "that", "this", "from", "what", "when", "where",
+  "which", "have", "into", "than", "then", "them", "they", "their", "there", "these",
+  "those", "will", "still", "more", "most", "much", "some", "every", "about", "guide",
+  "guides", "world", "time", "worth", "really", "actually", "weekend", "locoweekend",
+]);
+
+// Which sections make a sensible "Read next" when the current section runs dry.
+const SECTION_AFFINITY: Record<string, string[]> = {
+  "movies-series": ["culture", "technology"],
+  culture: ["movies-series", "style"],
+  technology: ["business", "movies-series"],
+  business: ["technology", "affairs"],
+  affairs: ["business", "culture"],
+  style: ["culture", "food-drink"],
+  "food-drink": ["travel", "style"],
+  travel: ["food-drink", "culture"],
+};
+
+// Subject vocabulary per section, so a film piece filed under Culture still beats a bookshop list.
+const SECTION_TOPIC_TERMS: Record<string, string[]> = {
+  "movies-series": ["film", "cinema", "cinephile", "movie", "television", "netflix", "box set"],
+};
+
 function relatedScore(current: ArticleMeta, article: ArticleMeta) {
   let score = 0;
-  const currentIsBusiness = getArticleSection(current).id === "business";
+  const currentSectionId = getArticleSection(current).id;
+  const articleSectionId = getArticleSection(article).id;
+  const currentIsBusiness = currentSectionId === "business";
 
-  if (getArticleSection(article).id === getArticleSection(current).id) score += 30;
+  if (articleSectionId === currentSectionId) score += 30;
+  const affinity = SECTION_AFFINITY[currentSectionId]?.indexOf(articleSectionId) ?? -1;
+  if (affinity === 0) score += 12;
+  if (affinity === 1) score += 8;
   if (article.category === current.category) score += 4;
   if (!currentIsBusiness && article.city === current.city) score += 3;
 
@@ -257,11 +314,14 @@ function relatedScore(current: ArticleMeta, article: ArticleMeta) {
       `${current.title} ${current.subtitle ?? ""} ${current.excerpt}`
         .toLowerCase()
         .split(/[^a-z0-9£]+/i)
-        .filter((term) => term.length > 3 && !/^\d+$/.test(term))
+        .filter((term) => term.length > 3 && !/^\d+$/.test(term) && !GENERIC_TERMS.has(term))
     )
   );
 
   const articleText = `${article.title} ${article.subtitle ?? ""} ${article.excerpt}`.toLowerCase();
+
+  const topicTerms = SECTION_TOPIC_TERMS[currentSectionId] ?? [];
+  if (articleSectionId !== currentSectionId && topicTerms.some((term) => articleText.includes(term))) score += 10;
 
   for (const term of currentTerms) {
     if (articleText.includes(term)) score += 0.35;
@@ -298,8 +358,29 @@ export function getRecommendedArticles(
 
   return getAllArticles()
     .filter((a) => a.slug !== current.slug && !relatedSlugs.has(a.slug))
-    .sort((a, b) => relatedScore(current, b) - relatedScore(current, a))
+    .map((article) => ({ article, score: relatedScore(current, article) }))
+    .sort((a, b) =>
+      b.score !== a.score
+        ? b.score - a.score
+        : new Date(b.article.date).getTime() - new Date(a.article.date).getTime()
+    )
+    .map((item) => item.article)
     .slice(0, limit);
+}
+
+/** Social/JSON-LD image: the article photo if there is one, else the generated card. */
+export function getArticleSocialImageUrl(article: Pick<ArticleMeta, "slug" | "image">): string {
+  return getAbsoluteImageUrl(article.image) ?? `${SITE_URL}/og/${article.slug}`;
+}
+
+export function buildArticleKeywords(article: ArticleMeta): string[] {
+  if (article.keywords?.length) return article.keywords;
+  const section = getArticleSection(article).title.toLowerCase();
+  const category = article.category.toLowerCase();
+  const city = article.city.toLowerCase();
+  return Array.from(new Set([category, section, city, "locoweekend"])).filter(
+    (term) => term && !term.includes("edition")
+  );
 }
 
 export function buildArticleTitle(article: ArticleMeta): string {

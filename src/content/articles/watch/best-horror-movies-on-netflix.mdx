@@ -1,4 +1,5 @@
 import { LocoRating } from '@/components/watch/LocoRating';
+import { Faq } from '@/components/site/Faq';
 
 export const meta = {
   slug: "best-horror-movies-on-netflix",
@@ -12,8 +13,46 @@ export const meta = {
   author: "LocoWeekend",
   date: "2026-09-21",
   updatedAt: "2026-09-21",
-  readTime: "8 min"
+  readTime: "8 min",
+  shortTitle: "Best Horror Movies on Netflix",
+  hubEyebrow: "Film guide / Six rated picks",
+  hubBlurb: "From the playful gore of The Babysitter to the lingering dread of Incantation. Separate quality and disturbance scores, runtimes and spoiler-free advice for choosing your evening.",
+  hubCta: "Find your next horror film",
+  keywords: ["best horror movies on netflix", "netflix uk horror", "scariest films on netflix", "horror film ratings", "his house", "incantation", "gerald's game", "the platform", "apostle", "the babysitter"]
 }
+
+export const faq = [
+  {
+    q: "What is the scariest horror movie on Netflix in this shortlist?",
+    a: "Incantation takes our top spot for supernatural dread and the way it implicates the viewer. Gerald’s Game may be more distressing if realistic injury or abuse-related material affects you more than curses. There is no universal scare ranking.",
+  },
+  {
+    q: "Which is the best horror movie here, regardless of scariness?",
+    a: "His House earns our only 5/5 quality rating. Its treatment of safety, belonging and guilt gives the haunted-house story a purpose that outlasts the immediate scares. The separate disturbance score explains why it is not number one in the countdown.",
+  },
+  {
+    q: "Is there a less frightening option?",
+    a: "The Babysitter has the most playful tone and our lowest disturbance score. It still contains bloody violence and sexual references. “Less frightening” is a comparison within this adult-oriented shortlist, not a recommendation for children.",
+  },
+  {
+    q: "Which films are under 100 minutes?",
+    a: "The Babysitter is 85 minutes, His House is 93 and The Platform is 94. Those runtimes make them easier to fit into a late start; their emotional effects are a different scheduling problem.",
+  },
+  {
+    q: "Are these films on Netflix everywhere?",
+    a: "This guide links to UK title pages. A public listing is not a guarantee of playback in every account or country. Netflix explains that catalogues vary by country and change over time in its [availability guidance](https://help.netflix.com/en/node/14164). Check the linked film in your own account.",
+  },
+];
+
+export const picks = [
+  // Same order as the countdown on the page (least to most disturbing).
+  { name: "The Babysitter", anchor: "the-babysitter", type: "Movie", url: "https://www.netflix.com/gb/title/80164456" },
+  { name: "His House", anchor: "his-house", type: "Movie", url: "https://www.netflix.com/gb/title/81231197" },
+  { name: "Apostle", anchor: "apostle", type: "Movie", url: "https://www.netflix.com/gb/title/80158148" },
+  { name: "The Platform", anchor: "the-platform", type: "Movie", url: "https://www.netflix.com/gb/title/81128579" },
+  { name: "Gerald’s Game", anchor: "geralds-game", type: "Movie", url: "https://www.netflix.com/gb/title/80128722" },
+  { name: "Incantation", anchor: "incantation", type: "Movie", url: "https://www.netflix.com/gb/title/81599888" },
+];
 
 You wanted a film. Now you’re forty minutes into scrolling past faces with their mouths open, and the only thing frightening you is tomorrow’s alarm.
 
@@ -128,25 +167,7 @@ If you are undecided between The Platform and His House, ask whether you want th
 
 ## Questions worth answering before pressing play
 
-### What is the scariest horror movie on Netflix in this shortlist?
-
-Incantation takes our top spot for supernatural dread and the way it implicates the viewer. Gerald’s Game may be more distressing if realistic injury or abuse-related material affects you more than curses. There is no universal scare ranking.
-
-### Which is the best horror movie here, regardless of scariness?
-
-His House earns our only 5/5 quality rating. Its treatment of safety, belonging and guilt gives the haunted-house story a purpose that outlasts the immediate scares. The separate disturbance score explains why it is not number one in the countdown.
-
-### Is there a less frightening option?
-
-The Babysitter has the most playful tone and our lowest disturbance score. It still contains bloody violence and sexual references. “Less frightening” is a comparison within this adult-oriented shortlist, not a recommendation for children.
-
-### Which films are under 100 minutes?
-
-The Babysitter is 85 minutes, His House is 93 and The Platform is 94. Those runtimes make them easier to fit into a late start; their emotional effects are a different scheduling problem.
-
-### Are these films on Netflix everywhere?
-
-This guide links to UK title pages. A public listing is not a guarantee of playback in every account or country. Netflix explains that catalogues vary by country and change over time in its [availability guidance](https://help.netflix.com/en/node/14164). Check the linked film in your own account.
+<Faq items={faq} />
 
 ## Sources and how this list was made
 
